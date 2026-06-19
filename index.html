@@ -1,4 +1,4 @@
-html = '''<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -8,30 +8,23 @@ html = '''<!DOCTYPE html>
     <meta name="keywords" content="música independente, metal, rap, eletrônica, trilha sonora, literatura, cinema, arte digital, D.T. Shen, D VAI, Daemon Studio">
     <meta name="author" content="D.T. Shen">
     <meta name="robots" content="index, follow">
-    
-    <!-- Open Graph -->
     <meta property="og:title" content="Daemon Studio | Projeto Multi-Artístico">
     <meta property="og:description" content="Música, literatura, cinema e arte digital. O universo de D.T. Shen.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://daemonstore.vercel.app">
     <meta property="og:image" content="https://daemonstore.vercel.app/assets/logo.png">
     <meta property="og:site_name" content="Daemon Studio">
-    
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Daemon Studio | Projeto Multi-Artístico">
     <meta name="twitter:description" content="Música, literatura, cinema e arte digital. O universo de D.T. Shen.">
     <meta name="twitter:image" content="https://daemonstore.vercel.app/assets/logo.png">
-    
     <link rel="icon" type="image/png" href="assets/logo.png">
     <link rel="apple-touch-icon" href="assets/logo.png">
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Background Effects -->
     <div class="bg-mesh"></div>
     <div class="bg-noise"></div>
     <div class="bg-particles" id="particles"></div>
@@ -82,20 +75,16 @@ html = '''<!DOCTYPE html>
             </div>
             <div class="hero-universe-nav">
                 <button class="universe-btn" onclick="app.scrollTo('musica')">
-                    <span class="universe-icon">🎵</span>
-                    <span>Música</span>
+                    <span class="universe-icon">🎵</span><span>Música</span>
                 </button>
                 <button class="universe-btn" onclick="app.scrollTo('literatura')">
-                    <span class="universe-icon">📚</span>
-                    <span>Livros</span>
+                    <span class="universe-icon">📚</span><span>Livros</span>
                 </button>
                 <button class="universe-btn" onclick="app.scrollTo('cinema')">
-                    <span class="universe-icon">🎬</span>
-                    <span>Cinema</span>
+                    <span class="universe-icon">🎬</span><span>Cinema</span>
                 </button>
                 <button class="universe-btn" onclick="app.scrollTo('textos')">
-                    <span class="universe-icon">✍️</span>
-                    <span>Textos</span>
+                    <span class="universe-icon">✍️</span><span>Textos</span>
                 </button>
             </div>
             <div class="hero-cta">
@@ -126,8 +115,8 @@ html = '''<!DOCTYPE html>
                     <h3>Música</h3>
                     <p>25+ projetos entre metal, rap, eletrônica e trilhas. Produção independente, sem gravadora.</p>
                     <div class="universe-card-stats">
-                        <span><strong>25</strong> projetos</span>
-                        <span><strong>100+</strong> faixas</span>
+                        <span><strong id="stat-albums">0</strong> álbuns</span>
+                        <span><strong id="stat-tracks">0</strong> faixas</span>
                     </div>
                     <span class="universe-card-cta">Explorar →</span>
                 </div>
@@ -137,7 +126,7 @@ html = '''<!DOCTYPE html>
                     <h3>Literatura</h3>
                     <p>Ficção, filosofia e poesia. Livros que nascem das mesmas fontes que as músicas.</p>
                     <div class="universe-card-stats">
-                        <span><strong>1</strong> lançado</span>
+                        <span><strong id="stat-books">0</strong> obras</span>
                         <span><strong>+</strong> em breve</span>
                     </div>
                     <span class="universe-card-cta">Ler →</span>
@@ -148,8 +137,8 @@ html = '''<!DOCTYPE html>
                     <h3>Cinema</h3>
                     <p>Documentários, clipes, experimentos visuais. Som e imagem em diálogo.</p>
                     <div class="universe-card-stats">
-                        <span><strong>5+</span>
-                        <span><strong>vídeos</span>
+                        <span><strong id="stat-videos">0</strong> vídeos</span>
+                        <span><strong>+</strong> produzindo</span>
                     </div>
                     <span class="universe-card-cta">Assistir →</span>
                 </div>
@@ -255,11 +244,11 @@ html = '''<!DOCTYPE html>
             <div class="about-text">
                 <span class="section-tag">👤 Quem Sou</span>
                 <h2 class="section-title">D.T. Shen</h2>
-                <p class="about-bio">Sou produtor musical, escritor e artista visual. Criei o Daemon Studio como um território livre de intermediários — onde música, literatura e cinema coexistem sem aprovação de gravadora, editora ou estúdio.</p>
+                <p class="about-bio">(bio em breve)</p>
                 <p class="about-bio">Como <strong>D VAI</strong>, escrevo e canto rap, metal e eletrônica. Como <strong>D.T. Shen</strong>, produzo trilhas, experimento com IA e construo mundos em texto e imagem. Cada obra é um fragmento do mesmo universo.</p>
                 <div class="about-manifesto">
                     <h3>Manifesto</h3>
-                    <blockquote>"Não faço arte para o mercado. Faço porque preciso existir. Se alguém se reconhece nisso, o mercado se forma ao redor."</blockquote>
+                    <blockquote>"(manifesto em breve)"</blockquote>
                 </div>
                 <div class="about-timeline">
                     <h3>Trajetória</h3>
@@ -269,7 +258,7 @@ html = '''<!DOCTYPE html>
                     </div>
                     <div class="timeline-item">
                         <span class="timeline-year">2026</span>
-                        <span class="timeline-event">25+ projetos musicais, "O Pináculo de Pain" e expansão para cinema</span>
+                        <span class="timeline-event">25+ projetos musicais, expansão para literatura e cinema</span>
                     </div>
                 </div>
                 <div class="about-features">
@@ -603,6 +592,9 @@ html = '''<!DOCTYPE html>
 
     <script src="config.js"></script>
     <script src="catalog.js"></script>
+    <script src="books-data.js"></script>
+    <script src="videos-data.js"></script>
+    <script src="texts-data.js"></script>
     <script src="app.js"></script>
 
     <!-- Formulário oculto para enviar pedido por email (FormSubmit) -->
@@ -617,6 +609,18 @@ html = '''<!DOCTYPE html>
         <textarea name="Itens" id="form-itens"></textarea>
         <input type="text" name="Total" id="form-total">
         <input type="text" name="Metodo" id="form-metodo">
+    </form>
+
+    <!-- Formulário oculto para enviar lead por email (FormSubmit) -->
+    <form action="https://formsubmit.co/daemonprod5@gmail.com" method="POST" id="lead-submit-form" style="display:none">
+        <input type="hidden" name="_subject" value="📬 Novo Lead — Daemon Studio">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://daemonstore.vercel.app">
+        <input type="text" name="Nome" id="lead-form-nome">
+        <input type="email" name="Email" id="lead-form-email">
+        <input type="tel" name="WhatsApp" id="lead-form-whatsapp">
+        <input type="text" name="Data" id="lead-form-data">
     </form>
 
 </body>
