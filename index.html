@@ -1,18 +1,40 @@
-<!DOCTYPE html>
+html = '''<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="page-title">Daemon Studio | Loja Oficial</title>
-    <meta name="description" content="Daemon Studio - Música independente de D.T. Shen e D VAI. Metal, Rap, Eletrônica, Trilhas.">
+    <title id="page-title">Daemon Studio | D.T. Shen — Metal • Rap • Eletrônica • Trilhas • Livros • Cinema</title>
+    <meta name="description" content="Daemon Studio — Projeto multi-artístico de D.T. Shen (D VAI). Música independente, literatura, cinema e arte digital. Sem intermediários.">
+    <meta name="keywords" content="música independente, metal, rap, eletrônica, trilha sonora, literatura, cinema, arte digital, D.T. Shen, D VAI, Daemon Studio">
+    <meta name="author" content="D.T. Shen">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Daemon Studio | Projeto Multi-Artístico">
+    <meta property="og:description" content="Música, literatura, cinema e arte digital. O universo de D.T. Shen.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://daemonstore.vercel.app">
+    <meta property="og:image" content="https://daemonstore.vercel.app/assets/logo.png">
+    <meta property="og:site_name" content="Daemon Studio">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Daemon Studio | Projeto Multi-Artístico">
+    <meta name="twitter:description" content="Música, literatura, cinema e arte digital. O universo de D.T. Shen.">
+    <meta name="twitter:image" content="https://daemonstore.vercel.app/assets/logo.png">
+    
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link rel="apple-touch-icon" href="assets/logo.png">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Background -->
+    <!-- Background Effects -->
     <div class="bg-mesh"></div>
     <div class="bg-noise"></div>
+    <div class="bg-particles" id="particles"></div>
 
     <!-- Navbar -->
     <nav class="navbar" id="navbar">
@@ -24,8 +46,12 @@
             </div>
         </div>
         <div class="nav-links">
-            <a href="#catalogo" class="nav-link">Catálogo</a>
-            <a href="#sobre" class="nav-link">Sobre</a>
+            <a href="#universo" class="nav-link">Universo</a>
+            <a href="#musica" class="nav-link">Música</a>
+            <a href="#literatura" class="nav-link">Literatura</a>
+            <a href="#cinema" class="nav-link">Cinema</a>
+            <a href="#textos" class="nav-link">Textos</a>
+            <a href="#quem-sou" class="nav-link">Quem Sou</a>
             <a href="#contato" class="nav-link">Contato</a>
         </div>
         <div class="nav-cart" onclick="app.toggleCart()">
@@ -42,30 +68,42 @@
         <div class="hero-content">
             <div class="hero-badge">
                 <span class="badge-dot"></span>
-                <span>Loja Oficial</span>
+                <span>Projeto Multi-Artístico</span>
             </div>
             <h1 class="hero-title">
                 <span class="hero-line1">Daemon</span>
                 <span class="hero-line2">Studio</span>
             </h1>
-            <p class="hero-subtitle" id="hero-subtitle">Produção • Rap • Metal • Eletrônica • Trilhas</p>
+            <p class="hero-subtitle" id="hero-subtitle">Música • Literatura • Cinema • Arte Digital</p>
             <div class="hero-aliases">
                 <span class="alias">D.T. Shen</span>
                 <span class="alias-sep">◆</span>
                 <span class="alias">D VAI</span>
             </div>
-            <div class="hero-stats" id="hero-stats">
-                <div class="stat"><span class="stat-num" id="stat-albums">0</span><span class="stat-label">Álbuns</span></div>
-                <div class="stat"><span class="stat-num" id="stat-eps">0</span><span class="stat-label">EPs</span></div>
-                <div class="stat"><span class="stat-num" id="stat-singles">0</span><span class="stat-label">Singles</span></div>
-                <div class="stat"><span class="stat-num" id="stat-tracks">0</span><span class="stat-label">Faixas</span></div>
+            <div class="hero-universe-nav">
+                <button class="universe-btn" onclick="app.scrollTo('musica')">
+                    <span class="universe-icon">🎵</span>
+                    <span>Música</span>
+                </button>
+                <button class="universe-btn" onclick="app.scrollTo('literatura')">
+                    <span class="universe-icon">📚</span>
+                    <span>Livros</span>
+                </button>
+                <button class="universe-btn" onclick="app.scrollTo('cinema')">
+                    <span class="universe-icon">🎬</span>
+                    <span>Cinema</span>
+                </button>
+                <button class="universe-btn" onclick="app.scrollTo('textos')">
+                    <span class="universe-icon">✍️</span>
+                    <span>Textos</span>
+                </button>
             </div>
             <div class="hero-cta">
-                <button class="btn btn-primary" onclick="app.scrollTo('catalogo')">
-                    <span>Explorar Músicas</span>
+                <button class="btn btn-primary" onclick="app.scrollTo('universo')">
+                    <span>Explorar o Universo</span>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l5 5 5-5M7 12l5 5 5-5"/></svg>
                 </button>
-                <button class="btn btn-outline" onclick="app.scrollTo('sobre')">Conhecer o Artista</button>
+                <button class="btn btn-outline" onclick="app.scrollTo('quem-sou')">Conhecer o Artista</button>
             </div>
         </div>
         <div class="hero-scroll">
@@ -76,14 +114,75 @@
         </div>
     </header>
 
-    <!-- Demo Banner -->
-    <div class="demo-banner" id="demo-banner" style="display:none">
-        <span>⚡ Modo Demonstração — Configure seus links de pagamento em catalog.js e config.js</span>
-        <button onclick="this.parentElement.style.display='none'">×</button>
-    </div>
+    <!-- Universo Overview -->
+    <section class="universe-section" id="universo">
+        <div class="universe-container">
+            <h2 class="section-title">O Universo Daemon</h2>
+            <p class="section-subtitle">Cada obra é um portal. Escolha onde entrar.</p>
+            <div class="universe-grid">
+                <div class="universe-card" onclick="app.scrollTo('musica')">
+                    <div class="universe-card-bg" style="--accent:#e94560"></div>
+                    <div class="universe-card-icon">🎵</div>
+                    <h3>Música</h3>
+                    <p>25+ projetos entre metal, rap, eletrônica e trilhas. Produção independente, sem gravadora.</p>
+                    <div class="universe-card-stats">
+                        <span><strong>25</strong> projetos</span>
+                        <span><strong>100+</strong> faixas</span>
+                    </div>
+                    <span class="universe-card-cta">Explorar →</span>
+                </div>
+                <div class="universe-card" onclick="app.scrollTo('literatura')">
+                    <div class="universe-card-bg" style="--accent:#f39c12"></div>
+                    <div class="universe-card-icon">📚</div>
+                    <h3>Literatura</h3>
+                    <p>Ficção, filosofia e poesia. Livros que nascem das mesmas fontes que as músicas.</p>
+                    <div class="universe-card-stats">
+                        <span><strong>1</strong> lançado</span>
+                        <span><strong>+</strong> em breve</span>
+                    </div>
+                    <span class="universe-card-cta">Ler →</span>
+                </div>
+                <div class="universe-card" onclick="app.scrollTo('cinema')">
+                    <div class="universe-card-bg" style="--accent:#00d2ff"></div>
+                    <div class="universe-card-icon">🎬</div>
+                    <h3>Cinema</h3>
+                    <p>Documentários, clipes, experimentos visuais. Som e imagem em diálogo.</p>
+                    <div class="universe-card-stats">
+                        <span><strong>5+</span>
+                        <span><strong>vídeos</span>
+                    </div>
+                    <span class="universe-card-cta">Assistir →</span>
+                </div>
+                <div class="universe-card" onclick="app.scrollTo('textos')">
+                    <div class="universe-card-bg" style="--accent:#c0c0c8"></div>
+                    <div class="universe-card-icon">✍️</div>
+                    <h3>Textos</h3>
+                    <p>Letras comentadas, manifestos, crônicas e pensamentos em construção.</p>
+                    <div class="universe-card-stats">
+                        <span><strong>∞</strong> ideias</span>
+                        <span><strong>0</strong> filtros</span>
+                    </div>
+                    <span class="universe-card-cta">Ler →</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Filter Bar -->
-    <section class="filter-section" id="catalogo">
+    <!-- Música -->
+    <section class="music-section" id="musica">
+        <div class="section-header">
+            <div class="section-header-content">
+                <span class="section-tag">🎵 Discografia</span>
+                <h2 class="section-title">Música</h2>
+                <p class="section-subtitle">Álbuns, EPs, singles e trilhas. Tudo produzido, composto e disponibilizado diretamente.</p>
+            </div>
+            <div class="section-header-stats" id="music-stats">
+                <div class="stat"><span class="stat-num" id="stat-albums">0</span><span class="stat-label">Álbuns</span></div>
+                <div class="stat"><span class="stat-num" id="stat-eps">0</span><span class="stat-label">EPs</span></div>
+                <div class="stat"><span class="stat-num" id="stat-singles">0</span><span class="stat-label">Singles</span></div>
+                <div class="stat"><span class="stat-num" id="stat-tracks">0</span><span class="stat-label">Faixas</span></div>
+            </div>
+        </div>
         <div class="filter-container">
             <div class="search-box">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
@@ -98,10 +197,6 @@
                 <button class="pill" data-filter="ia" onclick="app.setTag('ia')">Feito com IA</button>
             </div>
         </div>
-    </section>
-
-    <!-- Catalog -->
-    <section class="catalog-section">
         <div class="catalog-grid" id="catalog-grid"></div>
         <div class="empty-state" id="empty-state" style="display:none">
             <div class="empty-icon">🔍</div>
@@ -109,31 +204,79 @@
         </div>
     </section>
 
-    <!-- About -->
-    <section class="about-section" id="sobre">
+    <!-- Literatura / Livros -->
+    <section class="literature-section" id="literatura">
+        <div class="section-header">
+            <div class="section-header-content">
+                <span class="section-tag">📚 Literatura</span>
+                <h2 class="section-title">Livros</h2>
+                <p class="section-subtitle">Ficção, filosofia e poesia. Palavras que ecoam nas faixas.</p>
+            </div>
+        </div>
+        <div class="books-grid" id="books-grid"></div>
+    </section>
+
+    <!-- Cinema / Audiovisual -->
+    <section class="cinema-section" id="cinema">
+        <div class="section-header">
+            <div class="section-header-content">
+                <span class="section-tag">🎬 Cinema</span>
+                <h2 class="section-title">Audiovisual</h2>
+                <p class="section-subtitle">Documentários, clipes, experimentos. Som e imagem em diálogo.</p>
+            </div>
+        </div>
+        <div class="cinema-grid" id="cinema-grid"></div>
+    </section>
+
+    <!-- Textos -->
+    <section class="texts-section" id="textos">
+        <div class="section-header">
+            <div class="section-header-content">
+                <span class="section-tag">✍️ Textos</span>
+                <h2 class="section-title">Escritos</h2>
+                <p class="section-subtitle">Letras comentadas, manifestos, crônicas e pensamentos.</p>
+            </div>
+        </div>
+        <div class="texts-grid" id="texts-grid"></div>
+    </section>
+
+    <!-- Quem Sou Eu -->
+    <section class="about-section" id="quem-sou">
         <div class="about-container">
             <div class="about-visual">
-                <div class="about-card producer">
-                    <div class="about-icon">🎛️</div>
-                    <h3>D.T. Shen</h3>
-                    <p>Produtor musical. Criador do Daemon Studio. Metal, eletrônica, trilhas sonoras e experimentação sonora.</p>
-                </div>
-                <div class="about-connector">◆</div>
-                <div class="about-card rapper">
-                    <div class="about-icon">🎤</div>
-                    <h3>D VAI</h3>
-                    <p>Rapper e vocalista. Letras cruas, flow marcante. Do rap ao eletrônico, autoral e com IA.</p>
+                <div class="about-portrait">
+                    <div class="about-portrait-frame">
+                        <div class="about-portrait-placeholder">🎭</div>
+                        <div class="about-portrait-glow"></div>
+                    </div>
+                    <div class="about-portrait-label">D.T. Shen</div>
                 </div>
             </div>
             <div class="about-text">
-                <h2 class="section-title">Sobre o Projeto</h2>
-                <p>Daemon Studio é um projeto independente de música sem intermediários. Todas as faixas são produzidas, compostas e disponibilizadas diretamente pelo artista.</p>
-                <p>Sem gravadora. Sem distribuidora tirando porcentagem. Você compra direto do criador e recebe os arquivos em alta qualidade.</p>
+                <span class="section-tag">👤 Quem Sou</span>
+                <h2 class="section-title">D.T. Shen</h2>
+                <p class="about-bio">Sou produtor musical, escritor e artista visual. Criei o Daemon Studio como um território livre de intermediários — onde música, literatura e cinema coexistem sem aprovação de gravadora, editora ou estúdio.</p>
+                <p class="about-bio">Como <strong>D VAI</strong>, escrevo e canto rap, metal e eletrônica. Como <strong>D.T. Shen</strong>, produzo trilhas, experimento com IA e construo mundos em texto e imagem. Cada obra é um fragmento do mesmo universo.</p>
+                <div class="about-manifesto">
+                    <h3>Manifesto</h3>
+                    <blockquote>"Não faço arte para o mercado. Faço porque preciso existir. Se alguém se reconhece nisso, o mercado se forma ao redor."</blockquote>
+                </div>
+                <div class="about-timeline">
+                    <h3>Trajetória</h3>
+                    <div class="timeline-item">
+                        <span class="timeline-year">2025</span>
+                        <span class="timeline-event">Lançamento de dAImon — primeiro álbum de metal com IA</span>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-year">2026</span>
+                        <span class="timeline-event">25+ projetos musicais, "O Pináculo de Pain" e expansão para cinema</span>
+                    </div>
+                </div>
                 <div class="about-features">
                     <div class="feat"><span class="feat-check">✓</span> Download em alta qualidade</div>
-                    <div class="feat"><span class="feat-check">✓</span> Pagamento via Pix ou Cartão</div>
-                    <div class="feat"><span class="feat-check">✓</span> Suporte direto com o artista</div>
-                    <div class="feat"><span class="feat-check">✓</span> Atualizações constantes</div>
+                    <div class="feat"><span class="feat-check">✓</span> Pagamento direto ao artista</div>
+                    <div class="feat"><span class="feat-check">✓</span> Suporte direto, sem robô</div>
+                    <div class="feat"><span class="feat-check">✓</span> Obras em constante evolução</div>
                 </div>
             </div>
         </div>
@@ -143,7 +286,7 @@
     <section class="contact-section" id="contato">
         <div class="contact-container">
             <h2 class="section-title">Contato</h2>
-            <p class="contact-subtitle">Dúvidas sobre licenciamento, compras ou parcerias?</p>
+            <p class="contact-subtitle">Dúvidas sobre obras, licenciamento, parcerias ou simplesmente quer conversar?</p>
             <a href="mailto:daemonprod5@gmail.com" class="contact-email" id="contact-email">daemonprod5@gmail.com</a>
             <p class="contact-note">Resposta em até 24h. Suporte direto, sem robô.</p>
         </div>
@@ -157,13 +300,89 @@
                 <span>Daemon Studio</span>
             </div>
             <p class="footer-copy">© 2026 Daemon Studio. Todos os direitos reservados.</p>
-            <p class="footer-credit">Música independente. Sem atravessadores.</p>
+            <p class="footer-credit">Projeto multi-artístico independente. Sem atravessadores.</p>
         </div>
     </footer>
 
     <!-- ==================== MODAIS ==================== -->
 
-    <!-- Product Modal -->
+    <!-- Book Modal -->
+    <div class="modal" id="book-modal">
+        <div class="modal-overlay" onclick="app.closeModal('book-modal')"></div>
+        <div class="modal-content book-modal">
+            <button class="modal-close" onclick="app.closeModal('book-modal')">×</button>
+            <div class="book-layout">
+                <div class="book-modal-cover">
+                    <div class="book-cover-art" id="book-modal-cover">📖</div>
+                </div>
+                <div class="book-modal-details">
+                    <div class="book-modal-tag" id="book-modal-tag">Livro</div>
+                    <h2 class="book-modal-title" id="book-modal-title">Título</h2>
+                    <div class="book-modal-meta" id="book-modal-meta">Ficção • 2026</div>
+                    <div class="book-modal-synopsis" id="book-modal-synopsis">Sinopse...</div>
+                    <div class="book-modal-quote" id="book-modal-quote">"..."</div>
+                    <div class="book-modal-price-row">
+                        <div class="book-modal-price" id="book-modal-price">R$ 0,00</div>
+                        <div class="book-modal-actions">
+                            <button class="btn btn-primary" id="book-modal-buy" onclick="app.buyBook()">Comprar</button>
+                            <button class="btn btn-outline" id="book-modal-preview" onclick="app.previewBook()">Ler Trecho</button>
+                        </div>
+                    </div>
+                    <div class="book-modal-status" id="book-modal-status"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cinema Modal -->
+    <div class="modal" id="cinema-modal">
+        <div class="modal-overlay" onclick="app.closeModal('cinema-modal')"></div>
+        <div class="modal-content cinema-modal">
+            <button class="modal-close" onclick="app.closeModal('cinema-modal')">×</button>
+            <div class="cinema-layout">
+                <div class="cinema-player" id="cinema-player">
+                    <div class="cinema-player-placeholder" id="cinema-placeholder">
+                        <span>🎬</span>
+                        <p>Clique para assistir</p>
+                    </div>
+                    <iframe id="cinema-iframe" style="display:none" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="cinema-modal-details">
+                    <div class="cinema-modal-tag" id="cinema-modal-tag">Documentário</div>
+                    <h2 class="cinema-modal-title" id="cinema-modal-title">Título</h2>
+                    <div class="cinema-modal-meta" id="cinema-modal-meta">2026 • 15 min</div>
+                    <div class="cinema-modal-desc" id="cinema-modal-desc">Descrição...</div>
+                    <div class="cinema-modal-links">
+                        <a href="#" class="btn btn-primary" id="cinema-modal-youtube" target="_blank">Assistir no YouTube</a>
+                        <a href="#" class="btn btn-outline" id="cinema-modal-share" onclick="app.shareCinema()">Compartilhar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Text Modal -->
+    <div class="modal" id="text-modal">
+        <div class="modal-overlay" onclick="app.closeModal('text-modal')"></div>
+        <div class="modal-content text-modal">
+            <button class="modal-close" onclick="app.closeModal('text-modal')">×</button>
+            <div class="text-layout">
+                <div class="text-modal-header">
+                    <div class="text-modal-tag" id="text-modal-tag">Manifesto</div>
+                    <h2 class="text-modal-title" id="text-modal-title">Título</h2>
+                    <div class="text-modal-meta" id="text-modal-meta">D.T. Shen • 2026</div>
+                </div>
+                <div class="text-modal-content" id="text-modal-content">
+                    <p>Conteúdo do texto...</p>
+                </div>
+                <div class="text-modal-footer">
+                    <button class="btn btn-outline" onclick="app.shareText()">Compartilhar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Modal (Music) -->
     <div class="modal" id="product-modal">
         <div class="modal-overlay" onclick="app.closeModal('product-modal')"></div>
         <div class="modal-content product-modal">
@@ -191,12 +410,8 @@
                     <div class="product-price-row">
                         <div class="product-price" id="modal-price">R$ 0,00</div>
                         <div class="product-actions">
-                            <button class="btn btn-primary btn-buy" id="modal-buy-btn" onclick="app.buyItem()">
-                                Comprar Agora
-                            </button>
-                            <button class="btn btn-outline btn-cart" id="modal-cart-btn" onclick="app.addModalToCart()">
-                                + Carrinho
-                            </button>
+                            <button class="btn btn-primary btn-buy" id="modal-buy-btn" onclick="app.buyItem()">Comprar Agora</button>
+                            <button class="btn btn-outline btn-cart" id="modal-cart-btn" onclick="app.addModalToCart()">+ Carrinho</button>
                         </div>
                     </div>
                     <div class="product-note" id="modal-note"></div>
@@ -239,21 +454,13 @@
                     <span>Total</span>
                     <span id="checkout-total">R$ 0,00</span>
                 </div>
-
                 <p class="checkout-intro">Escolha como pagar:</p>
-
-                <!-- Pix Option -->
                 <div class="checkout-option" id="checkout-pix">
                     <div class="option-icon">⚡</div>
-                    <div class="option-info">
-                        <strong>Pix</strong>
-                        <span>Copie o código ou escaneie o QR</span>
-                    </div>
+                    <div class="option-info"><strong>Pix</strong><span>Copie o código ou escaneie o QR</span></div>
                 </div>
                 <div class="pix-details">
-                    <div class="pix-qr-wrap">
-                        <img id="pix-qr" src="" alt="QR Code Pix">
-                    </div>
+                    <div class="pix-qr-wrap"><img id="pix-qr" src="" alt="QR Code Pix"></div>
                     <div class="pix-code-wrap">
                         <p class="pix-label">Código Pix (copia e cola):</p>
                         <div class="pix-code-box">
@@ -263,43 +470,22 @@
                         <p class="pix-hint">Abra o app do seu banco, vá em "Pix Copia e Cola" e cole o código acima.</p>
                     </div>
                 </div>
-
-                <!-- Mercado Pago Option -->
                 <a href="#" class="checkout-option" id="checkout-mercadopago" target="_blank">
                     <div class="option-icon">💰</div>
-                    <div class="option-info">
-                        <strong>Mercado Pago</strong>
-                        <span>Pix, cartão, boleto — confirmação automática</span>
-                    </div>
+                    <div class="option-info"><strong>Mercado Pago</strong><span>Pix, cartão, boleto — confirmação automática</span></div>
                 </a>
-
-                <!-- Stripe Option -->
                 <a href="#" class="checkout-option" id="checkout-stripe" target="_blank">
                     <div class="option-icon">💳</div>
-                    <div class="option-info">
-                        <strong>Cartão (Stripe)</strong>
-                        <span>Visa, Mastercard, Amex — internacional</span>
-                    </div>
+                    <div class="option-info"><strong>Cartão (Stripe)</strong><span>Visa, Mastercard, Amex — internacional</span></div>
                 </a>
-
-                <!-- WhatsApp Option -->
                 <a href="#" class="checkout-option" id="checkout-whatsapp" target="_blank">
                     <div class="option-icon">💬</div>
-                    <div class="option-info">
-                        <strong>WhatsApp</strong>
-                        <span>Envie o pedido direto pelo WhatsApp</span>
-                    </div>
+                    <div class="option-info"><strong>WhatsApp</strong><span>Envie o pedido direto pelo WhatsApp</span></div>
                 </a>
-
-                <!-- Email Option -->
                 <a href="#" class="checkout-option" id="checkout-email" target="_blank">
                     <div class="option-icon">✉️</div>
-                    <div class="option-info">
-                        <strong>Email</strong>
-                        <span>Envie o pedido por email</span>
-                    </div>
+                    <div class="option-info"><strong>Email</strong><span>Envie o pedido por email</span></div>
                 </a>
-
                 <div class="checkout-note">
                     <p>🔒 Após confirmar o pagamento, enviaremos os arquivos em até 24h para o email cadastrado.</p>
                 </div>
@@ -317,31 +503,25 @@
             </div>
             <div class="customer-body">
                 <div class="form-summary" id="form-summary"></div>
-
                 <div class="form-section">
                     <h4 class="form-section-title">Seus Dados</h4>
                     <p class="form-section-desc">Preencha para receber seus arquivos após o pagamento.</p>
-
                     <div class="form-group">
                         <label for="cust-name">Nome completo *</label>
                         <input type="text" id="cust-name" placeholder="Seu nome" required>
                     </div>
-
                     <div class="form-group">
                         <label for="cust-email">Email *</label>
                         <input type="email" id="cust-email" placeholder="seu@email.com" required>
                     </div>
-
                     <div class="form-group">
                         <label for="cust-whatsapp">WhatsApp *</label>
                         <input type="tel" id="cust-whatsapp" placeholder="(11) 99999-9999" required>
                     </div>
                 </div>
-
                 <div class="form-note">
                     <p>🔒 Seus dados são usados apenas para entrega dos arquivos. Não compartilhamos com terceiros.</p>
                 </div>
-
                 <button class="btn btn-primary btn-full" onclick="app.validateAndProceed()">
                     <span>Prosseguir para Pagamento</span>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
