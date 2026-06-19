@@ -38,9 +38,7 @@
 
     <!-- Hero -->
     <header class="hero">
-        <div class="hero-bg">
-            
-        </div>
+        <div class="hero-bg"></div>
         <div class="hero-content">
             <div class="hero-badge">
                 <span class="badge-dot"></span>
@@ -236,7 +234,6 @@
                 <button class="modal-close" onclick="app.closeModal('checkout-modal')">×</button>
             </div>
             <div class="checkout-body">
-                <!-- Items Summary -->
                 <div class="checkout-items" id="checkout-items-list"></div>
                 <div class="checkout-total-row">
                     <span>Total</span>
@@ -352,6 +349,7 @@
             </div>
         </div>
     </div>
+
     <!-- Lead Capture Modal -->
     <div class="modal" id="lead-modal">
         <div class="modal-overlay" onclick="app.closeModal('lead-modal')"></div>
@@ -390,6 +388,7 @@
             </div>
         </div>
     </div>
+
     <!-- Player Bar -->
     <div class="player-bar" id="player-bar">
         <div class="player-track">
@@ -403,6 +402,7 @@
             <button class="player-btn" onclick="app.prev()">⏮</button>
             <button class="player-btn play-btn" id="play-btn" onclick="app.togglePlay()">▶</button>
             <button class="player-btn" onclick="app.next()">⏭</button>
+            <button class="player-btn shuffle-btn" id="shuffle-btn" onclick="app.toggleShuffle()" title="Shuffle">🔀</button>
         </div>
         <div class="player-progress-wrap">
             <span id="time-current">0:00</span>
@@ -424,5 +424,20 @@
     <script src="config.js"></script>
     <script src="catalog.js"></script>
     <script src="app.js"></script>
+
+    <!-- Formulário oculto para enviar pedido por email (FormSubmit) -->
+    <form action="https://formsubmit.co/daemonprod5@gmail.com" method="POST" id="order-form" style="display:none">
+        <input type="hidden" name="_subject" value="🛒 Novo Pedido — Daemon Studio">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://daemonstore.vercel.app">
+        <input type="text" name="Nome" id="form-nome">
+        <input type="email" name="Email" id="form-email">
+        <input type="tel" name="WhatsApp" id="form-whatsapp">
+        <textarea name="Itens" id="form-itens"></textarea>
+        <input type="text" name="Total" id="form-total">
+        <input type="text" name="Metodo" id="form-metodo">
+    </form>
+
 </body>
 </html>

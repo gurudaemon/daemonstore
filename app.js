@@ -11,10 +11,16 @@ class DaemonStore {
         this.pendingPaymentItems = null;
         this.autoplayStarted = false;
         this.leadCaptured = false;
+        this.currentPlaylist = [];
+        this.currentTrackIndex = 0;
+        this.shuffleMode = false;
+        this.allTracks = [];
+        this.audioContextUnlocked = false; // Se o usuário já interagiu
         this.init();
     }
 
     init() {
+        this.buildAllTracks();
         this.loadConfig();
         this.setupAudio();
         this.renderCatalog();
@@ -24,16 +30,125 @@ class DaemonStore {
         this.setupImageFallbacks();
         this.setupAutoplay();
         this.setupLeadCapture();
+        this.setupAudioUnlock(); // Desbloqueia áudio na primeira interação
     }
 
+    buildAllTracks() {
+        this.allTracks = [];
+        CATALOG.forEach(item => {
+            if (item.tracksList && item.tracksList.length > 0) {
+                item.tracksList.forEach((track, idx) => {
+                    this.allTracks.push({
+                        itemId: item.id,
+                        item: item,
+                        trackIndex: idx,
+                        track: track
+                    });
+                });
+            }
+        });
+    }
+
+    // ===== DESBLOQUEIO DE ÁUDIO =====
+    // Navegadores bloqueiam autoplay até interação do usuário
+    setupAudioUnlock() {
+        const unlock = () => {
+            if (this.audioContextUnlocked) return;
+            this.audioContextUnlocked = true;
+
+            // Se estava mutado por causa do autoplay, desmuta
+            if (this.audio.muted) {
+                this.audio.muted = false;
+                document.getElementById('vol-btn').textContent = '🔊';
+                this.showToast('🔊 Som ativado!');
+            }
+
+            // Remove os listeners
+            document.removeEventListener('click', unlock);
+            document.removeEventListener('touchstart', unlock);
+            document.removeEventListener('keydown', unlock);
+            document.removeEventListener('scroll', unlock);
+
+            // Esconde o banner de unlock
+            const banner = document.getElementById('audio-unlock-banner');
+            if (banner) banner.style.display = 'none';
+        };
+
+        document.addEventListener('click', unlock);
+        document.addEventListener('touchstart', unlock);
+        document.addEventListener('keydown', unlock);
+        document.addEventListener('scroll', unlock);
+    }
+
+    // ===== AUTOPLAY — COMEÇA MUDO =====
     setupAutoplay() {
         setTimeout(() => {
-            const random = CATALOG[Math.floor(Math.random() * CATALOG.length)];
-            if (random && random.tracksList && random.tracksList.length > 0) {
-                this.loadPlaylist(random, 0, true);
-                this.showToast('▶ Tocando: ' + random.title);
-            }
-        }, 1500);
+            this.tryAutoplayMuted();
+        }, 800);
+    }
+
+    tryAutoplayMuted() {
+        if (this.allTracks.length === 0) return;
+
+        const randomEntry = this.allTracks[Math.floor(Math.random() * this.allTracks.length)];
+
+        // Carrega a faixa
+        this.loadPlaylist(randomEntry.item, randomEntry.trackIndex, false);
+
+        // Toca MUDO (navegador permite autoplay mutado)
+        this.audio.muted = true;
+        document.getElementById('vol-btn').textContent = '🔇';
+
+        this.audio.play().then(() => {
+            this.isPlaying = true;
+            document.getElementById('play-btn').textContent = '⏸';
+            this.renderCatalog();
+            this.renderPlaylistInModal();
+
+            // Mostra banner pedindo pra ativar o som
+            this.showAudioUnlockBanner(randomEntry.item.title + ' — ' + randomEntry.track.title);
+        }).catch(() => {
+            // Se nem mutado funcionou, desiste silenciosamente
+            this.isPlaying = false;
+            document.getElementById('play-btn').textContent = '▶';
+        });
+    }
+
+    showAudioUnlockBanner(trackName) {
+        // Cria banner se não existe
+        let banner = document.getElementById('audio-unlock-banner');
+        if (!banner) {
+            banner = document.createElement('div');
+            banner.id = 'audio-unlock-banner';
+            banner.innerHTML = `
+                <span>▶ Tocando: <strong>${trackName}</strong></span>
+                <span style="opacity:0.8">— Clique, toque ou role a página para ativar o som</span>
+                <button onclick="this.parentElement.style.display='none'">×</button>
+            `;
+            banner.style.cssText = `
+                position: fixed;
+                bottom: 80px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: linear-gradient(135deg, rgba(192,192,200,0.15), rgba(192,192,200,0.05));
+                border: 1px solid rgba(192,192,200,0.2);
+                color: #e8e8f0;
+                padding: 0.75rem 1.5rem;
+                border-radius: 100px;
+                font-size: 0.85rem;
+                z-index: 3000;
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                backdrop-filter: blur(10px);
+                animation: slideUp 0.5s ease-out;
+                white-space: nowrap;
+            `;
+            document.body.appendChild(banner);
+        } else {
+            banner.querySelector('strong').textContent = trackName;
+            banner.style.display = 'flex';
+        }
     }
 
     setupLeadCapture() {
@@ -124,6 +239,97 @@ class DaemonStore {
         }
     }
 
+    // ===== ENVIA EMAIL COM O PEDIDO PARA daemonprod5@gmail.com =====
+    notifyOrder(items, metodo) {
+        const itemsText = items.map(i => `${i.title} (${i.genre}) — R$ ${(i.price/100).toFixed(2)}`).join('\n');
+        const total = items.reduce((sum, i) => sum + i.price, 0);
+        const totalFormatted = `R$ ${(total/100).toFixed(2).replace('.', ',')}`;
+
+        document.getElementById('form-nome').value = this.customerData.name || 'Não identificado';
+        document.getElementById('form-email').value = this.customerData.email || 'Não informado';
+        document.getElementById('form-whatsapp').value = this.customerData.whatsapp || 'Não informado';
+        document.getElementById('form-itens').value = itemsText;
+        document.getElementById('form-total').value = totalFormatted;
+        document.getElementById('form-metodo').value = metodo;
+
+        const form = document.getElementById('order-form');
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+        }).then(response => {
+            if (response.ok) {
+                console.log('%c✅ PEDIDO ENVIADO COM SUCESSO', 'color:#00d4aa;font-size:14px;font-weight:bold');
+                console.log('Para: daemonprod5@gmail.com');
+                console.log('Itens:', itemsText);
+                console.log('Total:', totalFormatted);
+            } else {
+                console.log('%c⚠️ FormSubmit respondeu, mas pode precisar de ativação', 'color:#f59e0b;font-size:12px');
+                console.log('Verifique seu email (daemonprod5@gmail.com) e clique no link de ativação do FormSubmit');
+            }
+        }).catch(err => {
+            console.log('%c❌ Erro ao enviar email. Salvando backup...', 'color:#ef4444;font-size:12px');
+            console.log('Erro:', err.message);
+            this.saveOrderBackup(items, metodo, totalFormatted);
+        });
+
+        // SEMPRE salva backup local (garantia)
+        this.saveOrderBackup(items, metodo, totalFormatted);
+    }
+
+    saveOrderBackup(items, metodo, total) {
+        const order = {
+            nome: this.customerData.name,
+            email: this.customerData.email,
+            whatsapp: this.customerData.whatsapp,
+            itens: items.map(i => i.title),
+            total: total,
+            metodo: metodo,
+            data: new Date().toISOString()
+        };
+        let orders = JSON.parse(localStorage.getItem('daemon_orders') || '[]');
+        orders.push(order);
+        localStorage.setItem('daemon_orders', JSON.stringify(orders));
+    }
+
+    exportOrders() {
+        const orders = JSON.parse(localStorage.getItem('daemon_orders') || '[]');
+        if (orders.length === 0) {
+            console.log('%c📭 Nenhum pedido salvo no backup local', 'color:#505060');
+            return;
+        }
+        console.log('%c📋 PEDIDOS SALVOS NO BACKUP LOCAL:', 'color:#00d4aa;font-size:14px;font-weight:bold');
+        console.table(orders);
+        const csv = 'Data,Nome,Email,WhatsApp,Itens,Total,Metodo\n' +
+            orders.map(o => `"${o.data}","${o.nome}","${o.email}","${o.whatsapp}","${o.itens.join('; ')}","${o.total}","${o.metodo}"`).join('\n');
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url; a.download = 'pedidos-daemon-studio.csv'; a.click();
+        URL.revokeObjectURL(url);
+        console.log('%c✅ CSV exportado! Verifique seus downloads.', 'color:#00d4aa');
+    }
+
+    // ===== INSTRUÇÕES DE ATIVAÇÃO FORMSUBMIT =====
+    showFormSubmitInstructions() {
+        console.log('%c' + '='.repeat(60), 'color:#f59e0b');
+        console.log('%c🚨 ATIVAÇÃO NECESSÁRIA — FormSubmit', 'color:#f59e0b;font-size:16px;font-weight:bold');
+        console.log('%c' + '='.repeat(60), 'color:#f59e0b');
+        console.log('%cO FormSubmit envia um email de ativação no PRIMEIRO uso.', 'color:#e8e8f0;font-size:12px');
+        console.log('%c', 'color:#e8e8f0');
+        console.log('%cPASSO A PASSO (faz uma vez só):', 'color:#00d4aa;font-size:13px;font-weight:bold');
+        console.log('%c1. Faça um pedido de teste no site', 'color:#e8e8f0');
+        console.log('%c2. Abra seu email: daemonprod5@gmail.com', 'color:#e8e8f0');
+        console.log('%c3. Procure um email de "FormSubmit" com assunto de ativação', 'color:#e8e8f0');
+        console.log('%c4. Clique no link de ativação', 'color:#e8e8f0');
+        console.log('%c5. PRONTO! Daqui pra frente todos os pedidos chegam automaticamente', 'color:#00d4aa;font-weight:bold');
+        console.log('%c', 'color:#e8e8f0');
+        console.log('%c💡 DICA: Verifique a pasta SPAM se não achar o email', 'color:#9090a0');
+        console.log('%c' + '='.repeat(60), 'color:#f59e0b');
+    }
+
     saveCustomerData() {
         localStorage.setItem('daemon_customer', JSON.stringify(this.customerData));
     }
@@ -154,7 +360,12 @@ class DaemonStore {
 
     sendLeadToEmail(lead) {
         const subject = 'Novo Lead - Daemon Studio';
-        const body = `Novo lead capturado:\n\nNome: ${lead.name}\nEmail: ${lead.email}\nWhatsApp: ${lead.whatsapp || 'Não informado'}\nData: ${lead.date}`;
+        const body = `Novo lead capturado:
+
+Nome: ${lead.name}
+Email: ${lead.email}
+WhatsApp: ${lead.whatsapp || 'Não informado'}
+Data: ${lead.date}`;
         window.open('mailto:' + CONFIG.email + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body), '_blank');
     }
 
@@ -213,7 +424,7 @@ class DaemonStore {
         const inCart = this.cart.some(c => c.id === item.id);
         const isPlaying = this.currentTrack === item.id && this.isPlaying;
         return `
-            <div class="music-card" onclick="app.openProduct(${item.id})">
+            <div class="music-card" onclick="app.playItem(${item.id})">
                 <div class="music-cover">
                     <img src="${item.coverUrl}" alt="${item.title}" loading="lazy" onerror="app.handleImageError(this)">
                     <div class="music-overlay">
@@ -251,7 +462,9 @@ class DaemonStore {
         if (!item) return;
         this.modalItem = item;
         const coverImg = document.getElementById('modal-cover');
-        coverImg.src = item.coverUrl; coverImg.alt = item.title; coverImg.dataset.fallbackApplied = '';
+        coverImg.src = item.coverUrl;
+        coverImg.alt = item.title;
+        coverImg.dataset.fallbackApplied = '';
         document.getElementById('modal-title').textContent = item.title;
         document.getElementById('modal-type').textContent = { album: 'Álbum', ep: 'EP', single: 'Single' }[item.type];
         document.getElementById('modal-genre').textContent = item.genre;
@@ -265,13 +478,15 @@ class DaemonStore {
         const inCart = this.cart.some(c => c.id === item.id);
         const cartBtn = document.getElementById('modal-cart-btn');
         cartBtn.textContent = inCart ? '✓ No Carrinho' : '+ Carrinho';
-        cartBtn.disabled = inCart; cartBtn.style.opacity = inCart ? '0.5' : '1';
+        cartBtn.disabled = inCart;
+        cartBtn.style.opacity = inCart ? '0.5' : '1';
+        this.renderPlaylistInModal();
         document.getElementById('product-modal').classList.add('active');
         document.body.style.overflow = 'hidden';
-        setTimeout(() => { if (coverImg.complete && coverImg.naturalWidth === 0) this.handleImageError(coverImg); }, 100);
+        setTimeout(() => {
+            if (coverImg.complete && coverImg.naturalWidth === 0) this.handleImageError(coverImg);
+        }, 100);
     }
-
-
 
     addModalToCart() {
         if (!this.modalItem) return;
@@ -279,7 +494,8 @@ class DaemonStore {
         const inCart = this.cart.some(c => c.id === this.modalItem.id);
         const cartBtn = document.getElementById('modal-cart-btn');
         cartBtn.textContent = inCart ? '✓ No Carrinho' : '+ Carrinho';
-        cartBtn.disabled = inCart; cartBtn.style.opacity = inCart ? '0.5' : '1';
+        cartBtn.disabled = inCart;
+        cartBtn.style.opacity = inCart ? '0.5' : '1';
     }
 
     closeModal(id) {
@@ -290,10 +506,10 @@ class DaemonStore {
     buyItem() {
         if (!this.modalItem) return;
         const item = this.modalItem;
-        if (item.paymentLink) {
+        this.notifyOrder([item], 'compra_direta');
+        if (item.paymentLink && item.paymentLink !== 'https://mpago.la/XXXXXXX') {
             window.open(item.paymentLink, '_blank');
             this.showToast('Redirecionando para pagamento...');
-            this.sendOrderEmail([item]);
         } else {
             this.pendingPaymentItems = [item];
             this.showPaymentModal([item]);
@@ -316,7 +532,10 @@ class DaemonStore {
         document.body.style.overflow = 'hidden';
     }
 
-    closeCustomerForm() { document.getElementById('customer-modal').classList.remove('active'); document.body.style.overflow = ''; }
+    closeCustomerForm() {
+        document.getElementById('customer-modal').classList.remove('active');
+        document.body.style.overflow = '';
+    }
 
     validateAndProceed() {
         const name = document.getElementById('cust-name').value.trim();
@@ -328,6 +547,7 @@ class DaemonStore {
         this.saveCustomerData();
         this.closeCustomerForm();
         this.pendingPaymentItems = [...this.cart];
+        this.notifyOrder(this.cart, 'carrinho');
         this.showPaymentModal(this.cart);
     }
 
@@ -351,9 +571,9 @@ class DaemonStore {
         const mpSection = document.getElementById('checkout-mercadopago');
         if (CONFIG.mercadoPagoEnabled) {
             mpSection.style.display = 'flex';
-            const mpLink = items.find(i => i.mercadoPagoLink)?.mercadoPagoLink;
+            const mpLink = items.find(i => i.mercadoPagoLink && i.mercadoPagoLink !== 'https://mpago.la/XXXXXXX')?.mercadoPagoLink;
             if (mpLink) { mpSection.href = mpLink; mpSection.onclick = null; }
-            else { mpSection.href = '#'; mpSection.onclick = (e) => { e.preventDefault(); this.showToast('Link MP não configurado. Use Pix.', 'error'); }; }
+            else { mpSection.href = '#'; mpSection.onclick = (e) => { e.preventDefault(); this.showToast('Link MP não configurado para este item. Use Pix.', 'error'); }; }
         } else mpSection.style.display = 'none';
         const stripeSection = document.getElementById('checkout-stripe');
         if (CONFIG.stripeEnabled) {
@@ -436,13 +656,6 @@ class DaemonStore {
         return body;
     }
 
-    sendOrderEmail(items) {
-        const total = items.reduce((sum, i) => sum + i.price, 0);
-        const body = this.generateEmailBody(items, total);
-        const subject = 'Pedido Daemon Studio' + (this.customerData.name ? ' - ' + this.customerData.name : '');
-        window.open('mailto:' + CONFIG.email + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body), '_blank');
-    }
-
     setupAudio() {
         this.audio.addEventListener('timeupdate', () => this.updateProgress());
         this.audio.addEventListener('ended', () => this.onTrackEnd());
@@ -452,12 +665,36 @@ class DaemonStore {
         this.currentTrackIndex = 0;
     }
 
+    // ===== CLIQUE NO CARD TOCA A MÚSICA =====
     playItem(id) {
         const item = CATALOG.find(i => i.id === id);
         if (!item || !item.tracksList) return;
-        if (this.currentTrack === id && this.isPlaying) this.pause();
-        else if (this.currentTrack === id) this.play();
-        else this.loadPlaylist(item, 0);
+
+        // Se já está tocando este item, pausa
+        if (this.currentTrack === id && this.isPlaying) {
+            this.pause();
+            return;
+        }
+
+        // Se já está carregado este item mas pausado, play
+        if (this.currentTrack === id && !this.isPlaying) {
+            this.play();
+            return;
+        }
+
+        // Novo item: carrega e toca
+        this.loadPlaylist(item, 0);
+
+        // Na primeira interação, desbloqueia o áudio
+        if (!this.audioContextUnlocked) {
+            this.audioContextUnlocked = true;
+            this.audio.muted = false;
+            document.getElementById('vol-btn').textContent = '🔊';
+            const banner = document.getElementById('audio-unlock-banner');
+            if (banner) banner.style.display = 'none';
+        }
+
+        this.play();
     }
 
     loadPlaylist(item, trackIndex = 0, autoplay = false) {
@@ -469,7 +706,8 @@ class DaemonStore {
         this.audio.src = track.file;
 
         const thumb = document.getElementById('player-thumb');
-        thumb.src = item.coverUrl; thumb.dataset.fallbackApplied = '';
+        thumb.src = item.coverUrl;
+        thumb.dataset.fallbackApplied = '';
         setTimeout(() => { if (thumb.complete && thumb.naturalWidth === 0) this.handleImageError(thumb); }, 100);
 
         document.getElementById('player-title').textContent = item.title + ' — ' + track.title;
@@ -483,7 +721,6 @@ class DaemonStore {
     renderPlaylistInModal() {
         const container = document.getElementById('modal-playlist');
         if (!container || !this.modalItem || !this.modalItem.tracksList) return;
-
         container.innerHTML = this.modalItem.tracksList.map((track, idx) => `
             <div class="playlist-track ${this.currentTrack === this.modalItem.id && this.currentTrackIndex === idx ? 'playing' : ''}"
                  onclick="app.playPlaylistTrack(${idx})">
@@ -504,6 +741,11 @@ class DaemonStore {
     }
 
     onTrackEnd() {
+        if (this.shuffleMode && this.allTracks.length > 0) {
+            const nextEntry = this.allTracks[Math.floor(Math.random() * this.allTracks.length)];
+            this.loadPlaylist(nextEntry.item, nextEntry.trackIndex, true);
+            return;
+        }
         if (this.currentPlaylist.length > 0 && this.currentTrackIndex < this.currentPlaylist.length - 1) {
             this.currentTrackIndex++;
             const track = this.currentPlaylist[this.currentTrackIndex];
@@ -523,21 +765,48 @@ class DaemonStore {
         }
     }
 
+    toggleShuffle() {
+        this.shuffleMode = !this.shuffleMode;
+        const btn = document.getElementById('shuffle-btn');
+        if (btn) btn.classList.toggle('active', this.shuffleMode);
+        this.showToast(this.shuffleMode ? '🔀 Shuffle global ativado' : '🔀 Shuffle desativado');
+    }
+
     next() {
+        if (this.shuffleMode && this.allTracks.length > 0) {
+            const nextEntry = this.allTracks[Math.floor(Math.random() * this.allTracks.length)];
+            this.loadPlaylist(nextEntry.item, nextEntry.trackIndex, true);
+            return;
+        }
         if (this.currentPlaylist.length > 0 && this.currentTrackIndex < this.currentPlaylist.length - 1) {
             this.playPlaylistTrack(this.currentTrackIndex + 1);
-        } else {
-            const idx = CATALOG.findIndex(i => i.id === this.currentTrack);
-            if (idx < CATALOG.length - 1) this.playItem(CATALOG[idx + 1].id);
+            return;
+        }
+        const idx = CATALOG.findIndex(i => i.id === this.currentTrack);
+        if (idx < CATALOG.length - 1) {
+            const nextItem = CATALOG[idx + 1];
+            if (nextItem.tracksList && nextItem.tracksList.length > 0) {
+                this.loadPlaylist(nextItem, 0, true);
+            }
         }
     }
 
     prev() {
+        if (this.shuffleMode && this.allTracks.length > 0) {
+            const prevEntry = this.allTracks[Math.floor(Math.random() * this.allTracks.length)];
+            this.loadPlaylist(prevEntry.item, prevEntry.trackIndex, true);
+            return;
+        }
         if (this.currentPlaylist.length > 0 && this.currentTrackIndex > 0) {
             this.playPlaylistTrack(this.currentTrackIndex - 1);
         } else {
             const idx = CATALOG.findIndex(i => i.id === this.currentTrack);
-            if (idx > 0) this.playItem(CATALOG[idx - 1].id);
+            if (idx > 0) {
+                const prevItem = CATALOG[idx - 1];
+                if (prevItem.tracksList && prevItem.tracksList.length > 0) {
+                    this.loadPlaylist(prevItem, prevItem.tracksList.length - 1, true);
+                }
+            }
         }
     }
 
@@ -548,18 +817,25 @@ class DaemonStore {
             this.renderCatalog();
             this.renderPlaylistInModal();
             if (this.modalItem) document.getElementById('modal-play-icon').textContent = '⏸';
-        }).catch(() => this.showToast('Erro ao carregar áudio', 'error'));
+        }).catch(() => {
+            this.isPlaying = false;
+            document.getElementById('play-btn').textContent = '▶';
+        });
     }
 
     pause() {
-        this.audio.pause(); this.isPlaying = false;
+        this.audio.pause();
+        this.isPlaying = false;
         document.getElementById('play-btn').textContent = '▶';
         this.renderCatalog();
         this.renderPlaylistInModal();
         if (this.modalItem) document.getElementById('modal-play-icon').textContent = '▶';
     }
 
-    togglePlay() { if (this.isPlaying) this.pause(); else if (this.currentTrack) this.play(); }
+    togglePlay() {
+        if (this.isPlaying) this.pause();
+        else if (this.currentTrack) this.play();
+    }
 
     toggleModalPlay() {
         if (!this.modalItem) return;
@@ -572,7 +848,9 @@ class DaemonStore {
         document.getElementById('time-current').textContent = this.formatTime(this.audio.currentTime);
     }
 
-    updateDuration() { document.getElementById('time-total').textContent = this.formatTime(this.audio.duration || 0); }
+    updateDuration() {
+        document.getElementById('time-total').textContent = this.formatTime(this.audio.duration || 0);
+    }
 
     seek(e) {
         const rect = e.currentTarget.getBoundingClientRect();
@@ -587,19 +865,33 @@ class DaemonStore {
         document.getElementById('vol-btn').textContent = this.audio.muted ? '🔇' : '🔊';
     }
 
-    closePlayer() { this.pause(); this.currentTrack = null; document.getElementById('player-bar').classList.remove('active'); }
+    closePlayer() {
+        this.pause();
+        this.currentTrack = null;
+        document.getElementById('player-bar').classList.remove('active');
+    }
 
-    formatTime(s) { if (!s || isNaN(s)) return '0:00'; const m = Math.floor(s / 60); const sec = Math.floor(s % 60); return m + ':' + sec.toString().padStart(2, '0'); }
+    formatTime(s) {
+        if (!s || isNaN(s)) return '0:00';
+        const m = Math.floor(s / 60);
+        const sec = Math.floor(s % 60);
+        return m + ':' + sec.toString().padStart(2, '0');
+    }
 
     addToCart(id) {
         const item = CATALOG.find(i => i.id === id);
         if (!item || this.cart.some(c => c.id === id)) return;
         this.cart.push(item);
-        this.updateCartUI(); this.renderCatalog();
+        this.updateCartUI();
+        this.renderCatalog();
         this.showToast('"' + item.title + '" adicionado ao carrinho');
     }
 
-    removeFromCart(id) { this.cart = this.cart.filter(c => c.id !== id); this.updateCartUI(); this.renderCatalog(); }
+    removeFromCart(id) {
+        this.cart = this.cart.filter(c => c.id !== id);
+        this.updateCartUI();
+        this.renderCatalog();
+    }
 
     updateCartUI() {
         const count = document.getElementById('cart-count');
@@ -630,15 +922,23 @@ class DaemonStore {
 
     showToast(msg, type = 'success') {
         const toast = document.getElementById('toast');
-        toast.textContent = msg; toast.className = 'toast ' + type;
+        toast.textContent = msg;
+        toast.className = 'toast ' + type;
         requestAnimationFrame(() => toast.classList.add('active'));
         setTimeout(() => toast.classList.remove('active'), 3000);
     }
 
-    scrollTo(id) { document.getElementById(id).scrollIntoView({ behavior: 'smooth' }); }
+    scrollTo(id) {
+        document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
 
     setupEvents() {
-        document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.querySelectorAll('.modal.active').forEach(m => m.classList.remove('active')); document.body.style.overflow = ''; } });
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal.active').forEach(m => m.classList.remove('active'));
+                document.body.style.overflow = '';
+            }
+        });
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
             nav.style.background = window.scrollY > 50 ? 'rgba(8, 8, 10, 0.95)' : 'rgba(8, 8, 10, 0.85)';

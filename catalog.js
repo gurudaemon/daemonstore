@@ -23,6 +23,7 @@ const CATALOG = [
         ],
         description: "11 faixas de metal/nu metal. Pesado, atmosférico e visceral.",
         paymentLink: "https://mpago.la/31AXSGh",
+        mercadoPagoLink: "https://mpago.la/31AXSGh",
         tags: ["metal","ia","album"]
     },
     {
@@ -58,7 +59,8 @@ const CATALOG = [
             { num: 21, title: "Faixa 21", file: "assets/audio/femea/21.mp3" }
         ],
         description: "21 faixas de rap. O álbum 'Fêmea' foi criado baseado no meu contato com o feminino.",
-        paymentLink: "",
+        paymentLink: "https://mpago.la/1gsnSKW",
+        mercadoPagoLink: "https://mpago.la/1gsnSKW",
         tags: ["rap","ia","album"]
     },
     {
@@ -86,7 +88,8 @@ const CATALOG = [
             { num: 13, title: "Faixa 13", file: "assets/audio/daimon2/13.mp3" }
         ],
         description: "13 faixas. A segunda versão de dAImon. Política, metal e ódio.",
-        paymentLink: "",
+        paymentLink: "https://mpago.la/2CRXQ85",
+        mercadoPagoLink: "https://mpago.la/2CRXQ85",
         tags: ["metal","ia","album"]
     },
     {
@@ -111,7 +114,8 @@ const CATALOG = [
             { num: 10, title: "Faixa 10", file: "assets/audio/prompter/10.mp3" }
         ],
         description: "10 faixas instrumentais que contam uma história.",
-        paymentLink: "",
+        paymentLink: "https://mpago.la/2EBQymT",
+        mercadoPagoLink: "https://mpago.la/2EBQymT",
         tags: ["metal","instrumental","ia","album"]
     },
     {
@@ -134,7 +138,8 @@ const CATALOG = [
             { num: 8, title: "Faixa 8", file: "assets/audio/almamendiga/8.mp3" }
         ],
         description: "8 faixas. A alma sem dono, vagando entre gêneros.",
-        paymentLink: "",
+        paymentLink: "https://mpago.la/2kGnz5C",
+        mercadoPagoLink: "https://mpago.la/2kGnz5C",
         tags: ["varios","ia","album"]
     },
     {
@@ -159,8 +164,9 @@ const CATALOG = [
             { num: 10, title: "Faixa 10", file: "assets/audio/arteeletronica/10.mp3" }
         ],
         description: "10 faixas. Meu primeiro álbum de eletrônica.",
-        paymentLink: "",
-        tags: ["eletronica","psytrance","ia","album"]
+        paymentLink: "https://mpago.la/2nVDhfR",
+        mercadoPagoLink: "https://mpago.la/2nVDhfR",
+        tags: ["eletronica","psytrance","autoral","album"]
     },
     {
         id: 7,
@@ -185,8 +191,9 @@ const CATALOG = [
             { num: 11, title: "Faixa 11", file: "assets/audio/trilhascinema/11.mp3" }
         ],
         description: "11 trilhas sonoras autorais para cinema e mídia.",
-        paymentLink: "",
-        tags: ["trilha","instrumental","ia","album"]
+        paymentLink: "https://mpago.la/252Ku9E",
+        mercadoPagoLink: "https://mpago.la/252Ku9E",
+        tags: ["trilha","instrumental","autoral","album"]
     },
     {
         id: 8,
@@ -202,8 +209,9 @@ const CATALOG = [
             { num: 2, title: "Faixa 2", file: "assets/audio/opai/2.mp3" }
         ],
         description: "2 faixas de rap. Diálogo direto e visceral.",
-        paymentLink: "",
-        tags: ["rap","autoral","ep"]
+        paymentLink: "https://mpago.la/2hxmQ8K",
+        mercadoPagoLink: "https://mpago.la/2hxmQ8K",
+        tags: ["rap","ia","ep"]
     },
     {
         id: 9,
@@ -219,7 +227,8 @@ const CATALOG = [
             { num: 2, title: "Faixa 2", file: "assets/audio/georgeestamorto/2.mp3" }
         ],
         description: "2 faixas de rap autoral. George não está mais aqui.",
-        paymentLink: "",
+        paymentLink: "https://mpago.la/2BqtWi7",
+        mercadoPagoLink: "https://mpago.la/2BqtWi7",
         tags: ["rap","autoral","ep"]
     },
     {
@@ -240,8 +249,9 @@ const CATALOG = [
             { num: 6, title: "Faixa 6", file: "assets/audio/theproduct/6.mp3" }
         ],
         description: "6 faixas conceituais. Uma crítica direta para Slim Shady.",
-        paymentLink: "",
-        tags: ["rap","autoral","album"]
+        paymentLink: "https://mpago.la/1wAWeQS",
+        mercadoPagoLink: "https://mpago.la/1wAWeQS",
+        tags: ["rap","ia","album"]
     },
     {
         id: 11,
@@ -262,8 +272,9 @@ const CATALOG = [
             { num: 7, title: "Faixa 7", file: "assets/audio/saudades/7.mp3" }
         ],
         description: "7 faixas em vários estilos. Uma jornada emocional.",
-        paymentLink: "",
-        tags: ["varios","autoral","album"]
+        paymentLink: "https://mpago.la/13hsHBC",
+        mercadoPagoLink: "https://mpago.la/13hsHBC",
+        tags: ["varios","ia","album"]
     },
     {
         id: 12,
@@ -289,7 +300,8 @@ const CATALOG = [
             { num: 12, title: "Faixa 12", file: "assets/audio/daimon/12.mp3" }
         ],
         description: "12 faixas. O início da era dAImon.",
-        paymentLink: "",
+        paymentLink: "https://mpago.la/1djGRCy",
+        mercadoPagoLink: "https://mpago.la/1djGRCy",
         tags: ["metal","ia","album"]
     },
     {
@@ -306,6 +318,7 @@ const CATALOG = [
         ],
         description: "Single autoral. Eletrofunk puro.",
         paymentLink: "https://mpago.la/1yewVzS",
+        mercadoPagoLink: "https://mpago.la/1yewVzS",
         tags: ["eletrofunk","autoral","single"]
     },
     {
@@ -321,8 +334,9 @@ const CATALOG = [
             { num: 1, title: "Janaína", file: "assets/audio/janaina/1.mp3" }
         ],
         description: "Single de rap. Faixa Extra do Álbum Fêmea.",
-        paymentLink: "",
-        tags: ["rap","autoral","single"]
+        paymentLink: "https://mpago.la/16m5zaD",
+        mercadoPagoLink: "https://mpago.la/16m5zaD",
+        tags: ["rap","ia","single"]
     },
     {
         id: 15,
@@ -337,8 +351,9 @@ const CATALOG = [
             { num: 1, title: "A Ilha", file: "assets/audio/ailha/1.mp3" }
         ],
         description: "Single de metal. A ilha do isolamento.",
-        paymentLink: "",
-        tags: ["metal","autoral","single"]
+        paymentLink: "https://mpago.la/2Pscewy",
+        mercadoPagoLink: "https://mpago.la/2Pscewy",
+        tags: ["metal","ia","single"]
     },
     {
         id: 16,
@@ -352,9 +367,10 @@ const CATALOG = [
         tracksList: [
             { num: 1, title: "E.T", file: "assets/audio/et/1.mp3" }
         ],
-        description: "Single de metal. Visitante de outro mundo.",
-        paymentLink: "",
-        tags: ["metal","autoral","single"]
+        description: "Single de metal. Eu sou um cantor artificial.",
+        paymentLink: "https://mpago.la/2qg61Hf",
+        mercadoPagoLink: "https://mpago.la/2qg61Hf",
+        tags: ["metal","ia","single"]
     },
     {
         id: 17,
@@ -369,12 +385,13 @@ const CATALOG = [
             { num: 1, title: "D VAI é o cara", file: "assets/audio/dvaieocara/1.mp3" }
         ],
         description: "Single autoral. D VAI na sua essência.",
-        paymentLink: "",
+        paymentLink: "https://mpago.la/2coVFaJ",
+        mercadoPagoLink: "https://mpago.la/2coVFaJ",
         tags: ["rap","eletronica","autoral","single"]
     },
     {
         id: 18,
-        title: "Forá",
+        title: "Fará",
         type: "single",
         tracks: 1,
         genre: "Psytrance",
@@ -382,10 +399,11 @@ const CATALOG = [
         price: 890,
         coverUrl: "assets/covers/Fara.png",
         tracksList: [
-            { num: 1, title: "Forá", file: "assets/audio/fara/1.mp3" }
+            { num: 1, title: "Fará", file: "assets/audio/fara/1.mp3" }
         ],
         description: "Single psytrance autoral.",
-        paymentLink: "",
+        paymentLink: "https://mpago.la/1G9v5tn",
+        mercadoPagoLink: "https://mpago.la/1G9v5tn",
         tags: ["psytrance","autoral","single"]
     },
     {
@@ -401,7 +419,8 @@ const CATALOG = [
             { num: 1, title: "Fé", file: "assets/audio/fe/1.mp3" }
         ],
         description: "Single rap autoral. Essa é a fé...",
-        paymentLink: "",
+        paymentLink: "https://mpago.la/31HB8JL",
+        mercadoPagoLink: "https://mpago.la/31HB8JL",
         tags: ["rap","autoral","single"]
     },
     {
@@ -417,7 +436,8 @@ const CATALOG = [
             { num: 1, title: "Lord Bell", file: "assets/audio/lordbell/1.mp3" }
         ],
         description: "Single drift phonk autoral.",
-        paymentLink: "",
+        paymentLink: "https://mpago.la/2UxmwJZ",
+        mercadoPagoLink: "https://mpago.la/2UxmwJZ",
         tags: ["drift phonk","autoral","single"]
     },
     {
@@ -433,7 +453,8 @@ const CATALOG = [
             { num: 1, title: "GTFO", file: "assets/audio/gtfo/1.mp3" }
         ],
         description: "Single psytrance autoral.",
-        paymentLink: "",
+        paymentLink: "https://mpago.la/2u4UhQ8",
+        mercadoPagoLink: "https://mpago.la/2u4UhQ8",
         tags: ["psytrance","autoral","single"]
     },
     {
@@ -449,7 +470,8 @@ const CATALOG = [
             { num: 1, title: "Dummm by Mc Memi", file: "assets/audio/dummm/1.mp3" }
         ],
         description: "Faixa produzida baseado no livro O Pináculo de Pain.",
-        paymentLink: "",
+        paymentLink: "https://mpago.la/1wF4fLA",
+        mercadoPagoLink: "https://mpago.la/1wF4fLA",
         tags: ["eletronica","autoral","single"]
     },
     {
@@ -465,7 +487,8 @@ const CATALOG = [
             { num: 1, title: "Vital", file: "assets/audio/vital/1.mp3" }
         ],
         description: "Single psytrance autoral. A vitalidade do som.",
-        paymentLink: "",
+        paymentLink: "https://mpago.la/12nxjTf",
+        mercadoPagoLink: "https://mpago.la/12nxjTf",
         tags: ["psytrance","autoral","single"]
     },
     {
@@ -481,7 +504,8 @@ const CATALOG = [
             { num: 1, title: "Eu sei", file: "assets/audio/eusei/1.mp3" }
         ],
         description: "Single stone rock autoral.",
-        paymentLink: "",
+        paymentLink: "https://mpago.la/1Wp4UDP",
+        mercadoPagoLink: "https://mpago.la/1Wp4UDP",
         tags: ["stone rock","autoral","single"]
     },
     {
@@ -497,7 +521,8 @@ const CATALOG = [
             { num: 1, title: "Piece by Piece", file: "assets/audio/piecebypiece/1.mp3" }
         ],
         description: "Single drum and bass autoral.",
-        paymentLink: "",
+        paymentLink: "https://mpago.la/1WNNDDn",
+        mercadoPagoLink: "https://mpago.la/1WNNDDn",
         tags: ["drum and bass","autoral","single"]
     }
 ];

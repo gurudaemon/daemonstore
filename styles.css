@@ -1573,3 +1573,19 @@ body {
     font-size: 0.8rem;
     color: var(--chrome);
 }
+
+/* Shuffle Button */
+.shuffle-btn {
+    font-size: 0.9rem;
+    opacity: 0.5;
+    transition: var(--transition);
+}
+.shuffle-btn:hover {
+    opacity: 1;
+    color: var(--chrome-light);
+}
+.shuffle-btn.active {
+    opacity: 1;
+    color: var(--chrome-light);
+    background: rgba(192, 192, 200, 0.1);
+}
