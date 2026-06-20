@@ -1,69 +1,92 @@
 const VIDEOS = [
     {
         id: 1,
-        title: "",
+        title: "Documentário Dualidades",
         type: "documentario",
         duration: "",
         year: 2026,
-        thumbnail: "assets/videos/video1.png",
-        youtubeId: "",
+        thumbnail: "https://img.youtube.com/vi/_253XeW8kHs/maxresdefault.jpg",
+        youtubeId: "_253XeW8kHs",
         description: "",
-        tags: ["documentário"]
+        tags: ["documentario"]
     },
     {
         id: 2,
-        title: "",
+        title: "Mini Doc. Weedemic",
+        type: "documentario",
+        duration: "",
+        year: 2026,
+        thumbnail: "https://img.youtube.com/vi/_253XeW8kHs/maxresdefault.jpg",
+        youtubeId: "0MTd075qIk0",
+        description: "",
+        tags: ["documentario"]
+    },
+    {
+        id: 3,
+        title: "Curta Beto Carrero",
+        type: "curta",
+        duration: "",
+        year: 2026,
+        thumbnail: "https://img.youtube.com/vi/_253XeW8kHs/maxresdefault.jpg",
+        youtubeId: "w8MapNJMvrg",
+        description: "",
+        tags: ["curta"]
+    },
+    {
+        id: 4,
+        title: "Curta Fatal Yogurt",
+        type: "curta",
+        duration: "",
+        year: 2026,
+        thumbnail: "https://img.youtube.com/vi/_253XeW8kHs/maxresdefault.jpg",
+        youtubeId: "2TlcSbACLBo",
+        description: "",
+        tags: ["curta"]
+    },
+    {
+        id: 5,
+        title: "Mr. Jones (Amy Winehouse Cover)",
         type: "clipe",
         duration: "",
         year: 2026,
-        thumbnail: "assets/videos/video2.png",
-        youtubeId: "",
+        thumbnail: "https://img.youtube.com/vi/_253XeW8kHs/maxresdefault.jpg",
+        youtubeId: "OsHBFlc_Yro",
+        description: "",
+        tags: ["clipe", "cover"]
+    },
+    {
+        id: 6,
+        title: "Farol (Cover)",
+        type: "clipe",
+        duration: "",
+        year: 2026,
+        thumbnail: "https://img.youtube.com/vi/_253XeW8kHs/maxresdefault.jpg",
+        youtubeId: "i2y8BOFdVw4",
+        description: "",
+        tags: ["clipe", "cover"]
+    },
+    {
+        id: 7,
+        title: "Boku ga Kira da",
+        type: "clipe",
+        duration: "",
+        year: 2026,
+        thumbnail: "https://img.youtube.com/vi/_253XeW8kHs/maxresdefault.jpg",
+        youtubeId: "JzlCDIxsEOU",
         description: "",
         tags: ["clipe"]
     },
     {
-        id: 3,
-        title: "",
-        type: "ensaio",
+        id: 8,
+        title: "Vital",
+        type: "clipe",
         duration: "",
         year: 2026,
-        thumbnail: "assets/videos/video3.png",
-        youtubeId: "",
+        thumbnail: "https://img.youtube.com/vi/_253XeW8kHs/maxresdefault.jpg",
+        youtubeId: "nSWbMdv5JsU",
         description: "",
-        tags: ["ensaio"]
-    },
-    {
-        id: 4,
-        title: "",
-        type: "lyric",
-        duration: "",
-        year: 2026,
-        thumbnail: "assets/videos/video4.png",
-        youtubeId: "",
-        description: "",
-        tags: ["lyric-video"]
-    },
-    {
-        id: 5,
-        title: "",
-        type: "live",
-        duration: "",
-        year: 2026,
-        thumbnail: "assets/videos/video5.png",
-        youtubeId: "",
-        description: "",
-        tags: ["live"]
-    },
-    {
-        id: 6,
-        title: "",
-        type: "curta",
-        duration: "",
-        year: 2026,
-        thumbnail: "assets/videos/video6.png",
-        youtubeId: "",
-        description: "",
-        tags: ["curta"]
+        tags: ["clipe"]
     }
 ];
+
 window.VIDEOS = VIDEOS;
