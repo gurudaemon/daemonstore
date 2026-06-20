@@ -524,6 +524,58 @@ const CATALOG = [
         paymentLink: "https://mpago.la/1WNNDDn",
         mercadoPagoLink: "https://mpago.la/1WNNDDn",
         tags: ["drum and bass","autoral","single"]
+    },
+    {
+        id: 26,
+        title: "Eletro Dance, Vol 1",
+        type: "album",
+        tracks: 10,
+        genre: "EDM","House","Techno",
+        year: 2026,
+        price: 890,
+        coverUrl: "assets/covers/edm1.jpg",
+          tracksList: [
+            { num: 1, title: "Faixa 1", file: "assets/audio/edm1/1.mp3" },
+            { num: 2, title: "Faixa 2", file: "assets/audio/edm1/2.mp3" },
+            { num: 3, title: "Faixa 3", file: "assets/audio/edm1/3.mp3" },
+            { num: 4, title: "Faixa 4", file: "assets/audio/edm1/4.mp3" },
+            { num: 5, title: "Faixa 5", file: "assets/audio/edm1/5.mp3" },
+            { num: 6, title: "Faixa 6", file: "assets/audio/edm1/6.mp3" },
+            { num: 7, title: "Faixa 7", file: "assets/audio/edm1/7.mp3" },
+            { num: 8, title: "Faixa 8", file: "assets/audio/edm1/8.mp3" },
+            { num: 9, title: "Faixa 9", file: "assets/audio/edm1/9.mp3" },
+            { num: 10, title: "Faixa 10", file: "assets/audio/edm1/10.mp3" },
+        ],
+        description: "Faixas mixadas por D.T. Shen.",
+        paymentLink: "https://mpago.la/xxxx",
+        mercadoPagoLink: "https://mpago.la/xxxx",
+        tags: ["EDM","autoral","album"]
+    },
+    {
+        id: 27,
+        title: "Eletro Dance, Vol 2",
+        type: "album",
+        tracks: 10,
+        genre: "EDM","House","Techno",
+        year: 2026,
+        price: 890,
+        coverUrl: "assets/covers/edm2.jpg",
+          tracksList: [
+            { num: 1, title: "Faixa 1", file: "assets/audio/edm2/1.mp3" },
+            { num: 2, title: "Faixa 2", file: "assets/audio/edm2/2.mp3" },
+            { num: 3, title: "Faixa 3", file: "assets/audio/edm2/3.mp3" },
+            { num: 4, title: "Faixa 4", file: "assets/audio/edm2/4.mp3" },
+            { num: 5, title: "Faixa 5", file: "assets/audio/edm2/5.mp3" },
+            { num: 6, title: "Faixa 6", file: "assets/audio/edm2/6.mp3" },
+            { num: 7, title: "Faixa 7", file: "assets/audio/edm2/7.mp3" },
+            { num: 8, title: "Faixa 8", file: "assets/audio/edm2/8.mp3" },
+            { num: 9, title: "Faixa 9", file: "assets/audio/edm2/9.mp3" },
+            { num: 10, title: "Faixa 10", file: "assets/audio/edm2/10.mp3" },
+        ],
+        description: "Faixas mixadas por D.T. Shen.",
+        paymentLink: "https://mpago.la/xxxx",
+        mercadoPagoLink: "https://mpago.la/xxxx",
+        tags: ["EDM","autoral","album"]
     }
 ];
 
