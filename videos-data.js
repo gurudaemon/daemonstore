@@ -16,7 +16,7 @@ const VIDEOS = [
         type: "documentario",
         duration: "",
         year: 2026,
-        thumbnail: "https://img.youtube.com/vi/_253XeW8kHs/maxresdefault.jpg",
+        thumbnail: "https://img.youtube.com/vi/0MTd075qIk0/maxresdefault.jpg",
         youtubeId: "0MTd075qIk0",
         description: "",
         tags: ["documentario"]
@@ -27,7 +27,7 @@ const VIDEOS = [
         type: "curta",
         duration: "",
         year: 2026,
-        thumbnail: "https://img.youtube.com/vi/_253XeW8kHs/maxresdefault.jpg",
+        thumbnail: "https://img.youtube.com/vi/w8MapNJMvrg/maxresdefault.jpg",
         youtubeId: "w8MapNJMvrg",
         description: "",
         tags: ["curta"]
@@ -38,7 +38,7 @@ const VIDEOS = [
         type: "curta",
         duration: "",
         year: 2026,
-        thumbnail: "https://img.youtube.com/vi/_253XeW8kHs/maxresdefault.jpg",
+        thumbnail: "https://img.youtube.com/vi/2TlcSbACLBo/maxresdefault.jpg",
         youtubeId: "2TlcSbACLBo",
         description: "",
         tags: ["curta"]
@@ -49,7 +49,7 @@ const VIDEOS = [
         type: "clipe",
         duration: "",
         year: 2026,
-        thumbnail: "https://img.youtube.com/vi/_253XeW8kHs/maxresdefault.jpg",
+        thumbnail: "https://img.youtube.com/vi/OsHBFlc_Yro/maxresdefault.jpg",
         youtubeId: "OsHBFlc_Yro",
         description: "",
         tags: ["clipe", "cover"]
@@ -60,7 +60,7 @@ const VIDEOS = [
         type: "clipe",
         duration: "",
         year: 2026,
-        thumbnail: "https://img.youtube.com/vi/_253XeW8kHs/maxresdefault.jpg",
+        thumbnail: "https://img.youtube.com/vi/i2y8BOFdVw4/maxresdefault.jpg",
         youtubeId: "i2y8BOFdVw4",
         description: "",
         tags: ["clipe", "cover"]
@@ -71,7 +71,7 @@ const VIDEOS = [
         type: "clipe",
         duration: "",
         year: 2026,
-        thumbnail: "https://img.youtube.com/vi/_253XeW8kHs/maxresdefault.jpg",
+        thumbnail: "https://img.youtube.com/vi/JzlCDIxsEOU/maxresdefault.jpg",
         youtubeId: "JzlCDIxsEOU",
         description: "",
         tags: ["clipe"]
@@ -82,7 +82,7 @@ const VIDEOS = [
         type: "clipe",
         duration: "",
         year: 2026,
-        thumbnail: "https://img.youtube.com/vi/_253XeW8kHs/maxresdefault.jpg",
+        thumbnail: "https://img.youtube.com/vi/nSWbMdv5JsU/maxresdefault.jpg",
         youtubeId: "nSWbMdv5JsU",
         description: "",
         tags: ["clipe"]
