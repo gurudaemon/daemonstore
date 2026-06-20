@@ -38,7 +38,7 @@ const VIDEOS = [
         type: "curta",
         duration: "",
         year: 2026,
-        thumbnail: "assets/videos/fatal-yogurt.svg",
+        thumbnail: "assets/videos/fatal.jpg",
         youtubeId: "2TlcSbACLBo",
         description: "",
         tags: ["curta"]
