@@ -38,7 +38,7 @@ const VIDEOS = [
         type: "curta",
         duration: "",
         year: 2026,
-        thumbnail: "https://img.youtube.com/vi/2TlcSbACLBo/maxresdefault.jpg",
+        thumbnail: "assets/videos/fatal-yogurt.svg",,
         youtubeId: "2TlcSbACLBo",
         description: "",
         tags: ["curta"]
