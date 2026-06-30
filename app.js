@@ -29,7 +29,6 @@ class DaemonStore {
         this.renderCatalog();
         this.renderBooks();
         this.renderVideos();
-        this.renderTexts();
         this.updateStats();
         this.setupEvents();
         this.loadCustomerData();

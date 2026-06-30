@@ -6,7 +6,7 @@ const BOOKS = [
         year: 2026,
         status: "disponivel",
         price: 4990,
-        coverUrl: "assets/covers/pinaculo-de-pain.png",
+        coverUrl: "assets/covers/pinaculo-de-pain/1.png",
         pages: 0,
         synopsis: "",
         quote: "",
@@ -21,40 +21,21 @@ const BOOKS = [
     },
     {
         id: 2,
-        title: "Manifesto do Artista Sem Gravadora",
+        title: "O Mundo Diante de Ti",
         subtitle: "",
         year: 2026,
-        status: "gratuito",
-        price: 0,
-        coverUrl: "assets/covers/manifesto.png",
+        status: "disponivel",
+        price: 2290,
+        coverUrl: "assets/covers/o-mundo-diante-de-ti/1.png",
         pages: 0,
         synopsis: "",
         quote: "",
-        tags: ["ensaio", "manifesto", "independência"],
-        buyLink: null,
+        tags: ["ficção", "filosofia"],
+        buyLink: "",
         previewText: "",
         extras: [
-            { label: "Preço", value: "Gratuito (doação opcional)" },
-            { label: "Formato", value: "PDF" }
-        ]
-    },
-    {
-        id: 3,
-        title: "Fêmea — Letras Comentadas",
-        subtitle: "",
-        year: 2026,
-        status: "pre-venda",
-        price: 2990,
-        coverUrl: "assets/covers/femea-livro.png",
-        pages: 0,
-        synopsis: "",
-        quote: "",
-        tags: ["poesia", "rap", "música"],
-        buyLink: null,
-        previewText: "",
-        extras: [
-            { label: "Status", value: "Pré-venda" },
-            { label: "Previsão", value: "Agosto/2026" }
+            { label: "Formato", value: "Digital (PDF + EPUB)" },
+            { label: "Idioma", value: "Português" }
         ]
     }
 ];

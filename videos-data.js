@@ -34,17 +34,6 @@ const VIDEOS = [
     },
     {
         id: 4,
-        title: "Curta Fatal Yogurt",
-        type: "curta",
-        duration: "",
-        year: 2026,
-        thumbnail: "https://img.youtube.com/vi/2TlcSbACLBo/maxresdefault.jpg",
-        youtubeId: "2TlcSbACLBo",
-        description: "",
-        tags: ["curta"]
-    },
-    {
-        id: 5,
         title: "Mr. Jones (Amy Winehouse Cover)",
         type: "clipe",
         duration: "",
@@ -55,7 +44,7 @@ const VIDEOS = [
         tags: ["clipe", "cover"]
     },
     {
-        id: 6,
+        id: 5,
         title: "Farol (Cover)",
         type: "clipe",
         duration: "",
@@ -66,7 +55,7 @@ const VIDEOS = [
         tags: ["clipe", "cover"]
     },
     {
-        id: 7,
+        id: 6,
         title: "Boku ga Kira da",
         type: "clipe",
         duration: "",
@@ -77,7 +66,7 @@ const VIDEOS = [
         tags: ["clipe"]
     },
     {
-        id: 8,
+        id: 7,
         title: "Vital",
         type: "clipe",
         duration: "",

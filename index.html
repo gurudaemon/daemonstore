@@ -43,7 +43,6 @@
             <a href="#musica" class="nav-link">Música</a>
             <a href="#literatura" class="nav-link">Literatura</a>
             <a href="#cinema" class="nav-link">Cinema</a>
-            <a href="#textos" class="nav-link">Textos</a>
             <a href="#quem-sou" class="nav-link">Quem Sou</a>
             <a href="#contato" class="nav-link">Contato</a>
         </div>
@@ -82,9 +81,6 @@
                 </button>
                 <button class="universe-btn" onclick="app.scrollTo('cinema')">
                     <span class="universe-icon">🎬</span><span>Cinema</span>
-                </button>
-                <button class="universe-btn" onclick="app.scrollTo('textos')">
-                    <span class="universe-icon">✍️</span><span>Textos</span>
                 </button>
             </div>
             <div class="hero-cta">
@@ -217,18 +213,6 @@
         <div class="cinema-grid" id="cinema-grid"></div>
     </section>
 
-    <!-- Textos -->
-    <section class="texts-section" id="textos">
-        <div class="section-header">
-            <div class="section-header-content">
-                <span class="section-tag">✍️ Textos</span>
-                <h2 class="section-title">Escritos</h2>
-                <p class="section-subtitle">Letras comentadas, manifestos, crônicas e pensamentos.</p>
-            </div>
-        </div>
-        <div class="texts-grid" id="texts-grid"></div>
-    </section>
-
     <!-- Quem Sou Eu -->
     <section class="about-section" id="quem-sou">
         <div class="about-container">
@@ -350,26 +334,6 @@
         </div>
     </div>
 
-    <!-- Text Modal -->
-    <div class="modal" id="text-modal">
-        <div class="modal-overlay" onclick="app.closeModal('text-modal')"></div>
-        <div class="modal-content text-modal">
-            <button class="modal-close" onclick="app.closeModal('text-modal')">×</button>
-            <div class="text-layout">
-                <div class="text-modal-header">
-                    <div class="text-modal-tag" id="text-modal-tag">Manifesto</div>
-                    <h2 class="text-modal-title" id="text-modal-title">Título</h2>
-                    <div class="text-modal-meta" id="text-modal-meta">D.T. Shen • 2026</div>
-                </div>
-                <div class="text-modal-content" id="text-modal-content">
-                    <p>Conteúdo do texto...</p>
-                </div>
-                <div class="text-modal-footer">
-                    <button class="btn btn-outline" onclick="app.shareText()">Compartilhar</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Product Modal (Music) -->
     <div class="modal" id="product-modal">
@@ -594,7 +558,6 @@
     <script src="catalog.js"></script>
     <script src="books-data.js"></script>
     <script src="videos-data.js"></script>
-    <script src="texts-data.js"></script>
     <script src="app.js"></script>
 
     <!-- Formulário oculto para enviar pedido por email (FormSubmit) -->
