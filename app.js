@@ -283,13 +283,20 @@ class DaemonStore {
     }
 
     updateStats() {
-        document.getElementById('stat-albums').textContent = CATALOG.filter(i => i.type === 'album').length;
-        document.getElementById('stat-eps').textContent = CATALOG.filter(i => i.type === 'ep').length;
-        document.getElementById('stat-singles').textContent = CATALOG.filter(i => i.type === 'single').length;
-        document.getElementById('stat-tracks').textContent = CATALOG.reduce((sum, i) => sum + i.tracks, 0);
-        if (window.BOOKS) document.getElementById('stat-books').textContent = BOOKS.length;
-        if (window.VIDEOS) document.getElementById('stat-videos').textContent = VIDEOS.length;
-    }
+    const albums = CATALOG.filter(i => i.type === 'album').length;
+    const eps = CATALOG.filter(i => i.type === 'ep').length;
+    const singles = CATALOG.filter(i => i.type === 'single').length;
+    const totalTracks = CATALOG.reduce((sum, i) => sum + (i.tracksList ? i.tracksList.length : i.tracks), 0);
+    
+    // Atualizar todos os elementos que mostram estas estatísticas
+    document.querySelectorAll('#stat-albums').forEach(el => el.textContent = albums);
+    document.querySelectorAll('#stat-eps').forEach(el => el.textContent = eps);
+    document.querySelectorAll('#stat-singles').forEach(el => el.textContent = singles);
+    document.querySelectorAll('#stat-tracks').forEach(el => el.textContent = totalTracks);
+    
+    if (window.BOOKS) document.getElementById('stat-books').textContent = BOOKS.length;
+    if (window.VIDEOS) document.getElementById('stat-videos').textContent = VIDEOS.length;
+}
 
     // ===== CATALOGO MUSICAL =====
     renderCatalog() {
