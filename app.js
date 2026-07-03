@@ -283,14 +283,10 @@ class DaemonStore {
     }
 
     updateStats() {
-        const albums = CATALOG.filter(i => i.type === 'album').length;
-        const eps = CATALOG.filter(i => i.type === 'ep').length;
-        const singles = CATALOG.filter(i => i.type === 'single').length;
-        const totalTracks = CATALOG.reduce((sum, i) => sum + (i.tracksList ? i.tracksList.length : i.tracks), 0);
-        document.querySelectorAll('#stat-albums').forEach(el => el.textContent = albums);
-        document.querySelectorAll('#stat-eps').forEach(el => el.textContent = eps);
-        document.querySelectorAll('#stat-singles').forEach(el => el.textContent = singles);
-        document.querySelectorAll('#stat-tracks').forEach(el => el.textContent = totalTracks);
+        document.getElementById('stat-albums').textContent = CATALOG.filter(i => i.type === 'album').length;
+        document.getElementById('stat-eps').textContent = CATALOG.filter(i => i.type === 'ep').length;
+        document.getElementById('stat-singles').textContent = CATALOG.filter(i => i.type === 'single').length;
+        document.getElementById('stat-tracks').textContent = CATALOG.reduce((sum, i) => sum + i.tracks, 0);
         if (window.BOOKS) document.getElementById('stat-books').textContent = BOOKS.length;
         if (window.VIDEOS) document.getElementById('stat-videos').textContent = VIDEOS.length;
     }
@@ -392,9 +388,19 @@ class DaemonStore {
     buyBook(book) {
         if (!book) book = this.currentBook;
         if (!book) return;
+        // Fecha o modal do livro
+        this.closeModal('book-modal');
+        // Preenche o resumo do pedido no formulário de cliente
+        const summary = document.getElementById('form-summary');
+        const total = book.price;
+        summary.innerHTML = `<div class="form-summary-items"><div class="form-summary-item"><img src="${book.coverUrl}" alt="${book.title}" onerror="app.handleImageError(this)"><div><div class="form-sum-title">${book.title}</div><div class="form-sum-meta">Livro</div></div><div class="form-sum-price">R$ ${(book.price/100).toFixed(2).replace('.', ',')}</div></div></div><div class="form-summary-total"><span>Total</span><span>R$ ${(total/100).toFixed(2).replace('.', ',')}</span></div>`;
+        // Abre o modal de dados do cliente
+        document.getElementById('customer-modal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+        // Salva o livro como item pendente para pagamento
+        this.pendingPaymentItems = [{ title: book.title, genre: 'Livro', price: book.price, tracks: 0, coverUrl: book.coverUrl, buyLink: book.buyLink }];
+        // Notifica por email
         this.notifyOrder([{ title: book.title, genre: 'Livro', price: book.price, tracks: 0, coverUrl: book.coverUrl }], 'compra_livro');
-        if (book.buyLink) window.open(book.buyLink, '_blank');
-        else this.showToast('Link de compra em breve', 'error');
     }
 
     reserveBook(book) {
@@ -586,15 +592,22 @@ class DaemonStore {
         this.customerData = { name, email, whatsapp };
         this.saveCustomerData();
         this.closeCustomerForm();
-        this.pendingPaymentItems = [...this.cart];
-        this.notifyOrder(this.cart, 'carrinho');
-        this.showPaymentModal(this.cart);
+        // Se veio do carrinho
+        if (this.cart.length > 0 && (!this.pendingPaymentItems || this.pendingPaymentItems.length === 0)) {
+            this.pendingPaymentItems = [...this.cart];
+            this.notifyOrder(this.cart, 'carrinho');
+            this.showPaymentModal(this.cart);
+        } else if (this.pendingPaymentItems && this.pendingPaymentItems.length > 0) {
+            // Se veio de um livro direto
+            this.notifyOrder(this.pendingPaymentItems, 'compra_livro');
+            this.showPaymentModal(this.pendingPaymentItems);
+        }
     }
 
     showPaymentModal(items) {
         const total = items.reduce((sum, i) => sum + i.price, 0);
         const totalFormatted = 'R$ ' + (total/100).toFixed(2).replace('.', ',');
-        document.getElementById('checkout-items-list').innerHTML = items.map(item => `<div class="checkout-item"><img src="${item.coverUrl}" alt="${item.title}" onerror="app.handleImageError(this)"><div class="checkout-item-info"><div class="checkout-item-title">${item.title}</div><div class="checkout-item-meta">${item.genre} • ${item.tracks || 0} faixas</div></div><div class="checkout-item-price">R$ ${(item.price/100).toFixed(2).replace('.', ',')}</div></div>`).join('');
+        document.getElementById('checkout-items-list').innerHTML = items.map(item => `<div class="checkout-item"><img src="${item.coverUrl}" alt="${item.title}" onerror="app.handleImageError(this)"><div class="checkout-item-info"><div class="checkout-item-title">${item.title}</div><div class="checkout-item-meta">${item.genre}${item.tracks !== undefined ? ' • ' + item.tracks + ' faixas' : ''}</div></div><div class="checkout-item-price">R$ ${(item.price/100).toFixed(2).replace('.', ',')}</div></div>`).join('');
         document.getElementById('checkout-total').textContent = totalFormatted;
         const pixSection = document.getElementById('checkout-pix');
         if (CONFIG.pixKey) {
@@ -607,7 +620,9 @@ class DaemonStore {
         if (CONFIG.mercadoPagoEnabled) {
             mpSection.style.display = 'flex';
             const mpLink = items.find(i => i.mercadoPagoLink && i.mercadoPagoLink !== 'https://mpago.la/XXXXXXX')?.mercadoPagoLink;
-            if (mpLink) { mpSection.href = mpLink; mpSection.onclick = null; }
+            const buyLink = items.find(i => i.buyLink)?.buyLink;
+            if (buyLink) { mpSection.href = buyLink; mpSection.onclick = null; }
+            else if (mpLink) { mpSection.href = mpLink; mpSection.onclick = null; }
             else { mpSection.href = '#'; mpSection.onclick = (e) => { e.preventDefault(); this.showToast('Link MP não configurado. Use Pix.', 'error'); }; }
         } else mpSection.style.display = 'none';
         const stripeSection = document.getElementById('checkout-stripe');
