@@ -21,7 +21,7 @@ O Pináculo de Pain é uma obra independente, intensa e provocadora, que questio
 Uma leitura para quem busca ação, reflexão e uma visão rara da ficção científica a partir do olhar brasileiro.`,
         quote: "",
         tags: ["ficção", "filosofia", "fantasia"],
-        buyLink: "",
+        buyLink: "https://mpago.la/1TWZwDc",
         previewText: "",
         extras: [
             { label: "Faixa inspirada", value: "Dummm by Mc Memi" },
@@ -66,7 +66,7 @@ E para rir, se indignar e refletir com uma linguagem direta, sem "academiquês".
 "O Mundo Diante de Ti" é para quem desconfia da superfície das coisas. Para quem sabe que o buraco é mais embaixo — e está disposto a olhar.`,
         quote: "",
         tags: ["ficção", "filosofia"],
-        buyLink: "",
+        buyLink: "https://mpago.la/2grFA4d",
         previewText: "",
         extras: [
             { label: "Formato", value: "Digital (PDF + EPUB)" },
