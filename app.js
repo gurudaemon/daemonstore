@@ -9,6 +9,7 @@ class DaemonStore {
         this.modalItem = null;
         this.customerData = { name: '', email: '', whatsapp: '' };
         this.pendingPaymentItems = null;
+        this.pendingPaymentSource = null;
         this.autoplayStarted = false;
         this.leadCaptured = false;
         this.currentPlaylist = [];
@@ -283,10 +284,14 @@ class DaemonStore {
     }
 
     updateStats() {
-        document.getElementById('stat-albums').textContent = CATALOG.filter(i => i.type === 'album').length;
-        document.getElementById('stat-eps').textContent = CATALOG.filter(i => i.type === 'ep').length;
-        document.getElementById('stat-singles').textContent = CATALOG.filter(i => i.type === 'single').length;
-        document.getElementById('stat-tracks').textContent = CATALOG.reduce((sum, i) => sum + i.tracks, 0);
+        const albums = CATALOG.filter(i => i.type === 'album').length;
+        const eps = CATALOG.filter(i => i.type === 'ep').length;
+        const singles = CATALOG.filter(i => i.type === 'single').length;
+        const totalTracks = CATALOG.reduce((sum, i) => sum + (i.tracksList ? i.tracksList.length : i.tracks), 0);
+        document.querySelectorAll('#stat-albums').forEach(el => el.textContent = albums);
+        document.querySelectorAll('#stat-eps').forEach(el => el.textContent = eps);
+        document.querySelectorAll('#stat-singles').forEach(el => el.textContent = singles);
+        document.querySelectorAll('#stat-tracks').forEach(el => el.textContent = totalTracks);
         if (window.BOOKS) document.getElementById('stat-books').textContent = BOOKS.length;
         if (window.VIDEOS) document.getElementById('stat-videos').textContent = VIDEOS.length;
     }
@@ -388,24 +393,19 @@ class DaemonStore {
     buyBook(book) {
         if (!book) book = this.currentBook;
         if (!book) return;
-        // Fecha o modal do livro
         this.closeModal('book-modal');
-        // Preenche o resumo do pedido no formulário de cliente
         const summary = document.getElementById('form-summary');
         const total = book.price;
         summary.innerHTML = `<div class="form-summary-items"><div class="form-summary-item"><img src="${book.coverUrl}" alt="${book.title}" onerror="app.handleImageError(this)"><div><div class="form-sum-title">${book.title}</div><div class="form-sum-meta">Livro</div></div><div class="form-sum-price">R$ ${(book.price/100).toFixed(2).replace('.', ',')}</div></div></div><div class="form-summary-total"><span>Total</span><span>R$ ${(total/100).toFixed(2).replace('.', ',')}</span></div>`;
-        // Abre o modal de dados do cliente
         document.getElementById('customer-modal').classList.add('active');
         document.body.style.overflow = 'hidden';
-        // Salva o livro como item pendente para pagamento
         this.pendingPaymentItems = [{ title: book.title, genre: 'Livro', price: book.price, tracks: 0, coverUrl: book.coverUrl, buyLink: book.buyLink }];
-        // Notifica por email
-        this.notifyOrder([{ title: book.title, genre: 'Livro', price: book.price, tracks: 0, coverUrl: book.coverUrl }], 'compra_livro');
+        this.pendingPaymentSource = 'compra_livro';
     }
 
     reserveBook(book) {
         if (!book) book = this.currentBook;
-        this.showToast('Pré-vada reservada! Entraremos em contato.');
+        this.showToast('Pré-venda reservada! Entraremos em contato.');
         this.notifyOrder([{ title: '[PRÉ-VENDA] ' + book.title, genre: 'Livro', price: 0, tracks: 0, coverUrl: book.coverUrl }], 'pre_venda_livro');
     }
 
@@ -555,17 +555,17 @@ class DaemonStore {
         }
     }
 
+    // ===== COMPRA DIRETA DO MODAL DE MÚSICA =====
     buyItem() {
         if (!this.modalItem) return;
         const item = this.modalItem;
-        this.notifyOrder([item], 'compra_direta');
-        if (item.paymentLink && item.paymentLink !== 'https://mpago.la/XXXXXXX') {
-            window.open(item.paymentLink, '_blank');
-            this.showToast('Redirecionando para pagamento...');
-        } else {
-            this.pendingPaymentItems = [item];
-            this.showPaymentModal([item]);
-        }
+        this.closeModal('product-modal');
+        const summary = document.getElementById('form-summary');
+        summary.innerHTML = `<div class="form-summary-items"><div class="form-summary-item"><img src="${item.coverUrl}" alt="${item.title}" onerror="app.handleImageError(this)"><div><div class="form-sum-title">${item.title}</div><div class="form-sum-meta">${item.genre} • ${item.tracks} faixas</div></div><div class="form-sum-price">R$ ${(item.price/100).toFixed(2).replace('.', ',')}</div></div></div><div class="form-summary-total"><span>Total</span><span>R$ ${(item.price/100).toFixed(2).replace('.', ',')}</span></div>`;
+        document.getElementById('customer-modal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+        this.pendingPaymentItems = [item];
+        this.pendingPaymentSource = 'compra_direta';
     }
 
     openCustomerForm() {
@@ -576,6 +576,8 @@ class DaemonStore {
         summary.innerHTML = `<div class="form-summary-items">${this.cart.map(item => `<div class="form-summary-item"><img src="${item.coverUrl}" alt="${item.title}" onerror="app.handleImageError(this)"><div><div class="form-sum-title">${item.title}</div><div class="form-sum-meta">${item.genre} • ${item.tracks} faixas</div></div><div class="form-sum-price">R$ ${(item.price/100).toFixed(2).replace('.', ',')}</div></div>`).join('')}</div><div class="form-summary-total"><span>Total</span><span>R$ ${(total/100).toFixed(2).replace('.', ',')}</span></div>`;
         document.getElementById('customer-modal').classList.add('active');
         document.body.style.overflow = 'hidden';
+        this.pendingPaymentItems = [...this.cart];
+        this.pendingPaymentSource = 'carrinho';
     }
 
     closeCustomerForm() {
@@ -587,20 +589,23 @@ class DaemonStore {
         const name = document.getElementById('cust-name').value.trim();
         const email = document.getElementById('cust-email').value.trim();
         const whatsapp = document.getElementById('cust-whatsapp').value.trim();
-        if (!name || !email) { this.showToast('Preencha nome e email', 'error'); return; }
+        if (!name || !email || !whatsapp) { this.showToast('Preencha nome, email e WhatsApp', 'error'); return; }
         if (!email.includes('@') || !email.includes('.')) { this.showToast('Email inválido', 'error'); return; }
         this.customerData = { name, email, whatsapp };
         this.saveCustomerData();
         this.closeCustomerForm();
-        // Se veio do carrinho
-        if (this.cart.length > 0 && (!this.pendingPaymentItems || this.pendingPaymentItems.length === 0)) {
-            this.pendingPaymentItems = [...this.cart];
-            this.notifyOrder(this.cart, 'carrinho');
-            this.showPaymentModal(this.cart);
-        } else if (this.pendingPaymentItems && this.pendingPaymentItems.length > 0) {
-            // Se veio de um livro direto
-            this.notifyOrder(this.pendingPaymentItems, 'compra_livro');
+        if (this.pendingPaymentItems && this.pendingPaymentItems.length > 0) {
+            this.notifyOrder(this.pendingPaymentItems, this.pendingPaymentSource || 'compra');
             this.showPaymentModal(this.pendingPaymentItems);
+            if (this.pendingPaymentSource === 'carrinho') {
+                this.cart = [];
+                this.updateCartUI();
+                this.renderCatalog();
+            }
+            this.pendingPaymentItems = null;
+            this.pendingPaymentSource = null;
+        } else {
+            this.showToast('Erro: nenhum item para pagamento', 'error');
         }
     }
 
@@ -619,7 +624,7 @@ class DaemonStore {
         const mpSection = document.getElementById('checkout-mercadopago');
         if (CONFIG.mercadoPagoEnabled) {
             mpSection.style.display = 'flex';
-            const mpLink = items.find(i => i.mercadoPagoLink && i.mercadoPagoLink !== 'https://mpago.la/XXXXXXX')?.mercadoPagoLink;
+            const mpLink = items.find(i => i.mercadoPagoLink && i.mercadoPagoLink !== 'https://mpago.la/xxxx')?.mercadoPagoLink;
             const buyLink = items.find(i => i.buyLink)?.buyLink;
             if (buyLink) { mpSection.href = buyLink; mpSection.onclick = null; }
             else if (mpLink) { mpSection.href = mpLink; mpSection.onclick = null; }
@@ -719,8 +724,8 @@ class DaemonStore {
     playItem(id) {
         const item = CATALOG.find(i => i.id === id);
         if (!item || !item.tracksList) return;
-        if (this.currentTrack === id && this.isPlaying) { this.pause(); return; }
-        if (this.currentTrack === id && !this.isPlaying) { this.play(); return; }
+        if (this.currentTrack === item.id && this.isPlaying) { this.pause(); return; }
+        if (this.currentTrack === item.id && !this.isPlaying) { this.play(); return; }
         this.loadPlaylist(item, 0);
         if (!this.audioContextUnlocked) {
             this.audioContextUnlocked = true;
