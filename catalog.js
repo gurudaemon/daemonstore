@@ -584,7 +584,7 @@ const CATALOG = [
         tracks: 1,
         genre: "Eletrônica / Alt",
         year: 2026,
-        price: 290,
+        price: 990,
         coverUrl: "assets/covers/OliverTree.webp",
         tracksList: [
             { num: 1, title: "Who is Oliver Tree", file: "assets/audio/olivertree/1.mp3" }
