@@ -1,598 +1,1306 @@
 const CATALOG = [
     {
-        id: 1,
-        title: "Máxima Proporção de Desgraça por Metro Quadrado",
-        type: "album",
-        tracks: 11,
-        genre: "Metal",
-        year: 2026,
-        price: 1990,
-        coverUrl: "assets/covers/MPDM.webp",
-        tracksList: [
-            { num: 1, title: "Faixa 1", file: "assets/audio/mpdm/1.mp3" },
-            { num: 2, title: "Faixa 2", file: "assets/audio/mpdm/2.mp3" },
-            { num: 3, title: "Faixa 3", file: "assets/audio/mpdm/3.mp3" },
-            { num: 4, title: "Faixa 4", file: "assets/audio/mpdm/4.mp3" },
-            { num: 5, title: "Faixa 5", file: "assets/audio/mpdm/5.mp3" },
-            { num: 6, title: "Faixa 6", file: "assets/audio/mpdm/6.mp3" },
-            { num: 7, title: "Faixa 7", file: "assets/audio/mpdm/7.mp3" },
-            { num: 8, title: "Faixa 8", file: "assets/audio/mpdm/8.mp3" },
-            { num: 9, title: "Faixa 9", file: "assets/audio/mpdm/9.mp3" },
-            { num: 10, title: "Faixa 10", file: "assets/audio/mpdm/10.mp3" },
-            { num: 11, title: "Faixa 11", file: "assets/audio/mpdm/11.mp3" }
+        "id": 1,
+        "title": "Máxima Proporção de Desgraça por Metro Quadrado",
+        "type": "album",
+        "tracks": 11,
+        "genre": "Metal",
+        "year": 2026,
+        "price": 1990,
+        "coverUrl": "assets/covers/MPDM.webp",
+        "tracksList": [
+            {
+                "num": 1,
+                "title": "Faixa 1",
+                "file": "assets/audio/mpdm/1.mp3"
+            },
+            {
+                "num": 2,
+                "title": "Faixa 2",
+                "file": "assets/audio/mpdm/2.mp3"
+            },
+            {
+                "num": 3,
+                "title": "Faixa 3",
+                "file": "assets/audio/mpdm/3.mp3"
+            },
+            {
+                "num": 4,
+                "title": "Faixa 4",
+                "file": "assets/audio/mpdm/4.mp3"
+            },
+            {
+                "num": 5,
+                "title": "Faixa 5",
+                "file": "assets/audio/mpdm/5.mp3"
+            },
+            {
+                "num": 6,
+                "title": "Faixa 6",
+                "file": "assets/audio/mpdm/6.mp3"
+            },
+            {
+                "num": 7,
+                "title": "Faixa 7",
+                "file": "assets/audio/mpdm/7.mp3"
+            },
+            {
+                "num": 8,
+                "title": "Faixa 8",
+                "file": "assets/audio/mpdm/8.mp3"
+            },
+            {
+                "num": 9,
+                "title": "Faixa 9",
+                "file": "assets/audio/mpdm/9.mp3"
+            },
+            {
+                "num": 10,
+                "title": "Faixa 10",
+                "file": "assets/audio/mpdm/10.mp3"
+            },
+            {
+                "num": 11,
+                "title": "Faixa 11",
+                "file": "assets/audio/mpdm/11.mp3"
+            }
         ],
-        description: "11 faixas de metal/nu metal. Pesado, atmosférico e visceral.",
-        paymentLink: "https://mpago.la/31AXSGh",
-        mercadoPagoLink: "https://mpago.la/31AXSGh",
-        tags: ["metal","ia","album"]
+        "description": "11 faixas de metal/nu metal. Pesado, atmosférico e visceral.",
+        "paymentLink": "https://mpago.la/31AXSGh",
+        "mercadoPagoLink": "https://mpago.la/31AXSGh",
+        "tags": [
+            "metal",
+            "ia",
+            "album"
+        ]
     },
     {
-        id: 2,
-        title: "Fêmea",
-        type: "album",
-        tracks: 21,
-        genre: "Rap",
-        year: 2026,
-        price: 990,
-        coverUrl: "assets/covers/femea.webp",
-        tracksList: [
-            { num: 1, title: "Faixa 1", file: "assets/audio/femea/1.mp3" },
-            { num: 2, title: "Faixa 2", file: "assets/audio/femea/2.mp3" },
-            { num: 3, title: "Faixa 3", file: "assets/audio/femea/3.mp3" },
-            { num: 4, title: "Faixa 4", file: "assets/audio/femea/4.mp3" },
-            { num: 5, title: "Faixa 5", file: "assets/audio/femea/5.mp3" },
-            { num: 6, title: "Faixa 6", file: "assets/audio/femea/6.mp3" },
-            { num: 7, title: "Faixa 7", file: "assets/audio/femea/7.mp3" },
-            { num: 8, title: "Faixa 8", file: "assets/audio/femea/8.mp3" },
-            { num: 9, title: "Faixa 9", file: "assets/audio/femea/9.mp3" },
-            { num: 10, title: "Faixa 10", file: "assets/audio/femea/10.mp3" },
-            { num: 11, title: "Faixa 11", file: "assets/audio/femea/11.mp3" },
-            { num: 12, title: "Faixa 12", file: "assets/audio/femea/12.mp3" },
-            { num: 13, title: "Faixa 13", file: "assets/audio/femea/13.mp3" },
-            { num: 14, title: "Faixa 14", file: "assets/audio/femea/14.mp3" },
-            { num: 15, title: "Faixa 15", file: "assets/audio/femea/15.mp3" },
-            { num: 16, title: "Faixa 16", file: "assets/audio/femea/16.mp3" },
-            { num: 17, title: "Faixa 17", file: "assets/audio/femea/17.mp3" },
-            { num: 18, title: "Faixa 18", file: "assets/audio/femea/18.mp3" },
-            { num: 19, title: "Faixa 19", file: "assets/audio/femea/19.mp3" },
-            { num: 20, title: "Faixa 20", file: "assets/audio/femea/20.mp3" },
-            { num: 21, title: "Faixa 21", file: "assets/audio/femea/21.mp3" }
+        "id": 2,
+        "title": "Fêmea",
+        "type": "album",
+        "tracks": 21,
+        "genre": "Rap",
+        "year": 2026,
+        "price": 990,
+        "coverUrl": "assets/covers/femea.webp",
+        "tracksList": [
+            {
+                "num": 1,
+                "title": "Faixa 1",
+                "file": "assets/audio/femea/1.mp3"
+            },
+            {
+                "num": 2,
+                "title": "Faixa 2",
+                "file": "assets/audio/femea/2.mp3"
+            },
+            {
+                "num": 3,
+                "title": "Faixa 3",
+                "file": "assets/audio/femea/3.mp3"
+            },
+            {
+                "num": 4,
+                "title": "Faixa 4",
+                "file": "assets/audio/femea/4.mp3"
+            },
+            {
+                "num": 5,
+                "title": "Faixa 5",
+                "file": "assets/audio/femea/5.mp3"
+            },
+            {
+                "num": 6,
+                "title": "Faixa 6",
+                "file": "assets/audio/femea/6.mp3"
+            },
+            {
+                "num": 7,
+                "title": "Faixa 7",
+                "file": "assets/audio/femea/7.mp3"
+            },
+            {
+                "num": 8,
+                "title": "Faixa 8",
+                "file": "assets/audio/femea/8.mp3"
+            },
+            {
+                "num": 9,
+                "title": "Faixa 9",
+                "file": "assets/audio/femea/9.mp3"
+            },
+            {
+                "num": 10,
+                "title": "Faixa 10",
+                "file": "assets/audio/femea/10.mp3"
+            },
+            {
+                "num": 11,
+                "title": "Faixa 11",
+                "file": "assets/audio/femea/11.mp3"
+            },
+            {
+                "num": 12,
+                "title": "Faixa 12",
+                "file": "assets/audio/femea/12.mp3"
+            },
+            {
+                "num": 13,
+                "title": "Faixa 13",
+                "file": "assets/audio/femea/13.mp3"
+            },
+            {
+                "num": 14,
+                "title": "Faixa 14",
+                "file": "assets/audio/femea/14.mp3"
+            },
+            {
+                "num": 15,
+                "title": "Faixa 15",
+                "file": "assets/audio/femea/15.mp3"
+            },
+            {
+                "num": 16,
+                "title": "Faixa 16",
+                "file": "assets/audio/femea/16.mp3"
+            },
+            {
+                "num": 17,
+                "title": "Faixa 17",
+                "file": "assets/audio/femea/17.mp3"
+            },
+            {
+                "num": 18,
+                "title": "Faixa 18",
+                "file": "assets/audio/femea/18.mp3"
+            },
+            {
+                "num": 19,
+                "title": "Faixa 19",
+                "file": "assets/audio/femea/19.mp3"
+            },
+            {
+                "num": 20,
+                "title": "Faixa 20",
+                "file": "assets/audio/femea/20.mp3"
+            },
+            {
+                "num": 21,
+                "title": "Faixa 21",
+                "file": "assets/audio/femea/21.mp3"
+            }
         ],
-        description: "21 faixas de rap. O álbum 'Fêmea' foi criado baseado no meu contato com o feminino.",
-        paymentLink: "https://mpago.la/1gsnSKW",
-        mercadoPagoLink: "https://mpago.la/1gsnSKW",
-        tags: ["rap","ia","album"]
+        "description": "21 faixas de rap. O álbum 'Fêmea' foi criado baseado no meu contato com o feminino.",
+        "paymentLink": "https://mpago.la/1gsnSKW",
+        "mercadoPagoLink": "https://mpago.la/1gsnSKW",
+        "tags": [
+            "rap",
+            "ia",
+            "album"
+        ]
     },
     {
-        id: 3,
-        title: "dAImon 2.0",
-        type: "album",
-        tracks: 13,
-        genre: "Metal",
-        year: 2026,
-        price: 1990,
-        coverUrl: "assets/covers/dAImon2.webp",
-        tracksList: [
-            { num: 1, title: "Faixa 1", file: "assets/audio/daimon2/1.mp3" },
-            { num: 2, title: "Faixa 2", file: "assets/audio/daimon2/2.mp3" },
-            { num: 3, title: "Faixa 3", file: "assets/audio/daimon2/3.mp3" },
-            { num: 4, title: "Faixa 4", file: "assets/audio/daimon2/4.mp3" },
-            { num: 5, title: "Faixa 5", file: "assets/audio/daimon2/5.mp3" },
-            { num: 6, title: "Faixa 6", file: "assets/audio/daimon2/6.mp3" },
-            { num: 7, title: "Faixa 7", file: "assets/audio/daimon2/7.mp3" },
-            { num: 8, title: "Faixa 8", file: "assets/audio/daimon2/8.mp3" },
-            { num: 9, title: "Faixa 9", file: "assets/audio/daimon2/9.mp3" },
-            { num: 10, title: "Faixa 10", file: "assets/audio/daimon2/10.mp3" },
-            { num: 11, title: "Faixa 11", file: "assets/audio/daimon2/11.mp3" },
-            { num: 12, title: "Faixa 12", file: "assets/audio/daimon2/12.mp3" },
-            { num: 13, title: "Faixa 13", file: "assets/audio/daimon2/13.mp3" }
+        "id": 3,
+        "title": "dAImon 2.0",
+        "type": "album",
+        "tracks": 13,
+        "genre": "Metal",
+        "year": 2026,
+        "price": 1990,
+        "coverUrl": "assets/covers/dAImon2.webp",
+        "tracksList": [
+            {
+                "num": 1,
+                "title": "Faixa 1",
+                "file": "assets/audio/daimon2/1.mp3"
+            },
+            {
+                "num": 2,
+                "title": "Faixa 2",
+                "file": "assets/audio/daimon2/2.mp3"
+            },
+            {
+                "num": 3,
+                "title": "Faixa 3",
+                "file": "assets/audio/daimon2/3.mp3"
+            },
+            {
+                "num": 4,
+                "title": "Faixa 4",
+                "file": "assets/audio/daimon2/4.mp3"
+            },
+            {
+                "num": 5,
+                "title": "Faixa 5",
+                "file": "assets/audio/daimon2/5.mp3"
+            },
+            {
+                "num": 6,
+                "title": "Faixa 6",
+                "file": "assets/audio/daimon2/6.mp3"
+            },
+            {
+                "num": 7,
+                "title": "Faixa 7",
+                "file": "assets/audio/daimon2/7.mp3"
+            },
+            {
+                "num": 8,
+                "title": "Faixa 8",
+                "file": "assets/audio/daimon2/8.mp3"
+            },
+            {
+                "num": 9,
+                "title": "Faixa 9",
+                "file": "assets/audio/daimon2/9.mp3"
+            },
+            {
+                "num": 10,
+                "title": "Faixa 10",
+                "file": "assets/audio/daimon2/10.mp3"
+            },
+            {
+                "num": 11,
+                "title": "Faixa 11",
+                "file": "assets/audio/daimon2/11.mp3"
+            },
+            {
+                "num": 12,
+                "title": "Faixa 12",
+                "file": "assets/audio/daimon2/12.mp3"
+            },
+            {
+                "num": 13,
+                "title": "Faixa 13",
+                "file": "assets/audio/daimon2/13.mp3"
+            }
         ],
-        description: "13 faixas. A segunda versão de dAImon. Política, metal e ódio.",
-        paymentLink: "https://mpago.la/2CRXQ85",
-        mercadoPagoLink: "https://mpago.la/2CRXQ85",
-        tags: ["metal","ia","album"]
+        "description": "13 faixas. A segunda versão de dAImon. Política, metal e ódio.",
+        "paymentLink": "https://mpago.la/2CRXQ85",
+        "mercadoPagoLink": "https://mpago.la/2CRXQ85",
+        "tags": [
+            "metal",
+            "ia",
+            "album"
+        ]
     },
     {
-        id: 4,
-        title: "PROMPTER",
-        type: "album",
-        tracks: 10,
-        genre: "Metal Instrumental",
-        year: 2026,
-        price: 1490,
-        coverUrl: "assets/covers/Prompter.webp",
-        tracksList: [
-            { num: 1, title: "Faixa 1", file: "assets/audio/prompter/1.mp3" },
-            { num: 2, title: "Faixa 2", file: "assets/audio/prompter/2.mp3" },
-            { num: 3, title: "Faixa 3", file: "assets/audio/prompter/3.mp3" },
-            { num: 4, title: "Faixa 4", file: "assets/audio/prompter/4.mp3" },
-            { num: 5, title: "Faixa 5", file: "assets/audio/prompter/5.mp3" },
-            { num: 6, title: "Faixa 6", file: "assets/audio/prompter/6.mp3" },
-            { num: 7, title: "Faixa 7", file: "assets/audio/prompter/7.mp3" },
-            { num: 8, title: "Faixa 8", file: "assets/audio/prompter/8.mp3" },
-            { num: 9, title: "Faixa 9", file: "assets/audio/prompter/9.mp3" },
-            { num: 10, title: "Faixa 10", file: "assets/audio/prompter/10.mp3" }
+        "id": 4,
+        "title": "PROMPTER",
+        "type": "album",
+        "tracks": 10,
+        "genre": "Metal Instrumental",
+        "year": 2026,
+        "price": 1490,
+        "coverUrl": "assets/covers/Prompter.webp",
+        "tracksList": [
+            {
+                "num": 1,
+                "title": "Faixa 1",
+                "file": "assets/audio/prompter/1.mp3"
+            },
+            {
+                "num": 2,
+                "title": "Faixa 2",
+                "file": "assets/audio/prompter/2.mp3"
+            },
+            {
+                "num": 3,
+                "title": "Faixa 3",
+                "file": "assets/audio/prompter/3.mp3"
+            },
+            {
+                "num": 4,
+                "title": "Faixa 4",
+                "file": "assets/audio/prompter/4.mp3"
+            },
+            {
+                "num": 5,
+                "title": "Faixa 5",
+                "file": "assets/audio/prompter/5.mp3"
+            },
+            {
+                "num": 6,
+                "title": "Faixa 6",
+                "file": "assets/audio/prompter/6.mp3"
+            },
+            {
+                "num": 7,
+                "title": "Faixa 7",
+                "file": "assets/audio/prompter/7.mp3"
+            },
+            {
+                "num": 8,
+                "title": "Faixa 8",
+                "file": "assets/audio/prompter/8.mp3"
+            },
+            {
+                "num": 9,
+                "title": "Faixa 9",
+                "file": "assets/audio/prompter/9.mp3"
+            },
+            {
+                "num": 10,
+                "title": "Faixa 10",
+                "file": "assets/audio/prompter/10.mp3"
+            }
         ],
-        description: "10 faixas instrumentais que contam uma história.",
-        paymentLink: "https://mpago.la/2EBQymT",
-        mercadoPagoLink: "https://mpago.la/2EBQymT",
-        tags: ["metal","instrumental","ia","album"]
+        "description": "10 faixas instrumentais que contam uma história.",
+        "paymentLink": "https://mpago.la/2EBQymT",
+        "mercadoPagoLink": "https://mpago.la/2EBQymT",
+        "tags": [
+            "metal",
+            "instrumental",
+            "ia",
+            "album"
+        ]
     },
     {
-        id: 5,
-        title: "Alma Mendiga",
-        type: "album",
-        tracks: 8,
-        genre: "Vários Estilos",
-        year: 2026,
-        price: 990,
-        coverUrl: "assets/covers/AlmaMendiga.webp",
-        tracksList: [
-            { num: 1, title: "Faixa 1", file: "assets/audio/almamendiga/1.mp3" },
-            { num: 2, title: "Faixa 2", file: "assets/audio/almamendiga/2.mp3" },
-            { num: 3, title: "Faixa 3", file: "assets/audio/almamendiga/3.mp3" },
-            { num: 4, title: "Faixa 4", file: "assets/audio/almamendiga/4.mp3" },
-            { num: 5, title: "Faixa 5", file: "assets/audio/almamendiga/5.mp3" },
-            { num: 6, title: "Faixa 6", file: "assets/audio/almamendiga/6.mp3" },
-            { num: 7, title: "Faixa 7", file: "assets/audio/almamendiga/7.mp3" },
-            { num: 8, title: "Faixa 8", file: "assets/audio/almamendiga/8.mp3" }
+        "id": 5,
+        "title": "Alma Mendiga",
+        "type": "album",
+        "tracks": 8,
+        "genre": "Vários Estilos",
+        "year": 2026,
+        "price": 990,
+        "coverUrl": "assets/covers/AlmaMendiga.webp",
+        "tracksList": [
+            {
+                "num": 1,
+                "title": "Faixa 1",
+                "file": "assets/audio/almamendiga/1.mp3"
+            },
+            {
+                "num": 2,
+                "title": "Faixa 2",
+                "file": "assets/audio/almamendiga/2.mp3"
+            },
+            {
+                "num": 3,
+                "title": "Faixa 3",
+                "file": "assets/audio/almamendiga/3.mp3"
+            },
+            {
+                "num": 4,
+                "title": "Faixa 4",
+                "file": "assets/audio/almamendiga/4.mp3"
+            },
+            {
+                "num": 5,
+                "title": "Faixa 5",
+                "file": "assets/audio/almamendiga/5.mp3"
+            },
+            {
+                "num": 6,
+                "title": "Faixa 6",
+                "file": "assets/audio/almamendiga/6.mp3"
+            },
+            {
+                "num": 7,
+                "title": "Faixa 7",
+                "file": "assets/audio/almamendiga/7.mp3"
+            },
+            {
+                "num": 8,
+                "title": "Faixa 8",
+                "file": "assets/audio/almamendiga/8.mp3"
+            }
         ],
-        description: "8 faixas. A alma sem dono, vagando entre gêneros.",
-        paymentLink: "https://mpago.la/2kGnz5C",
-        mercadoPagoLink: "https://mpago.la/2kGnz5C",
-        tags: ["varios","ia","album"]
+        "description": "8 faixas. A alma sem dono, vagando entre gêneros.",
+        "paymentLink": "https://mpago.la/2kGnz5C",
+        "mercadoPagoLink": "https://mpago.la/2kGnz5C",
+        "tags": [
+            "varios",
+            "ia",
+            "album"
+        ]
     },
     {
-        id: 6,
-        title: "Arte Eletrônica",
-        type: "album",
-        tracks: 10,
-        genre: "Eletrônica / Psytrance",
-        year: 2026,
-        price: 1490,
-        coverUrl: "assets/covers/ArteEletronica.webp",
-        tracksList: [
-            { num: 1, title: "Faixa 1", file: "assets/audio/arteeletronica/1.mp3" },
-            { num: 2, title: "Faixa 2", file: "assets/audio/arteeletronica/2.mp3" },
-            { num: 3, title: "Faixa 3", file: "assets/audio/arteeletronica/3.mp3" },
-            { num: 4, title: "Faixa 4", file: "assets/audio/arteeletronica/4.mp3" },
-            { num: 5, title: "Faixa 5", file: "assets/audio/arteeletronica/5.mp3" },
-            { num: 6, title: "Faixa 6", file: "assets/audio/arteeletronica/6.mp3" },
-            { num: 7, title: "Faixa 7", file: "assets/audio/arteeletronica/7.mp3" },
-            { num: 8, title: "Faixa 8", file: "assets/audio/arteeletronica/8.mp3" },
-            { num: 9, title: "Faixa 9", file: "assets/audio/arteeletronica/9.mp3" },
-            { num: 10, title: "Faixa 10", file: "assets/audio/arteeletronica/10.mp3" }
+        "id": 6,
+        "title": "Arte Eletrônica",
+        "type": "album",
+        "tracks": 10,
+        "genre": "Eletrônica / Psytrance",
+        "year": 2026,
+        "price": 1490,
+        "coverUrl": "assets/covers/ArteEletronica.webp",
+        "tracksList": [
+            {
+                "num": 1,
+                "title": "Faixa 1",
+                "file": "assets/audio/arteeletronica/1.mp3"
+            },
+            {
+                "num": 2,
+                "title": "Faixa 2",
+                "file": "assets/audio/arteeletronica/2.mp3"
+            },
+            {
+                "num": 3,
+                "title": "Faixa 3",
+                "file": "assets/audio/arteeletronica/3.mp3"
+            },
+            {
+                "num": 4,
+                "title": "Faixa 4",
+                "file": "assets/audio/arteeletronica/4.mp3"
+            },
+            {
+                "num": 5,
+                "title": "Faixa 5",
+                "file": "assets/audio/arteeletronica/5.mp3"
+            },
+            {
+                "num": 6,
+                "title": "Faixa 6",
+                "file": "assets/audio/arteeletronica/6.mp3"
+            },
+            {
+                "num": 7,
+                "title": "Faixa 7",
+                "file": "assets/audio/arteeletronica/7.mp3"
+            },
+            {
+                "num": 8,
+                "title": "Faixa 8",
+                "file": "assets/audio/arteeletronica/8.mp3"
+            },
+            {
+                "num": 9,
+                "title": "Faixa 9",
+                "file": "assets/audio/arteeletronica/9.mp3"
+            },
+            {
+                "num": 10,
+                "title": "Faixa 10",
+                "file": "assets/audio/arteeletronica/10.mp3"
+            }
         ],
-        description: "10 faixas. Meu primeiro álbum de eletrônica.",
-        paymentLink: "https://mpago.la/2nVDhfR",
-        mercadoPagoLink: "https://mpago.la/2nVDhfR",
-        tags: ["eletronica","psytrance","autoral","album"]
+        "description": "10 faixas. Meu primeiro álbum de eletrônica.",
+        "paymentLink": "https://mpago.la/2nVDhfR",
+        "mercadoPagoLink": "https://mpago.la/2nVDhfR",
+        "tags": [
+            "eletronica",
+            "psytrance",
+            "autoral",
+            "album"
+        ]
     },
     {
-        id: 7,
-        title: "Trilhas de Cinema",
-        type: "album",
-        tracks: 11,
-        genre: "Vários Estilos",
-        year: 2025,
-        price: 1490,
-        coverUrl: "assets/covers/TrilhasDeCinema.webp",
-        tracksList: [
-            { num: 1, title: "Faixa 1", file: "assets/audio/trilhascinema/1.mp3" },
-            { num: 2, title: "Faixa 2", file: "assets/audio/trilhascinema/2.mp3" },
-            { num: 3, title: "Faixa 3", file: "assets/audio/trilhascinema/3.mp3" },
-            { num: 4, title: "Faixa 4", file: "assets/audio/trilhascinema/4.mp3" },
-            { num: 5, title: "Faixa 5", file: "assets/audio/trilhascinema/5.mp3" },
-            { num: 6, title: "Faixa 6", file: "assets/audio/trilhascinema/6.mp3" },
-            { num: 7, title: "Faixa 7", file: "assets/audio/trilhascinema/7.mp3" },
-            { num: 8, title: "Faixa 8", file: "assets/audio/trilhascinema/8.mp3" },
-            { num: 9, title: "Faixa 9", file: "assets/audio/trilhascinema/9.mp3" },
-            { num: 10, title: "Faixa 10", file: "assets/audio/trilhascinema/10.mp3" },
-            { num: 11, title: "Faixa 11", file: "assets/audio/trilhascinema/11.mp3" }
+        "id": 7,
+        "title": "Trilhas de Cinema",
+        "type": "album",
+        "tracks": 11,
+        "genre": "Vários Estilos",
+        "year": 2025,
+        "price": 1490,
+        "coverUrl": "assets/covers/TrilhasDeCinema.webp",
+        "tracksList": [
+            {
+                "num": 1,
+                "title": "Faixa 1",
+                "file": "assets/audio/trilhascinema/1.mp3"
+            },
+            {
+                "num": 2,
+                "title": "Faixa 2",
+                "file": "assets/audio/trilhascinema/2.mp3"
+            },
+            {
+                "num": 3,
+                "title": "Faixa 3",
+                "file": "assets/audio/trilhascinema/3.mp3"
+            },
+            {
+                "num": 4,
+                "title": "Faixa 4",
+                "file": "assets/audio/trilhascinema/4.mp3"
+            },
+            {
+                "num": 5,
+                "title": "Faixa 5",
+                "file": "assets/audio/trilhascinema/5.mp3"
+            },
+            {
+                "num": 6,
+                "title": "Faixa 6",
+                "file": "assets/audio/trilhascinema/6.mp3"
+            },
+            {
+                "num": 7,
+                "title": "Faixa 7",
+                "file": "assets/audio/trilhascinema/7.mp3"
+            },
+            {
+                "num": 8,
+                "title": "Faixa 8",
+                "file": "assets/audio/trilhascinema/8.mp3"
+            },
+            {
+                "num": 9,
+                "title": "Faixa 9",
+                "file": "assets/audio/trilhascinema/9.mp3"
+            },
+            {
+                "num": 10,
+                "title": "Faixa 10",
+                "file": "assets/audio/trilhascinema/10.mp3"
+            },
+            {
+                "num": 11,
+                "title": "Faixa 11",
+                "file": "assets/audio/trilhascinema/11.mp3"
+            }
         ],
-        description: "11 trilhas sonoras autorais para cinema e mídia.",
-        paymentLink: "https://mpago.la/252Ku9E",
-        mercadoPagoLink: "https://mpago.la/252Ku9E",
-        tags: ["trilha","instrumental","autoral","album"]
+        "description": "11 trilhas sonoras autorais para cinema e mídia.",
+        "paymentLink": "https://mpago.la/252Ku9E",
+        "mercadoPagoLink": "https://mpago.la/252Ku9E",
+        "tags": [
+            "trilha",
+            "instrumental",
+            "autoral",
+            "album"
+        ]
     },
     {
-        id: 8,
-        title: "Ó, Pai",
-        type: "ep",
-        tracks: 2,
-        genre: "Rap",
-        year: 2026,
-        price: 290,
-        coverUrl: "assets/covers/OPai.jpg",
-        tracksList: [
-            { num: 1, title: "Faixa 1", file: "assets/audio/opai/1.mp3" },
-            { num: 2, title: "Faixa 2", file: "assets/audio/opai/2.mp3" }
+        "id": 8,
+        "title": "Ó, Pai",
+        "type": "ep",
+        "tracks": 2,
+        "genre": "Rap",
+        "year": 2026,
+        "price": 290,
+        "coverUrl": "assets/covers/OPai.jpg",
+        "tracksList": [
+            {
+                "num": 1,
+                "title": "Faixa 1",
+                "file": "assets/audio/opai/1.mp3"
+            },
+            {
+                "num": 2,
+                "title": "Faixa 2",
+                "file": "assets/audio/opai/2.mp3"
+            }
         ],
-        description: "2 faixas de rap. Diálogo direto e visceral.",
-        paymentLink: "https://mpago.la/2hxmQ8K",
-        mercadoPagoLink: "https://mpago.la/2hxmQ8K",
-        tags: ["rap","ia","ep"]
+        "description": "2 faixas de rap. Diálogo direto e visceral.",
+        "paymentLink": "https://mpago.la/2hxmQ8K",
+        "mercadoPagoLink": "https://mpago.la/2hxmQ8K",
+        "tags": [
+            "rap",
+            "ia",
+            "ep"
+        ]
     },
     {
-        id: 9,
-        title: "George está morto",
-        type: "ep",
-        tracks: 2,
-        genre: "Rap",
-        year: 2026,
-        price: 290,
-        coverUrl: "assets/covers/GeorgeEstaMorto.jpg",
-        tracksList: [
-            { num: 1, title: "Faixa 1", file: "assets/audio/georgeestamorto/1.mp3" },
-            { num: 2, title: "Faixa 2", file: "assets/audio/georgeestamorto/2.mp3" }
+        "id": 9,
+        "title": "George está morto",
+        "type": "ep",
+        "tracks": 2,
+        "genre": "Rap",
+        "year": 2026,
+        "price": 290,
+        "coverUrl": "assets/covers/GeorgeEstaMorto.jpg",
+        "tracksList": [
+            {
+                "num": 1,
+                "title": "Faixa 1",
+                "file": "assets/audio/georgeestamorto/1.mp3"
+            },
+            {
+                "num": 2,
+                "title": "Faixa 2",
+                "file": "assets/audio/georgeestamorto/2.mp3"
+            }
         ],
-        description: "2 faixas de rap autoral. George não está mais aqui.",
-        paymentLink: "https://mpago.la/2BqtWi7",
-        mercadoPagoLink: "https://mpago.la/2BqtWi7",
-        tags: ["rap","autoral","ep"]
+        "description": "2 faixas de rap autoral. George não está mais aqui.",
+        "paymentLink": "https://mpago.la/2BqtWi7",
+        "mercadoPagoLink": "https://mpago.la/2BqtWi7",
+        "tags": [
+            "rap",
+            "autoral",
+            "ep"
+        ]
     },
     {
-        id: 10,
-        title: "The Product",
-        type: "album",
-        tracks: 6,
-        genre: "Rap",
-        year: 2026,
-        price: 490,
-        coverUrl: "assets/covers/TheProduct.webp",
-        tracksList: [
-            { num: 1, title: "Faixa 1", file: "assets/audio/theproduct/1.mp3" },
-            { num: 2, title: "Faixa 2", file: "assets/audio/theproduct/2.mp3" },
-            { num: 3, title: "Faixa 3", file: "assets/audio/theproduct/3.mp3" },
-            { num: 4, title: "Faixa 4", file: "assets/audio/theproduct/4.mp3" },
-            { num: 5, title: "Faixa 5", file: "assets/audio/theproduct/5.mp3" },
-            { num: 6, title: "Faixa 6", file: "assets/audio/theproduct/6.mp3" }
+        "id": 10,
+        "title": "The Product",
+        "type": "album",
+        "tracks": 6,
+        "genre": "Rap",
+        "year": 2026,
+        "price": 490,
+        "coverUrl": "assets/covers/TheProduct.webp",
+        "tracksList": [
+            {
+                "num": 1,
+                "title": "Faixa 1",
+                "file": "assets/audio/theproduct/1.mp3"
+            },
+            {
+                "num": 2,
+                "title": "Faixa 2",
+                "file": "assets/audio/theproduct/2.mp3"
+            },
+            {
+                "num": 3,
+                "title": "Faixa 3",
+                "file": "assets/audio/theproduct/3.mp3"
+            },
+            {
+                "num": 4,
+                "title": "Faixa 4",
+                "file": "assets/audio/theproduct/4.mp3"
+            },
+            {
+                "num": 5,
+                "title": "Faixa 5",
+                "file": "assets/audio/theproduct/5.mp3"
+            },
+            {
+                "num": 6,
+                "title": "Faixa 6",
+                "file": "assets/audio/theproduct/6.mp3"
+            }
         ],
-        description: "6 faixas conceituais. Uma crítica direta para Slim Shady.",
-        paymentLink: "https://mpago.la/1wAWeQS",
-        mercadoPagoLink: "https://mpago.la/1wAWeQS",
-        tags: ["rap","ia","album"]
+        "description": "6 faixas conceituais. Uma crítica direta para Slim Shady.",
+        "paymentLink": "https://mpago.la/1wAWeQS",
+        "mercadoPagoLink": "https://mpago.la/1wAWeQS",
+        "tags": [
+            "rap",
+            "ia",
+            "album"
+        ]
     },
     {
-        id: 11,
-        title: "Saudades",
-        type: "album",
-        tracks: 7,
-        genre: "Vários Estilos",
-        year: 2026,
-        price: 490,
-        coverUrl: "assets/covers/Saudades.webp",
-        tracksList: [
-            { num: 1, title: "Faixa 1", file: "assets/audio/saudades/1.mp3" },
-            { num: 2, title: "Faixa 2", file: "assets/audio/saudades/2.mp3" },
-            { num: 3, title: "Faixa 3", file: "assets/audio/saudades/3.mp3" },
-            { num: 4, title: "Faixa 4", file: "assets/audio/saudades/4.mp3" },
-            { num: 5, title: "Faixa 5", file: "assets/audio/saudades/5.mp3" },
-            { num: 6, title: "Faixa 6", file: "assets/audio/saudades/6.mp3" },
-            { num: 7, title: "Faixa 7", file: "assets/audio/saudades/7.mp3" }
+        "id": 11,
+        "title": "Saudades",
+        "type": "album",
+        "tracks": 7,
+        "genre": "Vários Estilos",
+        "year": 2026,
+        "price": 490,
+        "coverUrl": "assets/covers/Saudades.webp",
+        "tracksList": [
+            {
+                "num": 1,
+                "title": "Faixa 1",
+                "file": "assets/audio/saudades/1.mp3"
+            },
+            {
+                "num": 2,
+                "title": "Faixa 2",
+                "file": "assets/audio/saudades/2.mp3"
+            },
+            {
+                "num": 3,
+                "title": "Faixa 3",
+                "file": "assets/audio/saudades/3.mp3"
+            },
+            {
+                "num": 4,
+                "title": "Faixa 4",
+                "file": "assets/audio/saudades/4.mp3"
+            },
+            {
+                "num": 5,
+                "title": "Faixa 5",
+                "file": "assets/audio/saudades/5.mp3"
+            },
+            {
+                "num": 6,
+                "title": "Faixa 6",
+                "file": "assets/audio/saudades/6.mp3"
+            },
+            {
+                "num": 7,
+                "title": "Faixa 7",
+                "file": "assets/audio/saudades/7.mp3"
+            }
         ],
-        description: "7 faixas em vários estilos. Uma jornada emocional.",
-        paymentLink: "https://mpago.la/13hsHBC",
-        mercadoPagoLink: "https://mpago.la/13hsHBC",
-        tags: ["varios","ia","album"]
+        "description": "7 faixas em vários estilos. Uma jornada emocional.",
+        "paymentLink": "https://mpago.la/13hsHBC",
+        "mercadoPagoLink": "https://mpago.la/13hsHBC",
+        "tags": [
+            "varios",
+            "ia",
+            "album"
+        ]
     },
     {
-        id: 12,
-        title: "dAImon",
-        type: "album",
-        tracks: 12,
-        genre: "Metal",
-        year: 2025,
-        price: 990,
-        coverUrl: "assets/covers/dAImon.webp",
-        tracksList: [
-            { num: 1, title: "Faixa 1", file: "assets/audio/daimon/1.mp3" },
-            { num: 2, title: "Faixa 2", file: "assets/audio/daimon/2.mp3" },
-            { num: 3, title: "Faixa 3", file: "assets/audio/daimon/3.mp3" },
-            { num: 4, title: "Faixa 4", file: "assets/audio/daimon/4.mp3" },
-            { num: 5, title: "Faixa 5", file: "assets/audio/daimon/5.mp3" },
-            { num: 6, title: "Faixa 6", file: "assets/audio/daimon/6.mp3" },
-            { num: 7, title: "Faixa 7", file: "assets/audio/daimon/7.mp3" },
-            { num: 8, title: "Faixa 8", file: "assets/audio/daimon/8.mp3" },
-            { num: 9, title: "Faixa 9", file: "assets/audio/daimon/9.mp3" },
-            { num: 10, title: "Faixa 10", file: "assets/audio/daimon/10.mp3" },
-            { num: 11, title: "Faixa 11", file: "assets/audio/daimon/11.mp3" },
-            { num: 12, title: "Faixa 12", file: "assets/audio/daimon/12.mp3" }
+        "id": 12,
+        "title": "dAImon",
+        "type": "album",
+        "tracks": 12,
+        "genre": "Metal",
+        "year": 2025,
+        "price": 990,
+        "coverUrl": "assets/covers/dAImon.webp",
+        "tracksList": [
+            {
+                "num": 1,
+                "title": "Faixa 1",
+                "file": "assets/audio/daimon/1.mp3"
+            },
+            {
+                "num": 2,
+                "title": "Faixa 2",
+                "file": "assets/audio/daimon/2.mp3"
+            },
+            {
+                "num": 3,
+                "title": "Faixa 3",
+                "file": "assets/audio/daimon/3.mp3"
+            },
+            {
+                "num": 4,
+                "title": "Faixa 4",
+                "file": "assets/audio/daimon/4.mp3"
+            },
+            {
+                "num": 5,
+                "title": "Faixa 5",
+                "file": "assets/audio/daimon/5.mp3"
+            },
+            {
+                "num": 6,
+                "title": "Faixa 6",
+                "file": "assets/audio/daimon/6.mp3"
+            },
+            {
+                "num": 7,
+                "title": "Faixa 7",
+                "file": "assets/audio/daimon/7.mp3"
+            },
+            {
+                "num": 8,
+                "title": "Faixa 8",
+                "file": "assets/audio/daimon/8.mp3"
+            },
+            {
+                "num": 9,
+                "title": "Faixa 9",
+                "file": "assets/audio/daimon/9.mp3"
+            },
+            {
+                "num": 10,
+                "title": "Faixa 10",
+                "file": "assets/audio/daimon/10.mp3"
+            },
+            {
+                "num": 11,
+                "title": "Faixa 11",
+                "file": "assets/audio/daimon/11.mp3"
+            },
+            {
+                "num": 12,
+                "title": "Faixa 12",
+                "file": "assets/audio/daimon/12.mp3"
+            }
         ],
-        description: "12 faixas. O início da era dAImon.",
-        paymentLink: "https://mpago.la/1djGRCy",
-        mercadoPagoLink: "https://mpago.la/1djGRCy",
-        tags: ["metal","ia","album"]
+        "description": "12 faixas. O início da era dAImon.",
+        "paymentLink": "https://mpago.la/1djGRCy",
+        "mercadoPagoLink": "https://mpago.la/1djGRCy",
+        "tags": [
+            "metal",
+            "ia",
+            "album"
+        ]
     },
     {
-        id: 13,
-        title: "Multa",
-        type: "single",
-        tracks: 1,
-        genre: "Eletrofunk",
-        year: 2026,
-        price: 390,
-        coverUrl: "assets/covers/Multa.webp",
-        tracksList: [
-            { num: 1, title: "Multa", file: "assets/audio/multa/1.mp3" }
+        "id": 13,
+        "title": "Multa",
+        "type": "single",
+        "tracks": 1,
+        "genre": "Eletrofunk",
+        "year": 2026,
+        "price": 390,
+        "coverUrl": "assets/covers/Multa.webp",
+        "tracksList": [
+            {
+                "num": 1,
+                "title": "Multa",
+                "file": "assets/audio/multa/1.mp3"
+            }
         ],
-        description: "Single autoral. Eletrofunk puro.",
-        paymentLink: "https://mpago.la/1yewVzS",
-        mercadoPagoLink: "https://mpago.la/1yewVzS",
-        tags: ["eletrofunk","autoral","single"]
+        "description": "Single autoral. Eletrofunk puro.",
+        "paymentLink": "https://mpago.la/1yewVzS",
+        "mercadoPagoLink": "https://mpago.la/1yewVzS",
+        "tags": [
+            "eletrofunk",
+            "autoral",
+            "single"
+        ]
     },
     {
-        id: 14,
-        title: "Janaína",
-        type: "single",
-        tracks: 1,
-        genre: "Rap",
-        year: 2026,
-        price: 290,
-        coverUrl: "assets/covers/Janaina.webp",
-        tracksList: [
-            { num: 1, title: "Janaína", file: "assets/audio/janaina/1.mp3" }
+        "id": 14,
+        "title": "Janaína",
+        "type": "single",
+        "tracks": 1,
+        "genre": "Rap",
+        "year": 2026,
+        "price": 290,
+        "coverUrl": "assets/covers/Janaina.webp",
+        "tracksList": [
+            {
+                "num": 1,
+                "title": "Janaína",
+                "file": "assets/audio/janaina/1.mp3"
+            }
         ],
-        description: "Single de rap. Faixa Extra do Álbum Fêmea.",
-        paymentLink: "https://mpago.la/16m5zaD",
-        mercadoPagoLink: "https://mpago.la/16m5zaD",
-        tags: ["rap","ia","single"]
+        "description": "Single de rap. Faixa Extra do Álbum Fêmea.",
+        "paymentLink": "https://mpago.la/16m5zaD",
+        "mercadoPagoLink": "https://mpago.la/16m5zaD",
+        "tags": [
+            "rap",
+            "ia",
+            "single"
+        ]
     },
     {
-        id: 15,
-        title: "A Ilha",
-        type: "single",
-        tracks: 1,
-        genre: "Metal",
-        year: 2026,
-        price: 290,
-        coverUrl: "assets/covers/AIlha.webp",
-        tracksList: [
-            { num: 1, title: "A Ilha", file: "assets/audio/ailha/1.mp3" }
+        "id": 15,
+        "title": "A Ilha",
+        "type": "single",
+        "tracks": 1,
+        "genre": "Metal",
+        "year": 2026,
+        "price": 290,
+        "coverUrl": "assets/covers/AIlha.webp",
+        "tracksList": [
+            {
+                "num": 1,
+                "title": "A Ilha",
+                "file": "assets/audio/ailha/1.mp3"
+            }
         ],
-        description: "Single de metal. A ilha do isolamento.",
-        paymentLink: "https://mpago.la/2Pscewy",
-        mercadoPagoLink: "https://mpago.la/2Pscewy",
-        tags: ["metal","ia","single"]
+        "description": "Single de metal. A ilha do isolamento.",
+        "paymentLink": "https://mpago.la/2Pscewy",
+        "mercadoPagoLink": "https://mpago.la/2Pscewy",
+        "tags": [
+            "metal",
+            "ia",
+            "single"
+        ]
     },
     {
-        id: 16,
-        title: "E.T",
-        type: "single",
-        tracks: 1,
-        genre: "Metal",
-        year: 2026,
-        price: 290,
-        coverUrl: "assets/covers/ET.webp",
-        tracksList: [
-            { num: 1, title: "E.T", file: "assets/audio/et/1.mp3" }
+        "id": 16,
+        "title": "E.T",
+        "type": "single",
+        "tracks": 1,
+        "genre": "Metal",
+        "year": 2026,
+        "price": 290,
+        "coverUrl": "assets/covers/ET.webp",
+        "tracksList": [
+            {
+                "num": 1,
+                "title": "E.T",
+                "file": "assets/audio/et/1.mp3"
+            }
         ],
-        description: "Single de metal. Eu sou um cantor artificial.",
-        paymentLink: "https://mpago.la/2qg61Hf",
-        mercadoPagoLink: "https://mpago.la/2qg61Hf",
-        tags: ["metal","ia","single"]
+        "description": "Single de metal. Eu sou um cantor artificial.",
+        "paymentLink": "https://mpago.la/2qg61Hf",
+        "mercadoPagoLink": "https://mpago.la/2qg61Hf",
+        "tags": [
+            "metal",
+            "ia",
+            "single"
+        ]
     },
     {
-        id: 17,
-        title: "D VAI é o cara",
-        type: "single",
-        tracks: 1,
-        genre: "Rap / Eletrônica",
-        year: 2026,
-        price: 490,
-        coverUrl: "assets/covers/DVAI.webp",
-        tracksList: [
-            { num: 1, title: "D VAI é o cara", file: "assets/audio/dvaieocara/1.mp3" }
+        "id": 17,
+        "title": "D VAI é o cara",
+        "type": "single",
+        "tracks": 1,
+        "genre": "Rap / Eletrônica",
+        "year": 2026,
+        "price": 490,
+        "coverUrl": "assets/covers/DVAI.webp",
+        "tracksList": [
+            {
+                "num": 1,
+                "title": "D VAI é o cara",
+                "file": "assets/audio/dvaieocara/1.mp3"
+            }
         ],
-        description: "Single autoral. D VAI na sua essência.",
-        paymentLink: "https://mpago.la/2coVFaJ",
-        mercadoPagoLink: "https://mpago.la/2coVFaJ",
-        tags: ["rap","eletronica","autoral","single"]
+        "description": "Single autoral. D VAI na sua essência.",
+        "paymentLink": "https://mpago.la/2coVFaJ",
+        "mercadoPagoLink": "https://mpago.la/2coVFaJ",
+        "tags": [
+            "rap",
+            "eletronica",
+            "autoral",
+            "single"
+        ]
     },
     {
-        id: 18,
-        title: "Fará",
-        type: "single",
-        tracks: 1,
-        genre: "Psytrance",
-        year: 2026,
-        price: 890,
-        coverUrl: "assets/covers/Fara.webp",
-        tracksList: [
-            { num: 1, title: "Fará", file: "assets/audio/fara/1.mp3" }
+        "id": 18,
+        "title": "Fará",
+        "type": "single",
+        "tracks": 1,
+        "genre": "Psytrance",
+        "year": 2026,
+        "price": 890,
+        "coverUrl": "assets/covers/Fara.webp",
+        "tracksList": [
+            {
+                "num": 1,
+                "title": "Fará",
+                "file": "assets/audio/fara/1.mp3"
+            }
         ],
-        description: "Single psytrance autoral.",
-        paymentLink: "https://mpago.la/1G9v5tn",
-        mercadoPagoLink: "https://mpago.la/1G9v5tn",
-        tags: ["psytrance","autoral","single"]
+        "description": "Single psytrance autoral.",
+        "paymentLink": "https://mpago.la/1G9v5tn",
+        "mercadoPagoLink": "https://mpago.la/1G9v5tn",
+        "tags": [
+            "psytrance",
+            "autoral",
+            "single"
+        ]
     },
     {
-        id: 19,
-        title: "Fé",
-        type: "single",
-        tracks: 1,
-        genre: "Rap",
-        year: 2026,
-        price: 290,
-        coverUrl: "assets/covers/Fe.webp",
-        tracksList: [
-            { num: 1, title: "Fé", file: "assets/audio/fe/1.mp3" }
+        "id": 19,
+        "title": "Fé",
+        "type": "single",
+        "tracks": 1,
+        "genre": "Rap",
+        "year": 2026,
+        "price": 290,
+        "coverUrl": "assets/covers/Fe.webp",
+        "tracksList": [
+            {
+                "num": 1,
+                "title": "Fé",
+                "file": "assets/audio/fe/1.mp3"
+            }
         ],
-        description: "Single rap autoral. Essa é a fé...",
-        paymentLink: "https://mpago.la/31HB8JL",
-        mercadoPagoLink: "https://mpago.la/31HB8JL",
-        tags: ["rap","autoral","single"]
+        "description": "Single rap autoral. Essa é a fé...",
+        "paymentLink": "https://mpago.la/31HB8JL",
+        "mercadoPagoLink": "https://mpago.la/31HB8JL",
+        "tags": [
+            "rap",
+            "autoral",
+            "single"
+        ]
     },
     {
-        id: 20,
-        title: "Lord Bell",
-        type: "single",
-        tracks: 1,
-        genre: "Drift Phonk",
-        year: 2026,
-        price: 290,
-        coverUrl: "assets/covers/LordBell.jpg",
-        tracksList: [
-            { num: 1, title: "Lord Bell", file: "assets/audio/lordbell/1.mp3" }
+        "id": 20,
+        "title": "Lord Bell",
+        "type": "single",
+        "tracks": 1,
+        "genre": "Drift Phonk",
+        "year": 2026,
+        "price": 290,
+        "coverUrl": "assets/covers/LordBell.jpg",
+        "tracksList": [
+            {
+                "num": 1,
+                "title": "Lord Bell",
+                "file": "assets/audio/lordbell/1.mp3"
+            }
         ],
-        description: "Single drift phonk autoral.",
-        paymentLink: "https://mpago.la/2UxmwJZ",
-        mercadoPagoLink: "https://mpago.la/2UxmwJZ",
-        tags: ["drift phonk","autoral","single"]
+        "description": "Single drift phonk autoral.",
+        "paymentLink": "https://mpago.la/2UxmwJZ",
+        "mercadoPagoLink": "https://mpago.la/2UxmwJZ",
+        "tags": [
+            "drift phonk",
+            "autoral",
+            "single"
+        ]
     },
     {
-        id: 21,
-        title: "GTFO",
-        type: "single",
-        tracks: 1,
-        genre: "Psytrance",
-        year: 2026,
-        price: 290,
-        coverUrl: "assets/covers/GTFO.webp",
-        tracksList: [
-            { num: 1, title: "GTFO", file: "assets/audio/gtfo/1.mp3" }
+        "id": 21,
+        "title": "GTFO",
+        "type": "single",
+        "tracks": 1,
+        "genre": "Psytrance",
+        "year": 2026,
+        "price": 290,
+        "coverUrl": "assets/covers/GTFO.webp",
+        "tracksList": [
+            {
+                "num": 1,
+                "title": "GTFO",
+                "file": "assets/audio/gtfo/1.mp3"
+            }
         ],
-        description: "Single psytrance autoral.",
-        paymentLink: "https://mpago.la/2u4UhQ8",
-        mercadoPagoLink: "https://mpago.la/2u4UhQ8",
-        tags: ["psytrance","autoral","single"]
+        "description": "Single psytrance autoral.",
+        "paymentLink": "https://mpago.la/2u4UhQ8",
+        "mercadoPagoLink": "https://mpago.la/2u4UhQ8",
+        "tags": [
+            "psytrance",
+            "autoral",
+            "single"
+        ]
     },
     {
-        id: 22,
-        title: "Dummm by Mc Memi",
-        type: "single",
-        tracks: 1,
-        genre: "Eletrônica",
-        year: 2026,
-        price: 290,
-        coverUrl: "assets/covers/Dummm.webp",
-        tracksList: [
-            { num: 1, title: "Dummm by Mc Memi", file: "assets/audio/dummm/1.mp3" }
+        "id": 22,
+        "title": "Dummm by Mc Memi",
+        "type": "single",
+        "tracks": 1,
+        "genre": "Eletrônica",
+        "year": 2026,
+        "price": 290,
+        "coverUrl": "assets/covers/Dummm.webp",
+        "tracksList": [
+            {
+                "num": 1,
+                "title": "Dummm by Mc Memi",
+                "file": "assets/audio/dummm/1.mp3"
+            }
         ],
-        description: "Faixa produzida baseado no livro O Pináculo de Pain.",
-        paymentLink: "https://mpago.la/1wF4fLA",
-        mercadoPagoLink: "https://mpago.la/1wF4fLA",
-        tags: ["eletronica","autoral","single"]
+        "description": "Faixa produzida baseado no livro O Pináculo de Pain.",
+        "paymentLink": "https://mpago.la/1wF4fLA",
+        "mercadoPagoLink": "https://mpago.la/1wF4fLA",
+        "tags": [
+            "eletronica",
+            "autoral",
+            "single"
+        ]
     },
     {
-        id: 23,
-        title: "Vital",
-        type: "single",
-        tracks: 1,
-        genre: "Psytrance",
-        year: 2026,
-        price: 690,
-        coverUrl: "assets/covers/Vital.webp",
-        tracksList: [
-            { num: 1, title: "Vital", file: "assets/audio/vital/1.mp3" }
+        "id": 23,
+        "title": "Vital",
+        "type": "single",
+        "tracks": 1,
+        "genre": "Psytrance",
+        "year": 2026,
+        "price": 690,
+        "coverUrl": "assets/covers/Vital.webp",
+        "tracksList": [
+            {
+                "num": 1,
+                "title": "Vital",
+                "file": "assets/audio/vital/1.mp3"
+            }
         ],
-        description: "Single psytrance autoral. A vitalidade do som.",
-        paymentLink: "https://mpago.la/12nxjTf",
-        mercadoPagoLink: "https://mpago.la/12nxjTf",
-        tags: ["psytrance","autoral","single"]
+        "description": "Single psytrance autoral. A vitalidade do som.",
+        "paymentLink": "https://mpago.la/12nxjTf",
+        "mercadoPagoLink": "https://mpago.la/12nxjTf",
+        "tags": [
+            "psytrance",
+            "autoral",
+            "single"
+        ]
     },
     {
-        id: 24,
-        title: "Eu sei",
-        type: "single",
-        tracks: 1,
-        genre: "Stone Rock",
-        year: 2026,
-        price: 590,
-        coverUrl: "assets/covers/EuSei.webp",
-        tracksList: [
-            { num: 1, title: "Eu sei", file: "assets/audio/eusei/1.mp3" }
+        "id": 24,
+        "title": "Eu sei",
+        "type": "single",
+        "tracks": 1,
+        "genre": "Stone Rock",
+        "year": 2026,
+        "price": 590,
+        "coverUrl": "assets/covers/EuSei.webp",
+        "tracksList": [
+            {
+                "num": 1,
+                "title": "Eu sei",
+                "file": "assets/audio/eusei/1.mp3"
+            }
         ],
-        description: "Single stone rock autoral.",
-        paymentLink: "https://mpago.la/1Wp4UDP",
-        mercadoPagoLink: "https://mpago.la/1Wp4UDP",
-        tags: ["stone rock","autoral","single"]
+        "description": "Single stone rock autoral.",
+        "paymentLink": "https://mpago.la/1Wp4UDP",
+        "mercadoPagoLink": "https://mpago.la/1Wp4UDP",
+        "tags": [
+            "stone rock",
+            "autoral",
+            "single"
+        ]
     },
     {
-        id: 25,
-        title: "Piece by Piece",
-        type: "single",
-        tracks: 1,
-        genre: "Drum and Bass",
-        year: 2026,
-        price: 490,
-        coverUrl: "assets/covers/PieceByPiece.jpg",
-        tracksList: [
-            { num: 1, title: "Piece by Piece", file: "assets/audio/piecebypiece/1.mp3" }
+        "id": 25,
+        "title": "Piece by Piece",
+        "type": "single",
+        "tracks": 1,
+        "genre": "Drum and Bass",
+        "year": 2026,
+        "price": 490,
+        "coverUrl": "assets/covers/PieceByPiece.jpg",
+        "tracksList": [
+            {
+                "num": 1,
+                "title": "Piece by Piece",
+                "file": "assets/audio/piecebypiece/1.mp3"
+            }
         ],
-        description: "Single drum and bass autoral.",
-        paymentLink: "https://mpago.la/1WNNDDn",
-        mercadoPagoLink: "https://mpago.la/1WNNDDn",
-        tags: ["drum and bass","autoral","single"]
+        "description": "Single drum and bass autoral.",
+        "paymentLink": "https://mpago.la/1WNNDDn",
+        "mercadoPagoLink": "https://mpago.la/1WNNDDn",
+        "tags": [
+            "drum and bass",
+            "autoral",
+            "single"
+        ]
     },
     {
-        id: 26,
-        title: "Eletro Dance, Vol 1",
-        type: "album",
-        tracks: 10,
-        genre: "EDM / House / Techno",
-        year: 2026,
-        price: 890,
-        coverUrl: "assets/covers/edm1.jpg",
-        tracksList: [
-            { num: 1, title: "Faixa 1", file: "assets/audio/edm1/1.mp3" },
-            { num: 2, title: "Faixa 2", file: "assets/audio/edm1/2.mp3" },
-            { num: 3, title: "Faixa 3", file: "assets/audio/edm1/3.mp3" },
-            { num: 4, title: "Faixa 4", file: "assets/audio/edm1/4.mp3" },
-            { num: 5, title: "Faixa 5", file: "assets/audio/edm1/5.mp3" },
-            { num: 6, title: "Faixa 6", file: "assets/audio/edm1/6.mp3" },
-            { num: 7, title: "Faixa 7", file: "assets/audio/edm1/7.mp3" },
-            { num: 8, title: "Faixa 8", file: "assets/audio/edm1/8.mp3" },
-            { num: 9, title: "Faixa 9", file: "assets/audio/edm1/9.mp3" },
-            { num: 10, title: "Faixa 10", file: "assets/audio/edm1/10.mp3" }
+        "id": 26,
+        "title": "Eletro Dance, Vol 1",
+        "type": "album",
+        "tracks": 10,
+        "genre": "EDM / House / Techno",
+        "year": 2026,
+        "price": 890,
+        "coverUrl": "assets/covers/edm1.jpg",
+        "tracksList": [
+            {
+                "num": 1,
+                "title": "Faixa 1",
+                "file": "assets/audio/edm1/1.mp3"
+            },
+            {
+                "num": 2,
+                "title": "Faixa 2",
+                "file": "assets/audio/edm1/2.mp3"
+            },
+            {
+                "num": 3,
+                "title": "Faixa 3",
+                "file": "assets/audio/edm1/3.mp3"
+            },
+            {
+                "num": 4,
+                "title": "Faixa 4",
+                "file": "assets/audio/edm1/4.mp3"
+            },
+            {
+                "num": 5,
+                "title": "Faixa 5",
+                "file": "assets/audio/edm1/5.mp3"
+            },
+            {
+                "num": 6,
+                "title": "Faixa 6",
+                "file": "assets/audio/edm1/6.mp3"
+            },
+            {
+                "num": 7,
+                "title": "Faixa 7",
+                "file": "assets/audio/edm1/7.mp3"
+            },
+            {
+                "num": 8,
+                "title": "Faixa 8",
+                "file": "assets/audio/edm1/8.mp3"
+            },
+            {
+                "num": 9,
+                "title": "Faixa 9",
+                "file": "assets/audio/edm1/9.mp3"
+            },
+            {
+                "num": 10,
+                "title": "Faixa 10",
+                "file": "assets/audio/edm1/10.mp3"
+            }
         ],
-        description: "Faixas mixadas por D.T. Shen.",
-        paymentLink: "https://mpago.la/xxxx",
-        mercadoPagoLink: "https://mpago.la/xxxx",
-        tags: ["edm","house","techno","autoral","album"]
+        "description": "Faixas mixadas por D.T. Shen.",
+        "paymentLink": "https://mpago.la/xxxx",
+        "mercadoPagoLink": "https://mpago.la/xxxx",
+        "tags": [
+            "edm",
+            "house",
+            "techno",
+            "autoral",
+            "album"
+        ]
     },
     {
-        id: 27,
-        title: "Eletro Dance, Vol 2",
-        type: "album",
-        tracks: 10,
-        genre: "EDM / House / Techno",
-        year: 2026,
-        price: 890,
-        coverUrl: "assets/covers/edm2.jpg",
-        tracksList: [
-            { num: 1, title: "Faixa 1", file: "assets/audio/edm2/1.mp3" },
-            { num: 2, title: "Faixa 2", file: "assets/audio/edm2/2.mp3" },
-            { num: 3, title: "Faixa 3", file: "assets/audio/edm2/3.mp3" },
-            { num: 4, title: "Faixa 4", file: "assets/audio/edm2/4.mp3" },
-            { num: 5, title: "Faixa 5", file: "assets/audio/edm2/5.mp3" },
-            { num: 6, title: "Faixa 6", file: "assets/audio/edm2/6.mp3" },
-            { num: 7, title: "Faixa 7", file: "assets/audio/edm2/7.mp3" },
-            { num: 8, title: "Faixa 8", file: "assets/audio/edm2/8.mp3" },
-            { num: 9, title: "Faixa 9", file: "assets/audio/edm2/9.mp3" },
-            { num: 10, title: "Faixa 10", file: "assets/audio/edm2/10.mp3" }
+        "id": 27,
+        "title": "Eletro Dance, Vol 2",
+        "type": "album",
+        "tracks": 10,
+        "genre": "EDM / House / Techno",
+        "year": 2026,
+        "price": 890,
+        "coverUrl": "assets/covers/edm2.jpg",
+        "tracksList": [
+            {
+                "num": 1,
+                "title": "Faixa 1",
+                "file": "assets/audio/edm2/1.mp3"
+            },
+            {
+                "num": 2,
+                "title": "Faixa 2",
+                "file": "assets/audio/edm2/2.mp3"
+            },
+            {
+                "num": 3,
+                "title": "Faixa 3",
+                "file": "assets/audio/edm2/3.mp3"
+            },
+            {
+                "num": 4,
+                "title": "Faixa 4",
+                "file": "assets/audio/edm2/4.mp3"
+            },
+            {
+                "num": 5,
+                "title": "Faixa 5",
+                "file": "assets/audio/edm2/5.mp3"
+            },
+            {
+                "num": 6,
+                "title": "Faixa 6",
+                "file": "assets/audio/edm2/6.mp3"
+            },
+            {
+                "num": 7,
+                "title": "Faixa 7",
+                "file": "assets/audio/edm2/7.mp3"
+            },
+            {
+                "num": 8,
+                "title": "Faixa 8",
+                "file": "assets/audio/edm2/8.mp3"
+            },
+            {
+                "num": 9,
+                "title": "Faixa 9",
+                "file": "assets/audio/edm2/9.mp3"
+            },
+            {
+                "num": 10,
+                "title": "Faixa 10",
+                "file": "assets/audio/edm2/10.mp3"
+            }
         ],
-        description: "Faixas mixadas por D.T. Shen.",
-        paymentLink: "https://mpago.la/xxxx",
-        mercadoPagoLink: "https://mpago.la/xxxx",
-        tags: ["edm","house","techno","autoral","album"]
+        "description": "Faixas mixadas por D.T. Shen.",
+        "paymentLink": "https://mpago.la/xxxx",
+        "mercadoPagoLink": "https://mpago.la/xxxx",
+        "tags": [
+            "edm",
+            "house",
+            "techno",
+            "autoral",
+            "album"
+        ]
     },
     {
-        id: 28,
-        title: "Who is Oliver Tree",
-        type: "single",
-        tracks: 1,
-        genre: "Eletrônica / Alt",
-        year: 2026,
-        price: 990,
-        coverUrl: "assets/covers/OliverTree.webp",
-        tracksList: [
-            { num: 1, title: "Who is Oliver Tree", file: "assets/audio/olivertree/1.mp3" }
+        "id": 28,
+        "title": "Who is Oliver Tree",
+        "type": "single",
+        "tracks": 1,
+        "genre": "Indie Rock",
+        "year": 2026,
+        "price": 1090,
+        "coverUrl": "assets/covers/OliverTree.webp",
+        "tracksList": [
+            {
+                "num": 1,
+                "title": "Who is Oliver Tree",
+                "file": "assets/audio/olivertree/1.mp3"
+            }
         ],
-        description: "Single autoral. Releitura eletrônica do universo de Oliver Tree.",
-        paymentLink: "",
-        mercadoPagoLink: "",
-        tags: ["eletronica","autoral","single"]
+        "description": "Single autoral. Uma homenagem para Oliver Tree.",
+        "paymentLink": "",
+        "mercadoPagoLink": "",
+        "tags": [
+            "indie rock",
+            "autoral",
+            "single"
+        ]
     }
 ];
 
