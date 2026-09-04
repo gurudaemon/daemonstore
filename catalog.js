@@ -576,6 +576,23 @@ const CATALOG = [
         paymentLink: "https://mpago.la/xxxx",
         mercadoPagoLink: "https://mpago.la/xxxx",
         tags: ["edm","house","techno","autoral","album"]
+    },
+    {
+        id: 28,
+        title: "Who is Oliver Tree",
+        type: "single",
+        tracks: 1,
+        genre: "Eletrônica / Alt",
+        year: 2026,
+        price: 290,
+        coverUrl: "assets/covers/OliverTree.png",
+        tracksList: [
+            { num: 1, title: "Who is Oliver Tree", file: "assets/audio/olivertree/1.mp3" }
+        ],
+        description: "Single autoral. Releitura eletrônica do universo de Oliver Tree.",
+        paymentLink: "",
+        mercadoPagoLink: "",
+        tags: ["eletronica","autoral","single"]
     }
 ];
 

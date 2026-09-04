@@ -181,18 +181,19 @@ body {
 
 .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 .hero-scroll {
-    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 2;
+    position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%); z-index: 2; pointer-events: none;
 }
 .scroll-indicator {
-    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-    color: var(--text-muted); font-size: 0.65rem;
+    display: flex; flex-direction: column; align-items: center; gap: 0.35rem;
+    color: var(--text-muted); font-size: 0.6rem;
     letter-spacing: 2px; text-transform: uppercase;
 }
 .scroll-line {
-    width: 1px; height: 40px;
+    width: 1px; height: 28px;
     background: linear-gradient(to bottom, var(--chrome), transparent);
     animation: scrollLine 2s ease-in-out infinite;
 }
+@media (max-width: 900px) { .hero-scroll { display: none; } }
 @keyframes scrollLine { 0%, 100% { transform: scaleY(1); opacity: 1; } 50% { transform: scaleY(0.5); opacity: 0.5; } }
 
 /* ============================================
