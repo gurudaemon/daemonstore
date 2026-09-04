@@ -98,7 +98,7 @@ const VIDEOS = [
         "type": "clipe",
         "duration": "",
         "year": 2026,
-        "thumbnail": "https://img.youtube.com/vi/ID/maxresdefault.jpg",
+        "thumbnail": "https://img.youtube.com/vi/AuxI-SfShjI/maxresdefault.jpg",
         "youtubeId": "AuxI-SfShjI",
         "description": "",
         "tags": [
