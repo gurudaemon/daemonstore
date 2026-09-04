@@ -91,6 +91,19 @@ const VIDEOS = [
         "tags": [
             "clipe"
         ]
+    },
+    {
+        "id": 8,
+        "title": "Bragança Maldita",
+        "type": "clipe",
+        "duration": "",
+        "year": 2026,
+        "thumbnail": "https://img.youtube.com/vi/ID/maxresdefault.jpg",
+        "youtubeId": "AuxI-SfShjI",
+        "description": "",
+        "tags": [
+            "clipe"
+        ]
     }
 ];
 
