@@ -624,17 +624,18 @@ class DaemonStore {
         const mpSection = document.getElementById('checkout-mercadopago');
         if (CONFIG.mercadoPagoEnabled) {
             mpSection.style.display = 'flex';
-            const mpLink = items.find(i => i.mercadoPagoLink && i.mercadoPagoLink !== 'https://mpago.la/xxxx')?.mercadoPagoLink;
+            const mpLink = items.find(i => i.mercadoPagoLink && i.mercadoPagoLink !== 'https://mpago.la/xxxx')?.mercadoPagoLink
+                || items.find(i => i.paymentLink && i.paymentLink !== 'https://mpago.la/xxxx')?.paymentLink;
             const buyLink = items.find(i => i.buyLink)?.buyLink;
-            if (buyLink) { mpSection.href = buyLink; mpSection.onclick = null; }
-            else if (mpLink) { mpSection.href = mpLink; mpSection.onclick = null; }
+            if (buyLink) { mpSection.href = buyLink; mpSection.target = '_blank'; mpSection.rel = 'noopener'; mpSection.onclick = null; }
+            else if (mpLink) { mpSection.href = mpLink; mpSection.target = '_blank'; mpSection.rel = 'noopener'; mpSection.onclick = null; }
             else { mpSection.href = '#'; mpSection.onclick = (e) => { e.preventDefault(); this.showToast('Link MP não configurado. Use Pix.', 'error'); }; }
         } else mpSection.style.display = 'none';
         const stripeSection = document.getElementById('checkout-stripe');
         if (CONFIG.stripeEnabled) {
             stripeSection.style.display = 'flex';
             const stripeLink = items.find(i => i.stripeLink)?.stripeLink;
-            if (stripeLink) { stripeSection.href = stripeLink; stripeSection.onclick = null; }
+            if (stripeLink) { stripeSection.href = stripeLink; stripeSection.target = '_blank'; stripeSection.rel = 'noopener'; stripeSection.onclick = null; }
             else { stripeSection.href = '#'; stripeSection.onclick = (e) => { e.preventDefault(); this.showToast('Link Stripe não configurado. Use Pix.', 'error'); }; }
         } else stripeSection.style.display = 'none';
         const whatsappSection = document.getElementById('checkout-whatsapp');
