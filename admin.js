@@ -151,7 +151,12 @@ class DaemonAdmin {
         const body = { message, content: contentBase64, branch: REPO_BRANCH };
         if (sha) body.sha = sha;
         const r = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`, { method: 'PUT', headers: { ...this.ghHeaders(), 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-        if (!r.ok) throw new Error('GitHub PUT ' + path + ' → ' + r.status + ' (' + (r.status === 401 ? 'token inválido' : r.status === 403 ? 'sem permissão' : 'erro') + ')');
+        if (!r.ok) {
+            let dica = 'erro';
+            if (r.status === 401) dica = 'token inválido ou expirado — gere outro';
+            if (r.status === 403) dica = 'token sem permissão — use token CLASSIC com a permissão repo (ou fine-grained com Contents: Read and write no repositório daemonstore)';
+            throw new Error('GitHub PUT ' + path + ' → ' + r.status + ' (' + dica + ')');
+        }
     }
 
     toBase64(str) { return btoa(unescape(encodeURIComponent(str))); }
