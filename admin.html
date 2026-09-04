@@ -63,7 +63,7 @@
             </div>
             <div style="display:flex; gap:0.5rem; align-items:center">
                 <span class="status" id="gh-status"></span>
-                <button class="btn" onclick="admin.openSettings()">⚙ Configurações</button>
+                <button class="btn" onclick="admin.logout()">🚪 Sair</button>
                 <button class="btn primary" onclick="admin.publish()">🚀 Publicar no site</button>
             </div>
         </div>
@@ -102,20 +102,6 @@
 
         <br>
         <div class="hint"><strong>Como funciona:</strong> edite aqui, clique em <b>Publicar no site</b> → vai direto para o GitHub → o Vercel publica automaticamente em ~1 minuto. Suas edições ficam salvas neste navegador; publique para o mundo ver.</div>
-    </div>
-
-    <!-- SETTINGS -->
-    <div id="settings-box" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:40; align-items:center; justify-content:center">
-        <div style="background:var(--card); border:1px solid var(--border); border-radius:14px; padding:1.5rem; width:min(480px,92vw)">
-            <h1 style="font-size:1.1rem; margin-bottom:0.8rem">⚙ Configurações de publicação</h1>
-            <p class="hint" style="padding:0 0 0.6rem">Cole um <b>Personal Access Token (classic)</b> do GitHub da conta <b>gurudaemon</b> com permissão <code>repo</code>. Crie em: github.com/settings/tokens → Generate new token (classic).</p>
-            <input type="password" id="gh-token" class="txt" style="width:100%" placeholder="ghp_...">
-            <div class="row" style="padding:0.8rem 0 0">
-                <button class="btn ok" onclick="admin.saveSettings()">Salvar</button>
-                <button class="btn" onclick="admin.closeSettings()">Cancelar</button>
-                <button class="btn" style="color:var(--accent)" onclick="admin.logout()">Sair da conta</button>
-            </div>
-        </div>
     </div>
 
     <div id="toast"></div>

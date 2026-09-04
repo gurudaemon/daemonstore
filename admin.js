@@ -30,6 +30,7 @@ class DaemonAdmin {
         const hash = await this.sha256(pass);
         if (hash !== ADMIN_PASS_SHA256) { err.textContent = 'Email ou senha incorretos.'; return; }
         sessionStorage.setItem('ds-admin-session', '1');
+        sessionStorage.setItem('ds-admin-pass', pass);
         this.session = true;
         this.showPanel();
     }
@@ -45,7 +46,7 @@ class DaemonAdmin {
     showPanel() {
         document.getElementById('login-box').style.display = 'none';
         document.getElementById('panel').style.display = 'block';
-        document.getElementById('gh-status').textContent = this.token ? '🔑 Token OK' : '⚠ Sem token';
+        document.getElementById('gh-status').textContent = '🔓 Publicação via servidor';
         this.renderList();
         this.updateDirtyInfo();
     }
@@ -136,48 +137,43 @@ class DaemonAdmin {
         this.renderList();
     }
 
-    // ===== GITHUB API =====
-    ghHeaders() { return { 'Authorization': 'Bearer ' + this.token, 'Accept': 'application/vnd.github+json' }; }
-
-    async ghGetSha(path) {
-        const r = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}?ref=${REPO_BRANCH}`, { headers: this.ghHeaders() });
-        if (r.status === 404) return null;
-        if (!r.ok) throw new Error('GitHub GET ' + r.status);
-        return (await r.json()).sha;
-    }
-
-    async ghPutFile(path, message, contentBase64) {
-        const sha = await this.ghGetSha(path);
-        const body = { message, content: contentBase64, branch: REPO_BRANCH };
-        if (sha) body.sha = sha;
-        const r = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`, { method: 'PUT', headers: { ...this.ghHeaders(), 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-        if (!r.ok) {
-            let dica = 'erro';
-            if (r.status === 401) dica = 'token inválido ou expirado — gere outro';
-            if (r.status === 403) dica = 'token sem permissão — use token CLASSIC com a permissão repo (ou fine-grained com Contents: Read and write no repositório daemonstore)';
-            throw new Error('GitHub PUT ' + path + ' → ' + r.status + ' (' + dica + ')');
-        }
-    }
-
     toBase64(str) { return btoa(unescape(encodeURIComponent(str))); }
 
     ghFileContent(arr, src) {
         return `const ${src.varName} = ${JSON.stringify(arr, null, 4)};\n\nwindow.${src.varName} = ${src.varName};\n`;
     }
 
+    // ===== PUBLICAÇÃO VIA SERVIDOR (serverless) =====
+    async serverPublish(files) {
+        const r = await fetch('/api/publish', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                email: ADMIN_EMAIL,
+                pass: sessionStorage.getItem('ds-admin-pass') || '',
+                files
+            })
+        });
+        const out = await r.json().catch(() => ({}));
+        if (!r.ok && !out.results) throw new Error(out.error || 'Erro ' + r.status);
+        return out;
+    }
+
     // ===== PUBLICAR =====
     async publish() {
-        if (!this.token) { this.openSettings(); this.toast('⚠ Configure o token do GitHub primeiro.'); return; }
         const tabs = Object.keys(DATA_SOURCES).filter(t => this.edits[t]);
         if (tabs.length === 0) { this.toast('Nada novo para publicar.'); return; }
         if (!confirm('Publicar ' + tabs.map(t => DATA_SOURCES[t].label).join(', ') + ' no site?')) return;
         this.toast('🚀 Publicando...');
         try {
-            for (const t of tabs) {
+            const files = tabs.map(t => {
                 const src = DATA_SOURCES[t];
-                await this.ghPutFile(src.file, 'admin: atualiza ' + src.label.toLowerCase(), this.toBase64(this.ghFileContent(this.edits[t], src)));
-                delete this.edits[t];
-            }
+                return { path: src.file, content: this.toBase64(this.ghFileContent(this.edits[t], src)), message: 'admin: atualiza ' + src.label.toLowerCase() };
+            });
+            const out = await this.serverPublish(files);
+            const failed = (out.results || []).filter(r => !r.ok);
+            if (failed.length) { this.toast('❌ Falhou: ' + failed[0].error); return; }
+            tabs.forEach(t => delete this.edits[t]);
             this.persistEdits();
             this.toast('✅ Publicado! O site atualiza em ~1 minuto (Vercel).');
         } catch (e) { this.toast('❌ ' + e.message); }
@@ -185,18 +181,19 @@ class DaemonAdmin {
 
     // ===== UPLOAD =====
     async uploadFile() {
-        if (!this.token) { this.openSettings(); this.toast('⚠ Configure o token do GitHub primeiro.'); return; }
         const fileInput = document.getElementById('up-file');
         const path = document.getElementById('up-path').value.trim().replace(/^\/+/, '');
         if (!fileInput.files[0] || !path) { this.toast('⚠ Escolha o arquivo e o caminho de destino.'); return; }
         if (!/^assets\/(audio|covers|about)\//.test(path)) { this.toast('⚠ Caminho deve começar com assets/audio/, assets/covers/ ou assets/about/.'); return; }
-        if (fileInput.files[0].size > 24 * 1024 * 1024) { this.toast('❌ Arquivo >24MB — GitHub API recusa. Use um MP3 menor.'); return; }
+        if (fileInput.files[0].size > 40 * 1024 * 1024) { this.toast('❌ Arquivo muito grande (máx ~40MB).'); return; }
         this.toast('⬆ Enviando ' + path + ' ...');
         try {
             const bytes = new Uint8Array(await fileInput.files[0].arrayBuffer());
             let binary = '';
             for (let i = 0; i < bytes.length; i += 0x8000) binary += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
-            await this.ghPutFile(path, 'admin: envia ' + path, btoa(binary));
+            const out = await this.serverPublish([{ path, content: btoa(binary), message: 'admin: envia ' + path }]);
+            const failed = (out.results || []).filter(r => !r.ok);
+            if (failed.length) { this.toast('❌ ' + failed[0].error); return; }
             this.toast('✅ Enviado! Disponível em /' + path);
         } catch (e) { this.toast('❌ ' + e.message); }
     }
