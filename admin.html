@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Admin — Daemon Studio</title>
+    <link rel="icon" type="image/webp" href="assets/logo.webp">
+    <style>
+        :root { --bg:#0a0a0e; --card:#121218; --border:rgba(255,255,255,0.08); --text:#f0f0f5; --muted:#8a8a9a; --accent:#e94560; --ok:#34d399; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; min-height: 100vh; }
+        .wrap { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; }
+        h1 { font-size: 1.4rem; margin-bottom: 0.25rem; }
+        .sub { color: var(--muted); font-size: 0.85rem; margin-bottom: 1.5rem; }
+        #login-box { max-width: 380px; margin: 18vh auto 0; background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 2rem; }
+        #login-box h1 { text-align: center; }
+        #login-box input { width: 100%; padding: 0.7rem 0.9rem; margin: 0.4rem 0; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 0.95rem; }
+        #login-box button { width: 100%; padding: 0.75rem; margin-top: 0.8rem; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; }
+        #login-err { color: var(--accent); font-size: 0.85rem; margin-top: 0.6rem; text-align: center; min-height: 1.2em; }
+        .topbar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
+        .tabs { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+        .tabs button { padding: 0.5rem 1rem; background: var(--card); border: 1px solid var(--border); color: var(--muted); border-radius: 999px; cursor: pointer; font-size: 0.85rem; }
+        .tabs button.active { color: var(--text); border-color: var(--accent); }
+        .btn { padding: 0.55rem 1rem; border: 1px solid var(--border); background: var(--card); color: var(--text); border-radius: 8px; cursor: pointer; font-size: 0.85rem; }
+        .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+        .btn.ok { background: var(--ok); border-color: var(--ok); color: #04150c; font-weight: 600; }
+        .grid2 { display: grid; grid-template-columns: 320px 1fr; gap: 1rem; align-items: start; }
+        @media (max-width: 800px) { .grid2 { grid-template-columns: 1fr; } }
+        .panel { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+        .panel-head { padding: 0.7rem 1rem; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; display:flex; justify-content:space-between; align-items:center; }
+        .item-row { padding: 0.6rem 1rem; border-bottom: 1px solid var(--border); cursor: pointer; font-size: 0.88rem; display: flex; justify-content: space-between; gap: 0.5rem; }
+        .item-row:hover { background: rgba(255,255,255,0.04); }
+        .item-row.sel { background: rgba(233,69,96,0.14); }
+        .item-row small { color: var(--muted); }
+        textarea.json { width: 100%; min-height: 380px; background: #0d0d12; color: #d8d8e8; border: none; padding: 1rem; font-family: Consolas, monospace; font-size: 0.82rem; line-height: 1.5; resize: vertical; outline: none; }
+        .row { display: flex; gap: 0.5rem; flex-wrap: wrap; padding: 0.7rem 1rem; border-top: 1px solid var(--border); align-items:center; }
+        .hint { color: var(--muted); font-size: 0.78rem; padding: 0.7rem 1rem; line-height: 1.5; }
+        input.txt { flex: 1; min-width: 200px; padding: 0.55rem 0.8rem; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 0.85rem; }
+        #toast { position: fixed; bottom: 1.2rem; left: 50%; transform: translateX(-50%); background: var(--card); border: 1px solid var(--border); padding: 0.7rem 1.3rem; border-radius: 999px; font-size: 0.85rem; display: none; z-index: 50; }
+        .status { color: var(--muted); font-size: 0.8rem; }
+        .del { color: var(--accent); background: none; border: none; cursor: pointer; font-size: 0.95rem; }
+        code { background: rgba(255,255,255,0.06); padding: 0 0.3rem; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <!-- LOGIN -->
+    <div id="login-box">
+        <h1>Daemon Studio — Admin</h1>
+        <p class="sub" style="text-align:center">Acesso restrito</p>
+        <input type="email" id="login-email" placeholder="Email" autocomplete="username">
+        <input type="password" id="login-pass" placeholder="Senha" autocomplete="current-password">
+        <button onclick="admin.login()">Entrar</button>
+        <div id="login-err"></div>
+    </div>
+
+    <!-- PAINEL -->
+    <div class="wrap" id="panel" style="display:none">
+        <div class="topbar">
+            <div>
+                <h1>Daemon Studio — Admin</h1>
+                <div class="sub" id="dirty-info">Nenhuma alteração não publicada</div>
+            </div>
+            <div style="display:flex; gap:0.5rem; align-items:center">
+                <span class="status" id="gh-status"></span>
+                <button class="btn" onclick="admin.openSettings()">⚙ Configurações</button>
+                <button class="btn primary" onclick="admin.publish()">🚀 Publicar no site</button>
+            </div>
+        </div>
+        <div class="tabs" id="tabs">
+            <button data-tab="music" class="active" onclick="admin.setTab('music')">🎵 Música</button>
+            <button data-tab="books" onclick="admin.setTab('books')">📚 Livros</button>
+            <button data-tab="videos" onclick="admin.setTab('videos')">🎬 Vídeos</button>
+        </div>
+        <br>
+        <div class="grid2">
+            <div class="panel">
+                <div class="panel-head"><span id="list-title">Itens</span><button class="btn" style="padding:0.25rem 0.7rem" onclick="admin.addItem()">+ Novo</button></div>
+                <div id="item-list"></div>
+            </div>
+            <div class="panel" id="editor-panel" style="display:none">
+                <div class="panel-head"><span id="edit-title">Editar</span><button class="del" title="Excluir item" onclick="admin.deleteItem()">🗑 Excluir</button></div>
+                <textarea class="json" id="json-editor" spellcheck="false"></textarea>
+                <div class="row">
+                    <button class="btn ok" onclick="admin.saveItem()">💾 Salvar alterações</button>
+                    <button class="btn" onclick="admin.revertItem()">↩ Descartar</button>
+                    <span class="hint" style="padding:0">Edite como JSON. Salve com o botão ao lado.</span>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <div class="panel">
+            <div class="panel-head"><span>📎 Upload de arquivos (áudio, capa, imagem)</span></div>
+            <div class="row"><input type="file" id="up-file" class="txt" style="flex:1"></div>
+            <div class="row">
+                <input type="text" id="up-path" class="txt" placeholder="Caminho no site, ex: assets/audio/meualbum/1.mp3 ou assets/covers/MinhaCapa.webp">
+                <button class="btn primary" onclick="admin.uploadFile()">⬆ Enviar arquivo</button>
+            </div>
+            <div class="hint">Envie o arquivo para o caminho indicado e depois use esse caminho no campo <code>file</code> (faixa) ou <code>coverUrl</code> (capa) do item. Aguarde a confirmação antes de publicar.</div>
+        </div>
+
+        <br>
+        <div class="hint"><strong>Como funciona:</strong> edite aqui, clique em <b>Publicar no site</b> → vai direto para o GitHub → o Vercel publica automaticamente em ~1 minuto. Suas edições ficam salvas neste navegador; publique para o mundo ver.</div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div id="settings-box" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:40; align-items:center; justify-content:center">
+        <div style="background:var(--card); border:1px solid var(--border); border-radius:14px; padding:1.5rem; width:min(480px,92vw)">
+            <h1 style="font-size:1.1rem; margin-bottom:0.8rem">⚙ Configurações de publicação</h1>
+            <p class="hint" style="padding:0 0 0.6rem">Cole um <b>Personal Access Token (classic)</b> do GitHub da conta <b>gurudaemon</b> com permissão <code>repo</code>. Crie em: github.com/settings/tokens → Generate new token (classic).</p>
+            <input type="password" id="gh-token" class="txt" style="width:100%" placeholder="ghp_...">
+            <div class="row" style="padding:0.8rem 0 0">
+                <button class="btn ok" onclick="admin.saveSettings()">Salvar</button>
+                <button class="btn" onclick="admin.closeSettings()">Cancelar</button>
+                <button class="btn" style="color:var(--accent)" onclick="admin.logout()">Sair da conta</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast"></div>
+
+    <script src="config.js"></script>
+    <script src="catalog.js"></script>
+    <script src="books-data.js"></script>
+    <script src="videos-data.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
