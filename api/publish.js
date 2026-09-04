@@ -52,7 +52,8 @@ module.exports = async (req, res) => {
             const pass = String(data.pass || '');
             if (email !== ADMIN_EMAIL) return json(res, 401, { error: 'Credenciais inválidas' });
             const hash = crypto.createHash('sha256').update(pass).digest('hex');
-            if (hash !== ADMIN_PASS_SHA256) return json(res, 401, { error: 'Credenciais inválidas' });
+            // aceita senha em texto (hasheia aqui) ou hash direto
+            if (hash !== ADMIN_PASS_SHA256 && pass !== ADMIN_PASS_SHA256) return json(res, 401, { error: 'Credenciais inválidas' });
 
             if (!process.env.GH_TOKEN) return json(res, 500, { error: 'Servidor sem GH_TOKEN configurado' });
 

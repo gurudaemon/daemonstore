@@ -44,6 +44,8 @@ class DaemonAdmin {
     }
 
     showPanel() {
+        // sessão antiga sem senha salva → força novo login
+        if (!sessionStorage.getItem('ds-admin-pass')) { this.logout(); return; }
         document.getElementById('login-box').style.display = 'none';
         document.getElementById('panel').style.display = 'block';
         document.getElementById('gh-status').textContent = '🔓 Publicação via servidor';
