@@ -157,8 +157,20 @@ class DaemonStore {
 
     handleImageError(img) {
         if (img.dataset.fallbackApplied) return;
-        img.dataset.fallbackApplied = 'true';
         const src = img.getAttribute('src') || '';
+        // thumbs do YouTube: tenta reduzir a qualidade antes de desistir
+        if (src.includes('i.ytimg.com') || src.includes('img.youtube.com')) {
+            const chain = ['maxresdefault', 'sddefault', 'hqdefault', 'mqdefault'];
+            const idx = chain.findIndex(q => src.includes(q));
+            if (idx > -1 && idx < chain.length - 1) {
+                img.src = src.replace(chain[idx], chain[idx + 1]);
+                return;
+            }
+            img.dataset.fallbackApplied = 'true';
+            img.src = this.generateGenericPlaceholder(img.alt || 'Vídeo');
+            return;
+        }
+        img.dataset.fallbackApplied = 'true';
         if (src.includes('assets/covers/')) {
             const item = CATALOG.find(i => i.coverUrl === src);
             if (item) { img.src = this.generateCoverSVG(item); return; }
@@ -460,7 +472,8 @@ class DaemonStore {
 
     createVideoCard(video) {
         const typeLabels = { documentario: 'Documentário', clipe: 'Clipe', ensaio: 'Ensaio', lyric: 'Lyric Video', live: 'Live', curta: 'Curta' };
-        return `<div class="cinema-card" onclick="app.openVideo(${video.id})"><div class="cinema-thumb"><img src="${video.thumbnail}" alt="${video.title}" loading="lazy" onerror="app.handleImageError(this)"><div class="cinema-play">▶</div><div class="cinema-duration">${video.duration}</div></div><div class="cinema-info"><div class="cinema-type">${typeLabels[video.type] || video.type}</div><div class="cinema-title">${video.title || 'Título em breve'}</div><div class="cinema-meta"><span>${video.year}</span></div></div></div>`;
+        const thumb = video.thumbnail || (video.youtubeId ? `https://i.ytimg.com/vi/${video.youtubeId}/maxresdefault.jpg` : '');
+        return `<div class="cinema-card" onclick="app.openVideo(${video.id})"><div class="cinema-thumb"><img src="${thumb}" alt="${video.title}" loading="lazy" referrerpolicy="no-referrer" onerror="app.handleImageError(this)"><div class="cinema-play">▶</div><div class="cinema-duration">${video.duration}</div></div><div class="cinema-info"><div class="cinema-type">${typeLabels[video.type] || video.type}</div><div class="cinema-title">${video.title || 'Título em breve'}</div><div class="cinema-meta"><span>${video.year}</span></div></div></div>`;
     }
 
     openVideo(id) {
