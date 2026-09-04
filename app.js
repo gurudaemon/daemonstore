@@ -16,6 +16,7 @@ class DaemonStore {
         this.currentTrackIndex = 0;
         this.shuffleMode = false;
         this.allTracks = [];
+        this.currentSort = 'default';
         this.audioContextUnlocked = false;
         this.currentBook = null;
         this.currentVideo = null;
@@ -38,6 +39,19 @@ class DaemonStore {
         this.setupLeadCapture();
         this.setupAudioUnlock();
         this.setupParticles();
+        this.setupKeyboardShortcuts();
+    }
+
+    setupKeyboardShortcuts() {
+        document.addEventListener('keydown', (e) => {
+            const tag = (document.activeElement && document.activeElement.tagName) || '';
+            if (['INPUT', 'TEXTAREA', 'SELECT'].includes(tag)) return;
+            if (e.code === 'Space') {
+                if (!this.currentTrack) return;
+                e.preventDefault();
+                this.togglePlay();
+            }
+        });
     }
 
     buildAllTracks() {
@@ -292,6 +306,8 @@ class DaemonStore {
         document.querySelectorAll('#stat-eps').forEach(el => el.textContent = eps);
         document.querySelectorAll('#stat-singles').forEach(el => el.textContent = singles);
         document.querySelectorAll('#stat-tracks').forEach(el => el.textContent = totalTracks);
+        const projects = document.getElementById('stat-projects');
+        if (projects) projects.textContent = CATALOG.length;
         if (window.BOOKS) document.getElementById('stat-books').textContent = BOOKS.length;
         if (window.VIDEOS) document.getElementById('stat-videos').textContent = VIDEOS.length;
     }
@@ -318,8 +334,17 @@ class DaemonStore {
         if (search) {
             items = items.filter(i => i.title.toLowerCase().includes(search) || i.genre.toLowerCase().includes(search) || i.tags.some(t => t.includes(search)));
         }
+        switch (this.currentSort) {
+            case 'year-desc': items.sort((a, b) => b.year - a.year); break;
+            case 'year-asc': items.sort((a, b) => a.year - b.year); break;
+            case 'price-asc': items.sort((a, b) => a.price - b.price); break;
+            case 'price-desc': items.sort((a, b) => b.price - a.price); break;
+            case 'title': items.sort((a, b) => a.title.localeCompare(b.title, 'pt-BR')); break;
+        }
         return items;
     }
+
+    setSort(value) { this.currentSort = value; this.renderCatalog(); }
 
     createCard(item) {
         const price = 'R$ ' + (item.price / 100).toFixed(2).replace('.', ',');
@@ -832,7 +857,7 @@ class DaemonStore {
         this.audio.play().then(() => {
             this.isPlaying = true;
             document.getElementById('play-btn').textContent = '⏸';
-            this.renderCatalog(); this.renderPlaylistInModal();
+            this.renderCatalog(); this.renderPlaylistInModal(); this.renderQueue();
             if (this.modalItem) document.getElementById('modal-play-icon').textContent = '⏸';
         }).catch(() => { this.isPlaying = false; document.getElementById('play-btn').textContent = '▶'; });
     }
@@ -841,11 +866,37 @@ class DaemonStore {
         this.audio.pause();
         this.isPlaying = false;
         document.getElementById('play-btn').textContent = '▶';
-        this.renderCatalog(); this.renderPlaylistInModal();
+        this.renderCatalog(); this.renderPlaylistInModal(); this.renderQueue();
         if (this.modalItem) document.getElementById('modal-play-icon').textContent = '▶';
     }
 
     togglePlay() { if (this.isPlaying) this.pause(); else if (this.currentTrack) this.play(); }
+
+    // ===== FILA DE REPRODUÇÃO =====
+    toggleQueue() {
+        const panel = document.getElementById('queue-panel');
+        if (!panel) return;
+        const show = panel.style.display === 'none';
+        panel.style.display = show ? 'block' : 'none';
+        if (show) this.renderQueue();
+    }
+
+    renderQueue() {
+        const list = document.getElementById('queue-list');
+        if (!list) return;
+        if (this.currentPlaylist.length === 0 || !this.currentTrack) {
+            list.innerHTML = '<div class="queue-empty">Nenhuma faixa na fila.</div>';
+            return;
+        }
+        const item = CATALOG.find(i => i.id === this.currentTrack);
+        list.innerHTML = this.currentPlaylist.map((track, idx) => {
+            const current = idx === this.currentTrackIndex;
+            return `<div class="queue-track ${current ? 'playing' : ''}" onclick="app.playPlaylistTrack(${idx})"><span class="track-num">${track.num}</span><span class="track-title">${track.title}</span><span class="track-status">${current && this.isPlaying ? '⏸' : '▶'}</span></div>`;
+        }).join('');
+        const playing = list.querySelector('.queue-track.playing');
+        if (playing) playing.scrollIntoView({ block: 'nearest' });
+    }
+
     toggleModalPlay() { if (!this.modalItem) return; this.playItem(this.modalItem.id); }
 
     updateProgress() {

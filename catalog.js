@@ -7,7 +7,7 @@ const CATALOG = [
         genre: "Metal",
         year: 2026,
         price: 1990,
-        coverUrl: "assets/covers/MPDM.png",
+        coverUrl: "assets/covers/MPDM.webp",
         tracksList: [
             { num: 1, title: "Faixa 1", file: "assets/audio/mpdm/1.mp3" },
             { num: 2, title: "Faixa 2", file: "assets/audio/mpdm/2.mp3" },
@@ -34,7 +34,7 @@ const CATALOG = [
         genre: "Rap",
         year: 2026,
         price: 990,
-        coverUrl: "assets/covers/femea.png",
+        coverUrl: "assets/covers/femea.webp",
         tracksList: [
             { num: 1, title: "Faixa 1", file: "assets/audio/femea/1.mp3" },
             { num: 2, title: "Faixa 2", file: "assets/audio/femea/2.mp3" },
@@ -71,7 +71,7 @@ const CATALOG = [
         genre: "Metal",
         year: 2026,
         price: 1990,
-        coverUrl: "assets/covers/dAImon2.png",
+        coverUrl: "assets/covers/dAImon2.webp",
         tracksList: [
             { num: 1, title: "Faixa 1", file: "assets/audio/daimon2/1.mp3" },
             { num: 2, title: "Faixa 2", file: "assets/audio/daimon2/2.mp3" },
@@ -100,7 +100,7 @@ const CATALOG = [
         genre: "Metal Instrumental",
         year: 2026,
         price: 1490,
-        coverUrl: "assets/covers/Prompter.png",
+        coverUrl: "assets/covers/Prompter.webp",
         tracksList: [
             { num: 1, title: "Faixa 1", file: "assets/audio/prompter/1.mp3" },
             { num: 2, title: "Faixa 2", file: "assets/audio/prompter/2.mp3" },
@@ -126,7 +126,7 @@ const CATALOG = [
         genre: "Vários Estilos",
         year: 2026,
         price: 990,
-        coverUrl: "assets/covers/AlmaMendiga.png",
+        coverUrl: "assets/covers/AlmaMendiga.webp",
         tracksList: [
             { num: 1, title: "Faixa 1", file: "assets/audio/almamendiga/1.mp3" },
             { num: 2, title: "Faixa 2", file: "assets/audio/almamendiga/2.mp3" },
@@ -150,7 +150,7 @@ const CATALOG = [
         genre: "Eletrônica / Psytrance",
         year: 2026,
         price: 1490,
-        coverUrl: "assets/covers/ArteEletronica.png",
+        coverUrl: "assets/covers/ArteEletronica.webp",
         tracksList: [
             { num: 1, title: "Faixa 1", file: "assets/audio/arteeletronica/1.mp3" },
             { num: 2, title: "Faixa 2", file: "assets/audio/arteeletronica/2.mp3" },
@@ -176,7 +176,7 @@ const CATALOG = [
         genre: "Vários Estilos",
         year: 2025,
         price: 1490,
-        coverUrl: "assets/covers/TrilhasDeCinema.png",
+        coverUrl: "assets/covers/TrilhasDeCinema.webp",
         tracksList: [
             { num: 1, title: "Faixa 1", file: "assets/audio/trilhascinema/1.mp3" },
             { num: 2, title: "Faixa 2", file: "assets/audio/trilhascinema/2.mp3" },
@@ -239,7 +239,7 @@ const CATALOG = [
         genre: "Rap",
         year: 2026,
         price: 490,
-        coverUrl: "assets/covers/TheProduct.png",
+        coverUrl: "assets/covers/TheProduct.webp",
         tracksList: [
             { num: 1, title: "Faixa 1", file: "assets/audio/theproduct/1.mp3" },
             { num: 2, title: "Faixa 2", file: "assets/audio/theproduct/2.mp3" },
@@ -261,7 +261,7 @@ const CATALOG = [
         genre: "Vários Estilos",
         year: 2026,
         price: 490,
-        coverUrl: "assets/covers/Saudades.png",
+        coverUrl: "assets/covers/Saudades.webp",
         tracksList: [
             { num: 1, title: "Faixa 1", file: "assets/audio/saudades/1.mp3" },
             { num: 2, title: "Faixa 2", file: "assets/audio/saudades/2.mp3" },
@@ -284,7 +284,7 @@ const CATALOG = [
         genre: "Metal",
         year: 2025,
         price: 990,
-        coverUrl: "assets/covers/dAImon.png",
+        coverUrl: "assets/covers/dAImon.webp",
         tracksList: [
             { num: 1, title: "Faixa 1", file: "assets/audio/daimon/1.mp3" },
             { num: 2, title: "Faixa 2", file: "assets/audio/daimon/2.mp3" },
@@ -312,7 +312,7 @@ const CATALOG = [
         genre: "Eletrofunk",
         year: 2026,
         price: 390,
-        coverUrl: "assets/covers/Multa.png",
+        coverUrl: "assets/covers/Multa.webp",
         tracksList: [
             { num: 1, title: "Multa", file: "assets/audio/multa/1.mp3" }
         ],
@@ -329,7 +329,7 @@ const CATALOG = [
         genre: "Rap",
         year: 2026,
         price: 290,
-        coverUrl: "assets/covers/Janaina.png",
+        coverUrl: "assets/covers/Janaina.webp",
         tracksList: [
             { num: 1, title: "Janaína", file: "assets/audio/janaina/1.mp3" }
         ],
@@ -346,7 +346,7 @@ const CATALOG = [
         genre: "Metal",
         year: 2026,
         price: 290,
-        coverUrl: "assets/covers/AIlha.png",
+        coverUrl: "assets/covers/AIlha.webp",
         tracksList: [
             { num: 1, title: "A Ilha", file: "assets/audio/ailha/1.mp3" }
         ],
@@ -363,7 +363,7 @@ const CATALOG = [
         genre: "Metal",
         year: 2026,
         price: 290,
-        coverUrl: "assets/covers/ET.png",
+        coverUrl: "assets/covers/ET.webp",
         tracksList: [
             { num: 1, title: "E.T", file: "assets/audio/et/1.mp3" }
         ],
@@ -380,7 +380,7 @@ const CATALOG = [
         genre: "Rap / Eletrônica",
         year: 2026,
         price: 490,
-        coverUrl: "assets/covers/DVAI.png",
+        coverUrl: "assets/covers/DVAI.webp",
         tracksList: [
             { num: 1, title: "D VAI é o cara", file: "assets/audio/dvaieocara/1.mp3" }
         ],
@@ -397,7 +397,7 @@ const CATALOG = [
         genre: "Psytrance",
         year: 2026,
         price: 890,
-        coverUrl: "assets/covers/Fara.png",
+        coverUrl: "assets/covers/Fara.webp",
         tracksList: [
             { num: 1, title: "Fará", file: "assets/audio/fara/1.mp3" }
         ],
@@ -414,7 +414,7 @@ const CATALOG = [
         genre: "Rap",
         year: 2026,
         price: 290,
-        coverUrl: "assets/covers/Fe.png",
+        coverUrl: "assets/covers/Fe.webp",
         tracksList: [
             { num: 1, title: "Fé", file: "assets/audio/fe/1.mp3" }
         ],
@@ -448,7 +448,7 @@ const CATALOG = [
         genre: "Psytrance",
         year: 2026,
         price: 290,
-        coverUrl: "assets/covers/GTFO.png",
+        coverUrl: "assets/covers/GTFO.webp",
         tracksList: [
             { num: 1, title: "GTFO", file: "assets/audio/gtfo/1.mp3" }
         ],
@@ -465,7 +465,7 @@ const CATALOG = [
         genre: "Eletrônica",
         year: 2026,
         price: 290,
-        coverUrl: "assets/covers/Dummm.png",
+        coverUrl: "assets/covers/Dummm.webp",
         tracksList: [
             { num: 1, title: "Dummm by Mc Memi", file: "assets/audio/dummm/1.mp3" }
         ],
@@ -482,7 +482,7 @@ const CATALOG = [
         genre: "Psytrance",
         year: 2026,
         price: 690,
-        coverUrl: "assets/covers/Vital.png",
+        coverUrl: "assets/covers/Vital.webp",
         tracksList: [
             { num: 1, title: "Vital", file: "assets/audio/vital/1.mp3" }
         ],
@@ -499,7 +499,7 @@ const CATALOG = [
         genre: "Stone Rock",
         year: 2026,
         price: 590,
-        coverUrl: "assets/covers/EuSei.png",
+        coverUrl: "assets/covers/EuSei.webp",
         tracksList: [
             { num: 1, title: "Eu sei", file: "assets/audio/eusei/1.mp3" }
         ],
@@ -585,7 +585,7 @@ const CATALOG = [
         genre: "Eletrônica / Alt",
         year: 2026,
         price: 290,
-        coverUrl: "assets/covers/OliverTree.png",
+        coverUrl: "assets/covers/OliverTree.webp",
         tracksList: [
             { num: 1, title: "Who is Oliver Tree", file: "assets/audio/olivertree/1.mp3" }
         ],

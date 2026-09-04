@@ -18,8 +18,8 @@
     <meta name="twitter:title" content="Daemon Studio | Projeto Multi-Artístico">
     <meta name="twitter:description" content="Música, literatura, cinema e arte digital. O universo de D.T. Shen.">
     <meta name="twitter:image" content="https://daemonstore.vercel.app/assets/logo.png">
-    <link rel="icon" type="image/png" href="assets/logo.png">
-    <link rel="apple-touch-icon" href="assets/logo.png">
+    <link rel="icon" type="image/webp" href="assets/logo.webp">
+    <link rel="apple-touch-icon" href="assets/logo.webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
@@ -32,7 +32,7 @@
     <!-- Navbar -->
     <nav class="navbar" id="navbar">
         <div class="nav-brand">
-            <img src="assets/logo.png" alt="Daemon Studio" class="nav-logo" id="nav-logo" onerror="this.style.display='none'; document.getElementById('nav-text-logo').style.display='flex'">
+            <img src="assets/logo.webp" alt="Daemon Studio" class="nav-logo" id="nav-logo" onerror="this.style.display='none'; document.getElementById('nav-text-logo').style.display='flex'">
             <div class="nav-text-logo" id="nav-text-logo" style="display:none">
                 <span class="nav-logo-ds">DS</span>
                 <span class="nav-logo-name">Daemon Studio</span>
@@ -109,7 +109,7 @@
                     <div class="universe-card-bg" style="--accent:#e94560"></div>
                     <div class="universe-card-icon">🎵</div>
                     <h3>Música</h3>
-                    <p>25+ projetos entre metal, rap, eletrônica e trilhas. Produção independente, sem gravadora.</p>
+                    <p><strong id="stat-projects">28</strong> projetos entre metal, rap, eletrônica e trilhas. Produção independente, sem gravadora.</p>
                     <div class="universe-card-stats">
                         <span><strong id="stat-albums">0</strong> álbuns</span>
                         <span><strong id="stat-tracks">0</strong> faixas</span>
@@ -170,6 +170,14 @@
                 <button class="pill" data-filter="autoral" onclick="app.setTag('autoral')">Autorais</button>
                 <button class="pill" data-filter="ia" onclick="app.setTag('ia')">Feito com IA</button>
             </div>
+            <select class="sort-select" id="sort-select" onchange="app.setSort(this.value)" aria-label="Ordenar catálogo">
+                <option value="default">Ordenar: Padrão</option>
+                <option value="year-desc">Mais recentes</option>
+                <option value="year-asc">Mais antigos</option>
+                <option value="price-asc">Menor preço</option>
+                <option value="price-desc">Maior preço</option>
+                <option value="title">Título (A–Z)</option>
+            </select>
         </div>
         <div class="catalog-grid" id="catalog-grid"></div>
         <div class="empty-state" id="empty-state" style="display:none">
@@ -511,6 +519,7 @@
             <button class="player-btn play-btn" id="play-btn" onclick="app.togglePlay()">▶</button>
             <button class="player-btn" onclick="app.next()">⏭</button>
             <button class="player-btn shuffle-btn" id="shuffle-btn" onclick="app.toggleShuffle()" title="Shuffle">🔀</button>
+            <button class="player-btn" id="queue-btn" onclick="app.toggleQueue()" title="Fila de reprodução">🎵</button>
         </div>
         <div class="player-progress-wrap">
             <span id="time-current">0:00</span>
@@ -524,6 +533,10 @@
             <input type="range" min="0" max="100" value="80" id="vol-slider" oninput="app.setVolume(this.value)">
         </div>
         <button class="player-close" onclick="app.closePlayer()">×</button>
+        <div class="queue-panel" id="queue-panel" style="display:none">
+            <div class="queue-header">Fila de reprodução <button onclick="app.toggleQueue()" class="queue-close">×</button></div>
+            <div class="queue-list" id="queue-list"></div>
+        </div>
     </div>
 
     <!-- Toast -->
